@@ -11,7 +11,10 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 
 #codeigniter 3
-application/logs/*
-!application/logs/index.html
-!application/logs/.htaccess
-/vendor/
+php/application/logs/*
+php/!application/logs/index.html
+php/!application/logs/.htaccess
+php/vendor/
+
+#composer
+php/composer.phar
