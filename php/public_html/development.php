@@ -53,8 +53,14 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : '');
+if (PHP_SAPI != 'cli') {
+	header("HTTP/1.0 403 Forbidden"); 
+	echo '403 Forbidden'; 
+	exit();
+}
+define('ENVIRONMENT', 'development');
 define('DS', DIRECTORY_SEPARATOR);
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
