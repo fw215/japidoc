@@ -103,7 +103,7 @@ switch (ENVIRONMENT)
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	$system_path = '..'.DS.'vendor'.DS.'codeigniter'.DS.'framework'.DS.'system';
+	$system_path = 'vendor'.DS.'codeigniter'.DS.'framework'.DS.'system';
 
 /*
  *---------------------------------------------------------------
@@ -120,7 +120,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$application_folder = '..'.DS.'application';
+	$application_folder = 'application';
 
 /*
  *---------------------------------------------------------------

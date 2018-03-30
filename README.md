@@ -16,3 +16,8 @@
     docker-compose exec php bash
     docker rm $(docker ps -aq)
     docker rmi -f $(docker images -aq)
+
+## migrate
+    php development.php migrate current
+    php development.php migrate rollback 0
+    php development.php migrate latest
