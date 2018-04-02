@@ -12,7 +12,11 @@ class MY_Controller extends CI_Controller
 	{
 		parent::__construct();
 
-		// ログインチェック
+		/* クラス名とメソッド名をセット */
+		$this->_data['class'] = strtolower($this->router->fetch_class());
+		$this->_data['method'] = strtolower($this->router->fetch_method());
+
+		/* ログインチェック */
 		$this->loginCheck();
 	}
 
@@ -24,12 +28,10 @@ class MY_Controller extends CI_Controller
 	 */
 	protected function loginCheck()
 	{
-		$class = strtolower($this->router->fetch_class());
-		$method = strtolower($this->router->fetch_method());
 
 		/* Pagesはログインチェックなし */
-		if( $class !== 'pages' ){
-			if( $class === 'login' && $method !== 'logout' ){
+		if( $this->_data['class'] !== 'pages' ){
+			if( $this->_data['class'] === 'login' && $this->_data['method'] !== 'logout' ){
 				/* ログイン済 */
 				if( $this->session->userdata('id') ){
 					redirect( base_url('/') );
@@ -69,5 +71,24 @@ class MY_Controller extends CI_Controller
 		delete_cookie('token');
 
 		redirect( base_url('login') );
+	}
+
+	/**
+	 * view表示
+	 *
+	 * contentsのviewファイルはclass/method.phpを見る
+	 * otherviewを指定した場合はclass/otherview.phpを見る
+	 *
+	 * @param string $otherview
+	 */
+	protected function set($otherview = NULL)
+	{
+
+		/* contents */
+		if( $otherview ){
+			$this->load->view( $this->_data['class'].DS.$otherview, $this->_data );
+		}else{
+			$this->load->view( $this->_data['class'].DS.$this->_data['method'], $this->_data );
+		}
 	}
 }

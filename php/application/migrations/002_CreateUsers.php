@@ -42,7 +42,7 @@ class Migration_CreateUsers extends CI_Migration
 		$this->dbforge->add_key('user_id', TRUE);
 		$this->dbforge->create_table('users');
 
-		// INDEX
+		/* INDEX */
 		$sql = "CREATE INDEX `index_users_login` ON `users`(`email`)";
 		$this->db->query($sql);
 	}
