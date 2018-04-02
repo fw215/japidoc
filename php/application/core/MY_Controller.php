@@ -83,12 +83,25 @@ class MY_Controller extends CI_Controller
 	 */
 	protected function set($otherview = NULL)
 	{
+		/* header */
+		if( $this->_data['class'] === 'login' ){
+			$this->load->view('templates'.DS.'login-header', $this->_data);
+		}else{
+			$this->load->view('templates'.DS.'header', $this->_data);
+		}
 
 		/* contents */
 		if( $otherview ){
 			$this->load->view( $this->_data['class'].DS.$otherview, $this->_data );
 		}else{
 			$this->load->view( $this->_data['class'].DS.$this->_data['method'], $this->_data );
+		}
+
+		/* footer */
+		if( $this->_data['class'] === 'login' ){
+			$this->load->view('templates'.DS.'login-footer', $this->_data);
+		}else{
+			$this->load->view('templates'.DS.'footer', $this->_data);
 		}
 	}
 }
