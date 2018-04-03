@@ -130,7 +130,8 @@ $autoload['config'] = array();
 |
 */
 $autoload['language'] = array(
-	'japidoc/login'
+	'japidoc/login',
+	'japidoc/signup',
 );
 
 /*

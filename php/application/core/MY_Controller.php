@@ -30,7 +30,7 @@ class MY_Controller extends CI_Controller
 	{
 
 		/* Pagesはログインチェックなし */
-		if( $this->_data['class'] !== 'pages' ){
+		if( $this->_data['class'] !== 'pages' && $this->_data['class'] !== 'signup' ){
 			if( $this->_data['class'] === 'login' && $this->_data['method'] !== 'logout' ){
 				/* ログイン済 */
 				if( $this->session->userdata('id') ){
@@ -84,7 +84,7 @@ class MY_Controller extends CI_Controller
 	protected function set($otherview = NULL)
 	{
 		/* header */
-		if( $this->_data['class'] === 'login' ){
+		if( $this->_data['class'] === 'login' || $this->_data['class'] === 'signup' ){
 			$this->load->view('templates'.DS.'login-header', $this->_data);
 		}else{
 			$this->load->view('templates'.DS.'header', $this->_data);
@@ -98,7 +98,7 @@ class MY_Controller extends CI_Controller
 		}
 
 		/* footer */
-		if( $this->_data['class'] === 'login' ){
+		if( $this->_data['class'] === 'login' || $this->_data['class'] === 'signup' ){
 			$this->load->view('templates'.DS.'login-footer', $this->_data);
 		}else{
 			$this->load->view('templates'.DS.'footer', $this->_data);
