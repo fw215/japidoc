@@ -63,7 +63,8 @@ $autoload['libraries'] = array(
 	'email',
 	'session',
 	'encrypt',
-	'form_validation' => 'validation'
+	'form_validation' => 'validation',
+	'LibUsers' => 'LibUsers'
 );
 
 /*
@@ -130,8 +131,10 @@ $autoload['config'] = array();
 |
 */
 $autoload['language'] = array(
+	'japidoc/app',
 	'japidoc/login',
 	'japidoc/signup',
+	'japidoc/users',
 );
 
 /*

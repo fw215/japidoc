@@ -15,6 +15,13 @@ class Signup extends MY_Controller
 
 	public function index()
 	{
+		if($this->input->method(TRUE) === 'POST' ){
+			if( $this->_data['errors'] = $this->LibUsers->signup( $this->input->post() ) ){
+				$this->_data['data']['nickname'] = $this->input->post('nickname');
+				$this->_data['data']['email'] = $this->input->post('email');
+				$this->_data['data']['terms'] = $this->input->post('terms');
+			}
+		}
 		$this->set();
 	}
 }

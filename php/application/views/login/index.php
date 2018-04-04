@@ -2,12 +2,12 @@
 
 <div class="login-box">
 	<div class="login-logo">
-		<a href="#"><b>Admin</b>LTE</a>
+		<a href="#"><b><?php echo lang('app_title'); ?></b></a>
 	</div>
 	<div class="login-box-body">
 		<p class="login-box-msg"><?php echo lang('login_title'); ?></p>
 
-		<form action="../../index2.html" method="post">
+		<form action="<?php echo base_url('login'); ?>" method="post">
 			<div class="form-group has-feedback">
 				<input type="email" class="form-control" placeholder="Email">
 				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
