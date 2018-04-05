@@ -48,23 +48,20 @@ class Users_model extends CI_Model
 	 *
 	 * 利用者を登録・編集する
 	 *
-	 * @param array $upsert
+	 * @param array $data
 	 * @return string|int $user_id
 	 */
-	public function register($upsert)
+	public function register($data)
 	{
-		$user_id = $upsert['user_id'];
+		$user_id = $data['user_id'];
 		$upsert = array(
-			'user_id' => $upsert['user_id'],
-			'nickname' => $upsert['nickname'],
-			'email' => $upsert['email'],
+			'user_id' => $data['user_id'],
+			'nickname' => $data['nickname'],
+			'email' => $data['email'],
 		);
-		if( !$this->validation->required($upsert['password']) ){
-			/* パスワードが空の場合は変更しない */
-			unset($upsert['password']);
-		}else{
+		if( $this->validation->required($data['password']) ){
 			/* パスワードがある場合はハッシュ化 */
-			$upsert['password'] = password_hash($upsert['password'], PASSWORD_DEFAULT);
+			$upsert['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 		}
 		try{
 			$this->db->trans_start();

@@ -8,11 +8,20 @@ class LibUsers
 	function __construct()
 	{
 		$this->CI =& get_instance();
+		$this->CI->load->library('form_validation', 'validation');
 	}
 
-	public function signup($data)
+	/**
+	 * signup_validation
+	 *
+	 * 新規登録バリデーション
+	 *
+	 * @param array $data
+	 * @return bool|array $result
+	 */
+	public function signup_validation(array $data)
 	{
-		$this->CI->load->library('form_validation', 'validation');
+		$result = false;
 
 		$this->CI->validation->set_data($data);
 		$this->CI->validation->set_rules(
@@ -36,12 +45,37 @@ class LibUsers
 			'required'
 		);
 		if( !$this->CI->validation->run() ){
-			$response['nickname'] = !empty($this->CI->validation->error('nickname')) ? $this->CI->validation->error('nickname') : NULL;
-			$response['email'] = !empty($this->CI->validation->error('email')) ?  $this->CI->validation->error('email') : NULL;
-			$response['password'] = !empty($this->CI->validation->error('password')) ? $this->CI->validation->error('password'): NULL;
-			$response['terms'] = !empty($this->CI->validation->error('terms')) ? $this->CI->validation->error('terms') : NULL;
-			return $response;
+			$result['nickname'] = !empty($this->CI->validation->error('nickname')) ? $this->CI->validation->error('nickname') : NULL;
+			$result['email'] = !empty($this->CI->validation->error('email')) ?  $this->CI->validation->error('email') : NULL;
+			$result['password'] = !empty($this->CI->validation->error('password')) ? $this->CI->validation->error('password'): NULL;
+			$result['terms'] = !empty($this->CI->validation->error('terms')) ? $this->CI->validation->error('terms') : NULL;
 		}
-		return false;
+		/* 追加バリデーション */
+		if( !isset($result['email']) ){
+			$email_validation = $this->email_validation($data);
+			if( isset($email_validation) ){
+				$result['email'] = $email_validation;
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * email_validation
+	 *
+	 * メールアドレスのチェック
+	 *
+	 * @param array $data
+	 * @return string|null
+	 */
+	public function email_validation(array $data){
+		/* メールアドレスと重複していないかチェック */
+		$email = isset($data['email']) ? $data['email'] : '';
+		$user_id = isset($data['user_id']) ? $data['user_id'] : 0;
+		if( $this->CI->Users->isCheckDuplicateEmail($email, $user_id) ){
+			return lang('signup_email_duplicate');
+		}
+		return NULL;
 	}
 }
