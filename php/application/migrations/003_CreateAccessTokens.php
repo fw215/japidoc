@@ -23,6 +23,11 @@ class Migration_CreateAccessTokens extends CI_Migration
 				'unsigned'       => TRUE,
 				'comment'        => '利用者ID'
 			),
+			'ip_address' => array(
+				'type'           => 'varchar',
+				'constraint'     => '15',
+				'comment'        => 'IPアドレス'
+			),
 			'access_expire' => array(
 				'type'           => 'datetime',
 				'null'           => FALSE,
