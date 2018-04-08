@@ -12,6 +12,36 @@ class LibUsers
 	}
 
 	/**
+	 * login_validation
+	 *
+	 * ログインバリデーション
+	 *
+	 * @param array $data
+	 * @return bool|array $result
+	 */
+	public function login_validation(array $data)
+	{
+		$result = false;
+
+		$this->CI->validation->set_data($data);
+		$this->CI->validation->set_rules(
+			'email',
+			'lang:users_email',
+			'required|trim|valid_email'
+		);
+		$this->CI->validation->set_rules(
+			'password',
+			'lang:users_password',
+			'required|trim'
+		);
+		if( !$this->CI->validation->run() ){
+			$result['email'] = !empty($this->CI->validation->error('email')) ? $this->CI->validation->error('email') : NULL ;
+			$result['password'] = !empty($this->CI->validation->error('password')) ? $this->CI->validation->error('password') : NULL;
+		}
+		return $result;
+	}
+
+	/**
 	 * signup_validation
 	 *
 	 * 新規登録バリデーション
