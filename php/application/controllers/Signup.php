@@ -13,6 +13,11 @@ class Signup extends MY_Controller
 		parent::__construct();
 	}
 
+	/**
+	 * index
+	 *
+	 * 新規登録画面
+	 */
 	public function index()
 	{
 		if($this->input->method(TRUE) === 'POST' ){
@@ -25,7 +30,8 @@ class Signup extends MY_Controller
 			}else{
 				/* 新規登録 */
 				$postdata['user_id'] = 0;
-				$this->Users->register( $postdata );
+				$user_id = $this->Users->register( $postdata );
+				//TODO ログイン処理
 			}
 		}
 		$this->set();
