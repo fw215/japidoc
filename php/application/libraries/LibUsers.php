@@ -12,6 +12,29 @@ class LibUsers
 	}
 
 	/**
+	 * login
+	 *
+	 * ログイン
+	 *
+	 * @param array $data
+	 * @return bool
+	 */
+	public function login(array $data)
+	{
+		$email = isset($data['email']) ? $data['email'] : '';
+		$password = isset($data['password']) ? $data['password'] : '';
+
+		if( !$result = $this->CI->Users->getDataEmail($email) ){
+			return false;
+		}
+
+		if( !password_verify($password, $result->password) ){
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * login_validation
 	 *
 	 * ログインバリデーション
