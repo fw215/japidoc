@@ -85,7 +85,7 @@ class LibUsers
 		$this->CI->validation->set_rules(
 			'email',
 			'lang:users_email',
-			'required|trim|valid_email|min_length[8]|max_length[255]'
+			'required|trim|valid_email|max_length[255]'
 		);
 		$this->CI->validation->set_rules(
 			'password',

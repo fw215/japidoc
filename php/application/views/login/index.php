@@ -8,6 +8,7 @@
 		<p class="login-box-msg"><?php echo lang('login_title'); ?></p>
 
 		<form action="<?php echo base_url('login'); ?>" method="post">
+			<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
 			<div class="form-group has-feedback<?php if(isset($errors['email'])): ?> has-error<?php endif; ?>">
 				<input type="text" class="form-control" name="email" placeholder="<?php echo lang('users_email'); ?>" value="<?php if(isset($data['email'])): echo html_escape($data['email']); endif; ?>">
 				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>

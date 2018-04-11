@@ -8,6 +8,7 @@
 		<p class="register-box-msg"><?php echo lang('signup_title'); ?></p>
 
 		<form action="<?php echo base_url('signup'); ?>" method="post">
+			<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
 			<div class="form-group has-feedback<?php if(isset($errors['nickname'])): ?> has-error<?php endif; ?>">
 				<input type="text" class="form-control" placeholder="<?php echo lang('users_nickname'); ?>" name="nickname" value="<?php if(isset($data['nickname'])): echo html_escape($data['nickname']); endif; ?>">
 				<span class="glyphicon glyphicon-user form-control-feedback"></span>
