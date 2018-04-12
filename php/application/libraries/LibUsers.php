@@ -17,7 +17,7 @@ class LibUsers
 	 * ログイン
 	 *
 	 * @param array $data
-	 * @return bool
+	 * @return bool|int
 	 */
 	public function login(array $data)
 	{
@@ -31,7 +31,7 @@ class LibUsers
 		if( !password_verify($password, $result->password) ){
 			return false;
 		}
-		return true;
+		return $result->user_id;
 	}
 
 	/**

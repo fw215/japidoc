@@ -62,7 +62,7 @@ $autoload['libraries'] = array(
 	'database',
 	'email',
 	'session',
-	'encrypt',
+	'encryption',
 	'form_validation' => 'validation',
 	'LibUsers' => 'LibUsers'
 );

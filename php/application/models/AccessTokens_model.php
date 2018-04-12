@@ -55,8 +55,9 @@ class AccessTokens_model extends CI_Model
 
 		$insert = array(
 			'user_id' => $user_id,
+			'ip_address' => $this->input->ip_address(),
 			'access_token' => $access_token,
-			'access_expire' => $access_expire
+			'access_expire' => $access_expire,
 		);
 		try{
 			$this->db->trans_start();

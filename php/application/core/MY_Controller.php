@@ -43,14 +43,14 @@ class MY_Controller extends CI_Controller
 					if( $auth ){
 						$this->session->sess_regenerate(TRUE);
 						$this->session->set_userdata('id', $this->session->session_id);
-						$this->session->set_userdata('user', $this->encrypt->encode($auth->user_id));
+						$this->session->set_userdata('user', $this->encryption->encrypt($auth->user_id));
 					}
 				}
 				/* 未ログイン */
 				if( !$this->session->userdata('id') ){
 					$this->logout();
 				}
-				$_user = $this->Users->getDetail( $this->encrypt->decode($this->session->userdata('user')) );
+				$_user = $this->Users->getDetail( $this->encryption->decrypt($this->session->userdata('user')) );
 				if( $_user ){
 					/* 最新のログイン情報を取得 */
 					$this->_user = $_user;
