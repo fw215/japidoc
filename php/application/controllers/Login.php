@@ -27,8 +27,10 @@ class Login extends MY_Controller
 				$this->_data['data']['email'] = $this->input->post('email');
 			}else{
 				/* ログインチェック */
-				if( $this->LibUsers->login( $postdata ) ){
-
+				if( $user = $this->LibUsers->login( $postdata ) ){
+					$this->session->sess_regenerate(TRUE);
+					$this->session->set_userdata('id', $this->session->session_id);
+					$this->session->set_userdata('user', $this->encrypt->encode($user->user_id));
 				}
 				$this->_data['data']['email'] = $this->input->post('email');
 				$this->_data['errors']['password'] = lang('login_failure');
