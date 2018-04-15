@@ -46,4 +46,13 @@ class Login extends MY_Controller
 
 		$this->set();
 	}
+
+	/* logout
+	 *
+	 * ログアウト処理
+	 */
+	public function logout()
+	{
+		$this->_logout();
+	}
 }

@@ -48,7 +48,7 @@ class MY_Controller extends CI_Controller
 				}
 				/* 未ログイン */
 				if( !$this->session->userdata('id') ){
-					$this->logout();
+					$this->_logout();
 				}
 				$_user = $this->Users->getDetail( $this->encryption->decrypt($this->session->userdata('user')) );
 				if( $_user ){
@@ -56,16 +56,18 @@ class MY_Controller extends CI_Controller
 					$this->_user = $_user;
 				}else{
 					/* ログインアカウントが正しくない */
-					$this->logout();
+					$this->_logout();
 				}
 			}
 		}
 	}
 
 	/**
-	 * logout
+	 * _logout
+	 *
+	 * ログアウト処理
 	 */
-	protected function logout()
+	protected function _logout()
 	{
 		$this->session->sess_destroy();
 		delete_cookie('token');
@@ -84,11 +86,8 @@ class MY_Controller extends CI_Controller
 	protected function set($otherview = NULL)
 	{
 		/* header */
-		if( $this->_data['class'] === 'login' || $this->_data['class'] === 'signup' ){
-			$this->load->view('templates'.DS.'login-header', $this->_data);
-		}else{
-			$this->load->view('templates'.DS.'header', $this->_data);
-		}
+		$this->_data['aside'] = lang('app_aside');
+		$this->load->view('templates'.DS.'header', $this->_data);
 
 		/* contents */
 		if( $otherview ){
@@ -98,10 +97,6 @@ class MY_Controller extends CI_Controller
 		}
 
 		/* footer */
-		if( $this->_data['class'] === 'login' || $this->_data['class'] === 'signup' ){
-			$this->load->view('templates'.DS.'login-footer', $this->_data);
-		}else{
-			$this->load->view('templates'.DS.'footer', $this->_data);
-		}
+		$this->load->view('templates'.DS.'footer', $this->_data);
 	}
 }
