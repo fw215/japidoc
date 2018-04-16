@@ -14,3 +14,11 @@ $lang['app_aside'][] = array(
 	'name' => 'ダッシュボード',
 	'children' => array(),
 );
+$lang['app_aside'][] = array(
+	'icon' => '<i class="fa fa-star" aria-hidden="true"></i>',
+	'class' => 'projects',
+	'method' => 'index',
+	'link' => '',
+	'name' => 'プロジェクト',
+	'children' => array(),
+);
