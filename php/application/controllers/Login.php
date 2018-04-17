@@ -22,12 +22,12 @@ class Login extends MY_Controller
 	{
 		if( $this->input->method(TRUE) === 'POST' ){
 			$postdata = $this->input->post();
-			if( $this->_data['errors'] = $this->LibUsers->login_validation( $postdata ) ){
+			if( $this->_data['errors'] = $this->Users_lib->login_validation( $postdata ) ){
 				/* エラー */
 				$this->_data['data']['email'] = $this->input->post('email');
 			}else{
 				/* ログインチェック */
-				if( $user_id = $this->LibUsers->login( $postdata ) ){
+				if( $user_id = $this->Users_lib->login( $postdata ) ){
 					$this->session->sess_regenerate(TRUE);
 					$this->session->set_userdata('id', $this->session->session_id);
 					$this->session->set_userdata('user', $this->encryption->encrypt($user_id));

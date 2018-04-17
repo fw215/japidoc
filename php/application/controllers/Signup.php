@@ -22,7 +22,7 @@ class Signup extends MY_Controller
 	{
 		if($this->input->method(TRUE) === 'POST' ){
 			$postdata = $this->input->post();
-			if( $this->_data['errors'] = $this->LibUsers->signup_validation( $postdata ) ){
+			if( $this->_data['errors'] = $this->Users_lib->signup_validation( $postdata ) ){
 				/* エラーチェック */
 				$this->_data['data']['nickname'] = $this->input->post('nickname');
 				$this->_data['data']['email'] = $this->input->post('email');
