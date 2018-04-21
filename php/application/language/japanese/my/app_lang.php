@@ -20,5 +20,18 @@ $lang['app_aside'][] = array(
 	'method' => 'index',
 	'link' => '',
 	'name' => 'プロジェクト',
-	'children' => array(),
+	'children' => array(
+		array(
+			'class' => 'projects',
+			'method' => 'index',
+			'link' => 'projects',
+			'name' => '一覧',
+		),
+		array(
+			'class' => 'projects',
+			'method' => 'edit',
+			'link' => 'projects/edit',
+			'name' => '登録&ensp;&middot;&ensp;編集',
+		)
+	),
 );

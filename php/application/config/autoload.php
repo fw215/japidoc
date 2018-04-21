@@ -135,6 +135,8 @@ $autoload['language'] = array(
 	'my/login',
 	'my/signup',
 	'my/users',
+	'my/dashboard',
+	'my/projects',
 );
 
 /*

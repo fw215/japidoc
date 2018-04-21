@@ -2,11 +2,11 @@
 
 
 			<section class="content-header">
-				<h1><?php echo lang('dashboard_title'); ?></h1>
+				<h1><?php echo lang('projects_title'); ?></h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="<?php echo base_url('/'); ?>">
-							<i class="fa fa-paw" aria-hidden="true"></i> <?php echo lang('dashboard_title'); ?>
+						<a href="<?php echo base_url('/projects'); ?>">
+							<i class="fa fa-paw" aria-hidden="true"></i> <?php echo lang('projects_title'); ?>
 						</a>
 					</li>
 				</ol>

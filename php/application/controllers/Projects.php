@@ -2,17 +2,22 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Dashboard
+ * Projects
  *
- * ダッシュボード
+ * プロジェクト
  */
-class Dashboard extends MY_Controller
+class Projects extends MY_Controller
 {
 	function __construct()
 	{
 		parent::__construct();
 	}
 
+	/**
+	 * index
+	 *
+	 * 一覧
+	 */
 	public function index()
 	{
 		$this->set();
