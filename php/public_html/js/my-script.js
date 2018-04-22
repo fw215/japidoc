@@ -10,3 +10,4 @@ $(function () {
 		increaseArea: '20%'
 	});
 });
+var base_url = $('#base_url').val();
