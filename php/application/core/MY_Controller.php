@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MY_Controller extends CI_Controller
 {
 	public $_data = array();
+	public $_api = array();
 
 	/**
 	 * construct
@@ -98,5 +99,23 @@ class MY_Controller extends CI_Controller
 
 		/* footer */
 		$this->load->view('templates'.DS.'footer', $this->_data);
+	}
+
+	/**
+	 * json
+	 *
+	 * API用jsonレスポンス
+	 *
+	 * @return json
+	 */
+	public function json()
+	{
+		$this->_api['code'] = isset($this->_api['code']) ? $this->_api['code'] : 200;
+
+		$this->output
+		->set_content_type('application/json')
+		->set_output(json_encode($this->_api))
+		->_display();
+		exit(0);
 	}
 }

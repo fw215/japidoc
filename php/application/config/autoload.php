@@ -155,4 +155,5 @@ $autoload['language'] = array(
 $autoload['model'] = array(
 	'Users_model' => 'Users',
 	'AccessTokens_model' => 'AccessTokens',
+	'Projects_model' => 'Projects',
 );
