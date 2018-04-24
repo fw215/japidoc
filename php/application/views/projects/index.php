@@ -1,12 +1,10 @@
 
-
-
 			<section class="content-header">
-				<h1><?php echo lang('projects_title'); ?></h1>
+				<h1><?= lang('projects_title'); ?></h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="<?php echo base_url('/projects'); ?>">
-							<i class="fa fa-paw" aria-hidden="true"></i> <?php echo lang('projects_title'); ?>
+						<a href="<?= base_url('/projects'); ?>">
+							<i class="fa fa-paw" aria-hidden="true"></i> <?= lang('projects_title'); ?>
 						</a>
 					</li>
 				</ol>
@@ -22,22 +20,26 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="box-body" v-cloak>
-									<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
-									<p>If you would like to edit this page you'll find it located at:</p>
-									<code>application/views/welcome_message.php</code>
-
-									<p>The corresponding controller for this page is found at:</p>
-									<code>application/controllers/Welcome.php</code>
-
-									<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-									<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-								</div>
+					<div class="table-responsive">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr class="success">
+											<th class="">project</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="project in projects">
+											<td>{{project|json}}</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr class="success">
+											<th class="">project</th>
+										</tr>
+									</tfoot>
+								</table>
 							</div>
-						</div>
 					</div>
 				</div>
 			</section>
