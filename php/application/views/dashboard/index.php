@@ -2,11 +2,11 @@
 
 
 			<section class="content-header">
-				<h1><?php echo lang('dashboard_title'); ?></h1>
+				<h1><?= lang('dashboard_title'); ?></h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="<?php echo base_url('/'); ?>">
-							<i class="fa fa-paw" aria-hidden="true"></i> <?php echo lang('dashboard_title'); ?>
+						<a href="<?= base_url('/'); ?>">
+							<i class="fa fa-paw" aria-hidden="true"></i> <?= lang('dashboard_title'); ?>
 						</a>
 					</li>
 				</ol>
@@ -34,7 +34,7 @@
 									<code>application/controllers/Welcome.php</code>
 
 									<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-									<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+									<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?= (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 								</div>
 							</div>
 						</div>
