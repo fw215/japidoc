@@ -1,0 +1,10 @@
+
+.break-word {
+	/* word-wrap: break-word;
+	overflow-wrap:　break-word; */
+	word-break: break-all;
+}
+
+.w90px {
+	width: 90px;
+}

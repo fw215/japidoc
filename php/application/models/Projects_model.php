@@ -26,6 +26,10 @@ class Projects_model extends CI_Model
 		try{
 			$select = array(
 				'projects.project_id',
+				'projects.name',
+				'projects.description',
+				'DATE_FORMAT(projects.created, "%Y/%m/%d") as created_ymd',
+				'DATE_FORMAT(projects.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 			);
 			$this->db->select($select);
 
