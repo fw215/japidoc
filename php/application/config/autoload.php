@@ -64,7 +64,8 @@ $autoload['libraries'] = array(
 	'session',
 	'encryption',
 	'form_validation' => 'validation',
-	'Users_lib' => 'Users_lib'
+	'Users_lib' => 'Users_lib',
+	'Projects_lib' => 'Projects_lib',
 );
 
 /*

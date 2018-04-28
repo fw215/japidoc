@@ -9,6 +9,8 @@ class Users_lib
 	{
 		$this->CI =& get_instance();
 		$this->CI->load->library('form_validation', 'validation');
+
+		$this->CI->validation->set_error_delimiters('', '');
 	}
 
 	/**

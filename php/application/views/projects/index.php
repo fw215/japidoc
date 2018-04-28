@@ -37,6 +37,7 @@
 							<table class="table table-bordered table-hover">
 								<thead>
 									<tr class="success">
+										<th><?= lang('projects_id'); ?></th>
 										<th><?= lang('projects_name'); ?></th>
 										<th><?= lang('projects_description'); ?></th>
 										<th class="w90px"><?= lang('projects_created'); ?></th>
@@ -44,6 +45,9 @@
 								</thead>
 								<tbody>
 									<tr v-for="project in projects">
+										<td class="break-word pointer" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">
+											{{project.project_id}}
+										</td>
 										<td class="break-word">{{project.name}}</td>
 										<td class="break-word">{{project.description}}</td>
 										<td :title="project.created_ymd_his">{{project.created_ymd}}</td>
@@ -51,6 +55,7 @@
 								</tbody>
 								<tfoot>
 									<tr class="success">
+										<th><?= lang('projects_id'); ?></th>
 										<th><?= lang('projects_name'); ?></th>
 										<th><?= lang('projects_description'); ?></th>
 										<th class="w90px"><?= lang('projects_created'); ?></th>

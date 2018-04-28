@@ -52,3 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['api/v1/projects/(:num)']['get'] = 'api/v1/projects/get/$1';
+$route['api/v1/projects/(:num)']['put'] = 'api/v1/projects/put/$1';
+$route['api/v1/projects/(:num)']['post'] = 'api/v1/projects/post/$1';

@@ -1,7 +1,11 @@
 
 [v-cloak] {
 	display: none;
-  }
+}
+
+.pointer {
+	cursor: pointer;
+}
 
 .break-word {
 	/* word-wrap: break-word;

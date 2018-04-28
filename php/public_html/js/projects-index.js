@@ -37,7 +37,7 @@ new Vue({
 			var self = this;
 			self.loading.search = true;
 			axios.get(
-				base_url + "api/v1/projects", {
+				base_url + "api/v1/projects/search", {
 					params: {
 						page: self.search.page,
 					}

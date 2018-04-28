@@ -88,3 +88,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
  * my constants
  */
 define('DEFAULT_PAGE_LIMIT', 100);
+
+define('API_BAD_REQUEST', 400);

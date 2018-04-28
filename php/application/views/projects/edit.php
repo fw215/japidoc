@@ -28,22 +28,24 @@
 								<div class="box-body" v-else v-cloak>
 									<input type="hidden" id="project_id" value="<?= $project_id; ?>">
 									<div class="row form-group">
-										<label class="col-sm-3 form-control-static">#</label>
+										<label class="col-sm-3 form-control-static"><?= lang('projects_id'); ?></label>
 										<div class="col-sm-9 form-control-static">
 											<span v-if="project.project_id > 0">{{project.project_id}}</span>
-											<span v-else><?= lang('projects_add'); ?></span>
+											<span v-else>#</span>
 										</div>
 									</div>
 									<div class="row form-group">
 										<label class="col-sm-3 form-control-static"><?= lang('projects_name'); ?></label>
 										<div class="col-sm-9">
 											<input type="text" class="form-control" v-model="project.name">
+											<span class="help-block">{{errors.name}}</span>
 										</div>
 									</div>
 									<div class="row form-group">
 										<label class="col-sm-3 form-control-static"><?= lang('projects_description'); ?></label>
 										<div class="col-sm-9">
-											<textarea class="form-control" rows="4" v-model="project.description"></textarea>
+											<textarea class="form-control" rows="5" v-model="project.description"></textarea>
+											<span class="help-block">{{errors.description}}</span>
 										</div>
 									</div>
 									<div class="row form-group">

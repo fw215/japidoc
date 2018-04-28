@@ -5,11 +5,12 @@ class MY_Controller extends CI_Controller
 {
 	public $_data = array();
 	public $_api = array();
+	public $_stream = array();
 
 	/**
 	 * construct
 	 */
-	public function __construct()
+	public function __construct($is_session_login=true)
 	{
 		parent::__construct();
 
@@ -18,18 +19,21 @@ class MY_Controller extends CI_Controller
 		$this->_data['method'] = strtolower($this->router->fetch_method());
 
 		/* ログインチェック */
-		$this->loginCheck();
+		if( $is_session_login ){
+			$this->sessionLoginCheck();
+		}else{
+			$this->apiLoginCheck();
+		}
 	}
 
 	/**
-	 * loginCheck
+	 * sessionLoginCheck
 	 *
-	 * ログインチェック
+	 * セッションログインチェック
 	 * 最新のデータを$this->_userに格納
 	 */
-	protected function loginCheck()
+	protected function sessionLoginCheck()
 	{
-
 		/* Pagesはログインチェックなし */
 		if( $this->_data['class'] !== 'pages' && $this->_data['class'] !== 'signup' ){
 			if( $this->_data['class'] === 'login' && $this->_data['method'] !== 'logout' ){
@@ -102,6 +106,24 @@ class MY_Controller extends CI_Controller
 	}
 
 	/**
+	 * apiLoginCheck
+	 *
+	 * APIログインチェック
+	 * 最新のデータを$this->_userに格納
+	 */
+	public function apiLoginCheck()
+	{
+		if( $this->input->raw_input_stream ){
+			$this->_stream = json_decode(trim($this->input->raw_input_stream), true);
+			if( !isset($this->_stream) ){
+				/* json形式エラー */
+				$this->_api['code'] = 900;
+				$this->json();
+			}
+		}
+	}
+
+	/**
 	 * json
 	 *
 	 * API用jsonレスポンス
@@ -118,4 +140,21 @@ class MY_Controller extends CI_Controller
 		->_display();
 		exit(0);
 	}
+
+	/**
+	 * space_trim
+	 *
+	 * 前後の半角全角スペースを除く
+	 *
+	 * @param string $str
+	 */
+	protected function space_trim($str) {
+		// 行頭の半角、全角スペースを、空文字に置き換える
+		$str = preg_replace('/^[ 　]+/u', '', $str);
+		// 末尾の半角、全角スペースを、空文字に置き換える
+		$str = preg_replace('/[ 　]+$/u', '', $str);
+
+		return $str;
+	}
+
 }
