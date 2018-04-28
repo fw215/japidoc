@@ -30,6 +30,8 @@ class Projects_model extends CI_Model
 				'projects.description',
 				'DATE_FORMAT(projects.created, "%Y/%m/%d") as created_ymd',
 				'DATE_FORMAT(projects.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
+				'DATE_FORMAT(projects.modified, "%Y/%m/%d") as modified_ymd',
+				'DATE_FORMAT(projects.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
 			);
 			$this->db->select($select);
 
@@ -79,6 +81,8 @@ class Projects_model extends CI_Model
 				'projects.description',
 				'DATE_FORMAT(projects.created, "%Y/%m/%d") as created_ymd',
 				'DATE_FORMAT(projects.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
+				'DATE_FORMAT(projects.modified, "%Y/%m/%d") as modified_ymd',
+				'DATE_FORMAT(projects.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
 			);
 			$this->db->select($select);
 
@@ -95,6 +99,60 @@ class Projects_model extends CI_Model
 			}
 
 			$result = $this->db->get($this->_table)->row();
+		}catch(Exception $e){
+			log_message('error', $e->getMessage());
+		}
+		return $result;
+	}
+
+	/**
+	 * update
+	 *
+	 * 1件更新
+	 *
+	 * @param int $project_id
+	 * @param array $update
+	 * @return object|bool
+	 */
+	public function update(int $project_id, array $update)
+	{
+		$result = false;
+		try{
+			$conditions = array(
+				'project_id' => $project_id
+			);
+			$project = $this->get($conditions);
+			if( !$project ){
+				return false;
+			}
+
+			if( $this->db->update($this->_table, $update, $conditions) ){
+				$result = $this->get($conditions);
+			}
+		}catch(Exception $e){
+			log_message('error', $e->getMessage());
+		}
+		return $result;
+	}
+
+	/**
+	 * insert
+	 *
+	 * 1件登録
+	 *
+	 * @param array $insert
+	 * @return object|bool
+	 */
+	public function insert(array $insert)
+	{
+		$result = false;
+		try{
+			if( $this->db->insert($this->_table, $insert) ){
+				$conditions = array(
+					'project_id' => $this->db->insert_id()
+				);
+				$result = $this->get($conditions);
+			}
 		}catch(Exception $e){
 			log_message('error', $e->getMessage());
 		}

@@ -11,6 +11,7 @@
 	/* word-wrap: break-word;
 	overflow-wrap:　break-word; */
 	word-break: break-all;
+	white-space: pre-line;
 }
 
 .w90px {

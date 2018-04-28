@@ -13,9 +13,13 @@
 			</section>
 
 			<section class="content container-fluid">
-				<div class="callout callout-warning error-box" v-cloak hidden>
+				<div class="callout callout-warning warning-box" v-cloak hidden>
 					<h4><i class="icon fa fa-warning"></i> Warning</h4>
-					<p><span v-for="err in errors">{{err}}<br></span></p>
+					<p><span v-for="warn in warning">{{warn}}<br></span></p>
+				</div>
+				<div class="callout callout-success success-box" v-cloak hidden>
+					<h4><i class="icon fa fa-check"></i> Success</h4>
+					<p><span v-for="success in successful">{{success}}<br></span></p>
 				</div>
 
 				<div class="box">
@@ -35,17 +39,29 @@
 										</div>
 									</div>
 									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('projects_name'); ?></label>
-										<div class="col-sm-9">
+										<label class="col-sm-3 form-control-static"><?= lang('projects_name'); ?><?= lang('app_required'); ?></label>
+										<div class="col-sm-9" :class="{'has-error': isErrorName}">
 											<input type="text" class="form-control" v-model="project.name">
 											<span class="help-block">{{errors.name}}</span>
 										</div>
 									</div>
 									<div class="row form-group">
 										<label class="col-sm-3 form-control-static"><?= lang('projects_description'); ?></label>
-										<div class="col-sm-9">
+										<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
 											<textarea class="form-control" rows="5" v-model="project.description"></textarea>
 											<span class="help-block">{{errors.description}}</span>
+										</div>
+									</div>
+									<div class="row form-group" v-if="project.modified_ymd_his">
+										<label class="col-sm-3 form-control-static"><?= lang('projects_modified'); ?></label>
+										<div class="col-sm-9 form-control-static">
+											{{project.modified_ymd_his}}
+										</div>
+									</div>
+									<div class="row form-group" v-if="project.created_ymd_his">
+										<label class="col-sm-3 form-control-static"><?= lang('projects_created'); ?></label>
+										<div class="col-sm-9 form-control-static">
+											{{project.created_ymd_his}}
 										</div>
 									</div>
 									<div class="row form-group">
@@ -55,7 +71,7 @@
 												<span v-if="project.project_id > 0"><?= lang('projects_edit'); ?></span>
 												<span v-else><?= lang('projects_add'); ?></span>
 											</button>
-											<button class="btn btn-info" v-if="loading.register" disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+											<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
 										</div>
 									</div>
 								</div>

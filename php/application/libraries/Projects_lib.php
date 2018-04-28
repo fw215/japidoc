@@ -34,7 +34,7 @@ class Projects_lib
 		$this->CI->validation->set_rules(
 			'description',
 			'lang:projects_description',
-			'required|trim|max_length[20000]'
+			'trim|max_length[20000]'
 		);
 		if( !$this->CI->validation->run() ){
 			$result['name'] = !empty($this->CI->validation->error('name')) ? $this->CI->validation->error('name') : NULL;

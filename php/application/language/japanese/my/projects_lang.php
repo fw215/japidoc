@@ -8,4 +8,5 @@ $lang['projects_edit'] = '編集';
 $lang['projects_id'] = 'ID';
 $lang['projects_name'] = '名称';
 $lang['projects_description'] = '説明';
+$lang['projects_modified'] = '更新日時';
 $lang['projects_created'] = '登録日時';

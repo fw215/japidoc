@@ -53,6 +53,7 @@ $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['api/v1/projects/(:num)']['get'] = 'api/v1/projects/get/$1';
-$route['api/v1/projects/(:num)']['put'] = 'api/v1/projects/put/$1';
-$route['api/v1/projects/(:num)']['post'] = 'api/v1/projects/post/$1';
+$route['api/v1/projects']['POST'] = 'api/v1/projects/post';
+$route['api/v1/projects/(:num)']['GET'] = 'api/v1/projects/get/$1';
+$route['api/v1/projects/(:num)']['PUT'] = 'api/v1/projects/put/$1';
+$route['api/v1/projects/(:num)']['DELETE'] = 'api/v1/projects/delete/$1';

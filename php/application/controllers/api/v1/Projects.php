@@ -68,6 +68,12 @@ class Projects extends MY_Controller
 			$this->json();
 		}
 
+		$project = $this->Projects->update($project_id, $update);
+		if( !$project ){
+			show_404();
+		}
+		$this->_api['project'] = $project;
+
 		$this->json();
 	}
 
@@ -76,8 +82,25 @@ class Projects extends MY_Controller
 	 *
 	 * 1件登録
 	 */
-	public function post($project_id=0)
+	public function post()
 	{
+		$insert = array(
+			'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
+			'description' => isset($this->_stream['description']) ? $this->space_trim($this->_stream['description']) : NULL,
+		);
+		$errors = $this->Projects_lib->register_validation( $insert );
+		if( $errors ){
+			$this->_api['code'] = API_BAD_REQUEST;
+			$this->_api['errors'] = $errors;
+			$this->json();
+		}
+
+		$project = $this->Projects->insert($insert);
+		if( !$project ){
+			show_404();
+		}
+		$this->_api['project'] = $project;
+
 		$this->json();
 	}
 }

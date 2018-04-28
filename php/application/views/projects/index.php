@@ -45,7 +45,7 @@
 								</thead>
 								<tbody>
 									<tr v-for="project in projects">
-										<td class="break-word pointer" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">
+										<td class="pointer" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">
 											{{project.project_id}}
 										</td>
 										<td class="break-word">{{project.name}}</td>

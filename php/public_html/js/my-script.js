@@ -13,14 +13,27 @@ $(function () {
 var base_url = $('#base_url').val();
 
 /**
-* アニメーション付きエラー表示
+* アニメーション付き成功表示
 */
-function showErrorBox() {
-	$(".error-box").slideDown('normal', function () {
+function showSuccessBox() {
+	$(".success-box").slideDown('normal', function () {
 		$(this).show();
 	});
 	setTimeout(function () {
-		$(".error-box").slideUp('normal', function () {
+		$(".success-box").slideUp('normal', function () {
+			$(this).hide();
+		});
+	}, 2500);
+}
+/**
+* アニメーション付き警告表示
+*/
+function showWarningBox() {
+	$(".warning-box").slideDown('normal', function () {
+		$(this).show();
+	});
+	setTimeout(function () {
+		$(".warning-box").slideUp('normal', function () {
 			$(this).hide();
 		});
 	}, 2500);
