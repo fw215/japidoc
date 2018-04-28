@@ -11,3 +11,14 @@ $(function () {
 	});
 });
 var base_url = $('#base_url').val();
+
+function showErrorBox() {
+	$(".error-box").slideDown('normal', function () {
+		$(this).show();
+	});
+	setTimeout(function () {
+		$(".error-box").slideUp('normal', function () {
+			$(this).hide();
+		});
+	}, 2500);
+}

@@ -1,4 +1,8 @@
 
+[v-cloak] {
+	display: none;
+  }
+
 .break-word {
 	/* word-wrap: break-word;
 	overflow-wrap:　break-word; */

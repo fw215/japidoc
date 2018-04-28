@@ -37,7 +37,8 @@
 					<ul class="nav navbar-nav">
 						<li class="dropdown user user-menu">
 							<a href="<?= base_url('/login/logout'); ?>" class="dropdown-toggle">
-								<span class=""><?= lang('logout_title'); ?></span>
+								<span class="visible-xs"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+								<span class="hidden-xs"><?= lang('logout_title'); ?></span>
 							</a>
 						</li>
 					</ul>

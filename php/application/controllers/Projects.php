@@ -22,4 +22,16 @@ class Projects extends MY_Controller
 	{
 		$this->set();
 	}
+
+	/**
+	 * edit
+	 *
+	 * 登録・編集
+	 */
+	public function edit($project_id=0)
+	{
+		$this->_data['project_id'] = $project_id;
+
+		$this->set();
+	}
 }
