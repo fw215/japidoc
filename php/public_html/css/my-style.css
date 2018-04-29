@@ -2,18 +2,28 @@
 [v-cloak] {
 	display: none;
 }
+.v-enter-active, .v-leave-active {
+	transition: opacity 0.5s;
+}
+.v-enter, .v-leave-to {
+	opacity: 0;
+}
 
 .pointer {
 	cursor: pointer;
 }
-
 .break-word {
 	/* word-wrap: break-word;
 	overflow-wrap:　break-word; */
 	word-break: break-all;
 	white-space: pre-line;
 }
-
+.mb20px {
+	margin-bottom: 20px;
+}
+.w110px {
+	width: 110px;
+}
 .w90px {
 	width: 90px;
 }

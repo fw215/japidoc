@@ -158,4 +158,31 @@ class Projects_model extends CI_Model
 		}
 		return $result;
 	}
+
+	/**
+	 * delete
+	 *
+	 * 1件削除
+	 *
+	 * @param int $project_id
+	 * @return bool
+	 */
+	public function delete(int $project_id)
+	{
+		$result = false;
+		try{
+			$conditions = array(
+				'project_id' => $project_id
+			);
+			$project = $this->get($conditions);
+			if( !$project ){
+				return false;
+			}
+
+			$result = $this->db->delete($this->_table, $conditions);
+		}catch(Exception $e){
+			log_message('error', $e->getMessage());
+		}
+		return $result;
+	}
 }

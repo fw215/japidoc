@@ -17,9 +17,10 @@ class AccessTokens_model extends CI_Model
 	 * 自動ログインを試みる
 	 *
 	 * @param string $token
+	 * @param int $type
 	 * @return object|bool
 	 */
-	public function tryAutoLogin($token)
+	public function tryAutoLogin(string $token, int $type)
 	{
 		$result = false;
 		try{
@@ -28,7 +29,38 @@ class AccessTokens_model extends CI_Model
 			);
 			$conditions = array(
 				'access_token' => $token,
-				'access_expire >=' => date('Y-m-d H:i:s'),
+				'expire_date >=' => date('Y-m-d H:i:s'),
+				'type' => $type,
+			);
+			$this->db->join('users', 'access_tokens.user_id = users.user_id');
+			$result = $this->db->select($select)->where($conditions)->get($this->_table)->row();
+		}catch(Exception $e){
+			log_message('error', $e->getMessage());
+			return false;
+		}
+		return $result;
+	}
+
+	/**
+	 * fetchToken
+	 *
+	 * 自動ログインを試みる
+	 *
+	 * @param int $user_id
+	 * @param int $type
+	 * @return object|bool
+	 */
+	public function fetchToken(int $user_id, int $type)
+	{
+		$result = false;
+		try{
+			$select = array(
+				'access_tokens.access_token',
+			);
+			$conditions = array(
+				'access_tokens.user_id' => $user_id,
+				'access_tokens.expire_date >=' => date('Y-m-d H:i:s'),
+				'access_tokens.type' => $type,
 			);
 			$this->db->join('users', 'access_tokens.user_id = users.user_id');
 			$result = $this->db->select($select)->where($conditions)->get($this->_table)->row();
@@ -45,19 +77,21 @@ class AccessTokens_model extends CI_Model
 	 * ログイントークンを生成する
 	 *
 	 * @param string $user_id
+	 * @param int $type
 	 * @return string|bool
 	 */
-	public function generateToken($user_id)
+	public function generateToken($user_id, $type)
 	{
 		$result = false;
 		$access_token = random_string('alnum', 128);
-		$access_expire = date('Y-m-d H:i:s', time() + ACCESS_EXPIRE_TIME);
+		$expire_date = date('Y-m-d H:i:s', time() + ACCESS_EXPIRE_TIME);
 
 		$insert = array(
 			'user_id' => $user_id,
 			'ip_address' => $this->input->ip_address(),
 			'access_token' => $access_token,
-			'access_expire' => $access_expire,
+			'expire_date' => $expire_date,
+			'type' => $type
 		);
 		try{
 			$this->db->trans_start();
@@ -66,7 +100,7 @@ class AccessTokens_model extends CI_Model
 				$error = $this->db->error();
 				/* 重複しているため再度トークンを発行 */
 				if( $error['code'] === 1062 ){
-					$this->generateToken($user_id);
+					$this->generateToken($user_id, $type);
 				}
 			}
 			$this->db->trans_complete();

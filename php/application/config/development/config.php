@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-define('ACCESS_EXPIRE_TIME', 60 * 60 * 24 * 7);
 
 /*
 |--------------------------------------------------------------------------

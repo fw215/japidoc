@@ -28,10 +28,16 @@ class Migration_CreateAccessTokens extends CI_Migration
 				'constraint'     => '15',
 				'comment'        => 'IPアドレス'
 			),
-			'access_expire' => array(
+			'expire_date' => array(
 				'type'           => 'datetime',
 				'null'           => FALSE,
-				'comment'        => 'ログイン期限'
+				'comment'        => 'アクセス期限'
+			),
+			'type' => array(
+				'type'           => 'int',
+				'unsigned'       => TRUE,
+				'null'           => FALSE,
+				'comment'        => 'トークンタイプ'
 			),
 		);
 		$this->dbforge->add_field($fields);

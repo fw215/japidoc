@@ -88,5 +88,9 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
  * my constants
  */
 define('DEFAULT_PAGE_LIMIT', 100);
-
+define('API_AUTH_HEADER', 'X-AUTH-TOKEN');
 define('API_BAD_REQUEST', 400);
+
+define('ACCESS_EXPIRE_TIME', 60 * 60 * 24 * 7);
+define('ACCESS_TOKEN_COOKIE', 0b001);
+define('ACCESS_TOKEN_API', 0b011);

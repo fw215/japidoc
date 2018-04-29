@@ -17,7 +17,8 @@ new Vue({
 			description: null
 		},
 		warning: [],
-		successful: []
+		successful: [],
+		isDangerBox: false
 	},
 	created: function () {
 		var self = this;
@@ -72,6 +73,7 @@ new Vue({
 				).then(function (res) {
 					if (res.data.code == 200) {
 						self.project = res.data.project;
+						// window.location.href = base_url + "projects/edit/" + self.project.project_id;
 						self.successful.push('登録しました');
 						showSuccessBox();
 					} else {
@@ -84,6 +86,32 @@ new Vue({
 					showWarningBox();
 				});
 			}
+		},
+		deleleProject: function () {
+			var self = this;
+			self.reset();
+			self.loading.delete = true;
+			axios.delete(
+				base_url + "api/v1/projects/" + self.project.project_id
+			).then(function (res) {
+				if (res.data.code == 200) {
+					self.isDangerBox = false;
+					self.project = {
+						project_id: 0,
+						name: '',
+						description: '',
+					};
+					self.successful.push('削除しました');
+					showSuccessBox();
+				} else {
+					self.errors = res.data.errors;
+				}
+				self.loading.delete = false;
+			}).catch(function (error) {
+				self.loading.delete = false;
+				self.warning.push('削除に失敗しました');
+				showWarningBox();
+			});
 		},
 		getProject: function (project_id) {
 			var self = this;

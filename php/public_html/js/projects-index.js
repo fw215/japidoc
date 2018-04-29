@@ -5,7 +5,7 @@ new Vue({
 	data: {
 		project: {},
 		projects: [],
-		count: 0,
+		pages: 0,
 		search: {
 			page: 1,
 		},
@@ -45,7 +45,7 @@ new Vue({
 			).then(function (res) {
 				if (res.data.code == 200) {
 					self.projects = res.data.projects;
-					self.count = res.data.count;
+					self.pages = res.data.pages;
 				} else {
 					self.error_message = res.data.error;
 				}

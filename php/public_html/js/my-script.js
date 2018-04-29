@@ -25,6 +25,7 @@ function showSuccessBox() {
 		});
 	}, 2500);
 }
+
 /**
 * アニメーション付き警告表示
 */

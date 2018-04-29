@@ -31,10 +31,11 @@ class Login extends MY_Controller
 					$this->session->sess_regenerate(TRUE);
 					$this->session->set_userdata('id', $this->session->session_id);
 					$this->session->set_userdata('user', $this->encryption->encrypt($userID));
+					$this->AccessTokens->generateToken( $userID, ACCESS_TOKEN_API );
 
 					/* 自動ログイン */
 					if( $this->input->post('remember_me') ){
-						$access_token = $this->AccessTokens->generateToken( $userID );
+						$access_token = $this->AccessTokens->generateToken( $userID, ACCESS_TOKEN_COOKIE );
 						set_cookie('token', $access_token, ACCESS_EXPIRE_TIME);
 					}
 					redirect( base_url('/') );

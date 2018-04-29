@@ -1,14 +1,14 @@
 
 			<section class="content-header">
-				<h1>
+				<h1 v-cloak>
 					<?= lang('projects_title'); ?>
-					<small v-if="project.project_id > 0"><?= lang('projects_edit'); ?></small>
-					<small v-else><?= lang('projects_add'); ?></small>
+					<small v-if="project.project_id > 0"><?= lang('app_edit'); ?></small>
+					<small v-else><?= lang('app_add'); ?></small>
 				</h1>
-				<ol class="breadcrumb">
+				<ol class="breadcrumb" v-cloak>
 					<li><a href="<?= base_url('/projects'); ?>"><i class="fa fa-star" aria-hidden="true"></i> <?= lang('projects_title'); ?></a></li>
-					<li class="active" v-if="project.project_id > 0"><?= lang('projects_edit'); ?></li>
-					<li class="active" v-else><?= lang('projects_add'); ?></li>
+					<li class="active" v-if="project.project_id > 0"><?= lang('app_edit'); ?></li>
+					<li class="active" v-else><?= lang('app_add'); ?></li>
 				</ol>
 			</section>
 
@@ -68,8 +68,8 @@
 										<label class="col-sm-3 form-control-static"></label>
 										<div class="col-sm-9">
 											<button class="btn btn-info" @click="registerProject" v-if="!loading.register">
-												<span v-if="project.project_id > 0"><?= lang('projects_edit'); ?></span>
-												<span v-else><?= lang('projects_add'); ?></span>
+												<span v-if="project.project_id > 0"><?= lang('app_edit'); ?></span>
+												<span v-else><?= lang('app_add'); ?></span>
 											</button>
 											<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
 										</div>
@@ -79,4 +79,23 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="clearfix mb20px" v-cloak>
+					<div class="pull-right">
+						<button class="btn btn-danger" @click="isDangerBox = !isDangerBox" v-if="project.project_id > 0">
+							<i class="fa fa-angle-right" v-if="!isDangerBox"></i>
+							<i class="fa fa-angle-down" v-else></i>
+							<?= lang('app_delete'); ?>
+						</button>
+					</div>
+				</div>
+				<transition>
+					<div class="callout bg-red disabled danger-box" v-if="isDangerBox" v-cloak>
+						<h4><i class="icon fa fa-ban"></i> Alert</h4>
+						<p><?= lang('projects_delete_alert'); ?></p>
+						<p class="text-right">
+							<button class="btn btn-default"　@click="deleleProject"><?= lang('app_delete'); ?></button>
+						</p>
+					</div>
+				</transition>
 			</section>

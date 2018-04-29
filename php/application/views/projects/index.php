@@ -33,35 +33,48 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<div class="table-responsive">
-							<table class="table table-bordered table-hover">
-								<thead>
-									<tr class="success">
-										<th><?= lang('projects_id'); ?></th>
-										<th><?= lang('projects_name'); ?></th>
-										<th><?= lang('projects_description'); ?></th>
-										<th class="w90px"><?= lang('projects_created'); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr v-for="project in projects">
-										<td class="pointer" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">
-											{{project.project_id}}
-										</td>
-										<td class="break-word">{{project.name}}</td>
-										<td class="break-word">{{project.description}}</td>
-										<td :title="project.created_ymd_his">{{project.created_ymd}}</td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr class="success">
-										<th><?= lang('projects_id'); ?></th>
-										<th><?= lang('projects_name'); ?></th>
-										<th><?= lang('projects_description'); ?></th>
-										<th class="w90px"><?= lang('projects_created'); ?></th>
-									</tr>
-								</tfoot>
-							</table>
+						<div v-if="projects.length > 0">
+							<div class="w110px mb20px">
+								<select class="form-control input-sm" v-model="search.page">
+									<option :value="page" v-for="page in pages">{{page}} <?= lang('app_pages'); ?></option>
+								</select>
+							</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-hover">
+									<thead>
+										<tr class="success">
+											<th class="success"><?= lang('projects_id'); ?></th>
+											<th><?= lang('projects_name'); ?></th>
+											<th><?= lang('projects_description'); ?></th>
+											<th class="w90px"><?= lang('projects_created'); ?></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="project in projects">
+											<td class="pointer bg-teal" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">{{project.project_id}}</td>
+											<td class="break-word">{{project.name}}</td>
+											<td class="break-word">{{project.description}}</td>
+											<td :title="project.created_ymd_his">{{project.created_ymd}}</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr class="success">
+											<th><?= lang('projects_id'); ?></th>
+											<th><?= lang('projects_name'); ?></th>
+											<th><?= lang('projects_description'); ?></th>
+											<th class="w90px"><?= lang('projects_created'); ?></th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="w110px">
+								<select class="form-control input-sm" v-model="search.page">
+									<option :value="page" v-for="page in pages">{{page}} <?= lang('app_pages'); ?></option>
+								</select>
+							</div>
+						</div>
+						<div v-else>
+							<p class="form-control-static"><?= lang('app_not_exist'); ?></p>
 						</div>
 					</div>
 				</div>

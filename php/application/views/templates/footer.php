@@ -15,8 +15,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js?v=2.5.13"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js?v=0.18.0"></script>
 <script src="<?= base_url('/'); ?>js/my-script.js?v=<?= get_file_info(FCPATH.'js'.DS.'my-script.js')['date']; ?>"></script>
+<?php if( isset($api_token) ): ?>
+<script>
+	axios.defaults.headers.common['<?= API_AUTH_HEADER; ?>'] = '<?= $api_token->access_token; ?>';
+</script>
+<?php endif; ?>
 <?php if( read_file(FCPATH.'js'.DS.$class.'-'.$method.'.js') !== FALSE ): ?>
 <script src="<?= base_url('/'); ?>js/<?= $class; ?>-<?= $method; ?>.js?v=<?= get_file_info(FCPATH.'js'.DS.$class.'-'.$method.'.js')['date']; ?>"></script>
 <?php endif; ?>
+
 </body>
 </html>

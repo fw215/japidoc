@@ -43,12 +43,14 @@ class MY_Controller extends CI_Controller
 				}
 			}else{
 				/* Cookieがあればログインを試みる */
-				if( get_cookie('token') ){
-					$auth = $this->AccessTokens->tryAutoLogin( get_cookie('token') );
+				$token = get_cookie('token');
+				if( $token ){
+					$auth = $this->AccessTokens->tryAutoLogin( $token, ACCESS_TOKEN_COOKIE );
 					if( $auth ){
 						$this->session->sess_regenerate(TRUE);
 						$this->session->set_userdata('id', $this->session->session_id);
 						$this->session->set_userdata('user', $this->encryption->encrypt($auth->user_id));
+						$this->AccessTokens->generateToken( $auth->user_id, ACCESS_TOKEN_API );
 					}
 				}
 				/* 未ログイン */
@@ -59,6 +61,7 @@ class MY_Controller extends CI_Controller
 				if( $_user ){
 					/* 最新のログイン情報を取得 */
 					$this->_user = $_user;
+					$this->_data['api_token'] = $this->AccessTokens->fetchToken( $this->_user->user_id, ACCESS_TOKEN_API );
 				}else{
 					/* ログインアカウントが正しくない */
 					$this->_logout();
@@ -113,6 +116,22 @@ class MY_Controller extends CI_Controller
 	 */
 	public function apiLoginCheck()
 	{
+		$token = $this->input->get_request_header(API_AUTH_HEADER, TRUE);
+		$auth = $this->AccessTokens->tryAutoLogin($token, ACCESS_TOKEN_API);
+		if( !$auth ){
+			/* 無効なトークン */
+			$this->_api['code'] = 400;
+			$this->json();
+		}
+
+		$_user = $this->Users->getDetail( $auth->user_id );
+		if( !$_user ){
+			/* ログインアカウントが正しくない */
+			$this->_api['code'] = 403;
+			$this->json();
+		}
+		$this->_user = $_user;
+
 		if( $this->input->raw_input_stream ){
 			$this->_stream = json_decode(trim($this->input->raw_input_stream), true);
 			if( !isset($this->_stream) ){

@@ -30,6 +30,7 @@ class Projects extends MY_Controller
 
 		$this->_api['projects'] = $this->Projects->getList($search);
 		$this->_api['count'] = $this->Projects->getList($search, TRUE);
+		$this->_api['pages'] = ceil($this->_api['count'] / DEFAULT_PAGE_LIMIT);
 
 		$this->json();
 	}
@@ -45,7 +46,11 @@ class Projects extends MY_Controller
 			'project_id' => $project_id,
 		);
 
-		$this->_api['project'] = $this->Projects->get($search);
+		$project = $this->Projects->get($search);
+		if( !$project ){
+			show_404();
+		}
+		$this->_api['project'] = $project;
 
 		$this->json();
 	}
@@ -100,6 +105,21 @@ class Projects extends MY_Controller
 			show_404();
 		}
 		$this->_api['project'] = $project;
+
+		$this->json();
+	}
+
+	/**
+	 * delete
+	 *
+	 * 1件削除
+	 */
+	public function delete($project_id=0)
+	{
+		$result = $this->Projects->delete($project_id);
+		if( !$result ){
+			show_404();
+		}
 
 		$this->json();
 	}
