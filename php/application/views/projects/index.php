@@ -19,16 +19,10 @@
 					<div class="box-header with-border">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4">
-								検索項目
+								<input type="text" class="form-control">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-4">
-								検索項目
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-4">
-								検索項目
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-4">
-								検索項目
+								<button class="btn bg-teal"><?= lang('app_search'); ?></button>
 							</div>
 						</div>
 					</div>

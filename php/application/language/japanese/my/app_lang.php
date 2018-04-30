@@ -8,6 +8,7 @@ $lang['app_required'] = '&ensp;<span class="label label-danger">必須</span>';
 $lang['app_not_exist'] = '検索結果が0件です';
 $lang['app_pages'] = 'ページ';
 
+$lang['app_search'] = '検索';
 $lang['app_add'] = '登録';
 $lang['app_edit'] = '編集';
 $lang['app_delete'] = '削除';
