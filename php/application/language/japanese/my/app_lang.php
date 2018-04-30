@@ -17,7 +17,7 @@ $lang['app_aside_header'] = 'メニュー';
 $lang['app_aside'] = array();
 $lang['app_aside'][] = array(
 	'icon' => '<i class="fa fa-tachometer" aria-hidden="true"></i>',
-	'class' => 'dashboard',
+	'class' => array('dashboard'),
 	'method' => 'index',
 	'link' => '',
 	'name' => 'ダッシュボード',
@@ -25,22 +25,38 @@ $lang['app_aside'][] = array(
 );
 $lang['app_aside'][] = array(
 	'icon' => '<i class="fa fa-star" aria-hidden="true"></i>',
-	'class' => 'projects',
+	'class' => array('projects','apis'),
 	'method' => 'index',
 	'link' => '',
 	'name' => 'プロジェクト',
 	'children' => array(
 		array(
-			'class' => 'projects',
+			'class' => array('projects'),
 			'method' => 'index',
 			'link' => 'projects',
 			'name' => '一覧',
+			'project' => FALSE
 		),
 		array(
-			'class' => 'projects',
+			'class' => array('projects'),
 			'method' => 'edit',
 			'link' => 'projects/edit',
 			'name' => '登録&ensp;&middot;&ensp;編集',
-		)
+			'project' => FALSE
+		),
+		array(
+			'class' => array('apis'),
+			'method' => 'index',
+			'link' => 'apis/index/',
+			'name' => 'API <i class="fa fa-angle-right"></i>一覧',
+			'project' => TRUE
+		),
+		array(
+			'class' => array('apis'),
+			'method' => 'edit',
+			'link' => 'apis/edit/',
+			'name' => 'API <i class="fa fa-angle-right"></i>登録&ensp;&middot;&ensp;編集',
+			'project' => TRUE
+		),
 	),
 );

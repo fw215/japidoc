@@ -57,3 +57,8 @@ $route['api/v1/projects']['POST'] = 'api/v1/projects/post';
 $route['api/v1/projects/(:num)']['GET'] = 'api/v1/projects/get/$1';
 $route['api/v1/projects/(:num)']['PUT'] = 'api/v1/projects/put/$1';
 $route['api/v1/projects/(:num)']['DELETE'] = 'api/v1/projects/delete/$1';
+
+$route['api/v1/apis']['POST'] = 'api/v1/apis/post';
+$route['api/v1/apis/(:num)']['GET'] = 'api/v1/apis/get/$1';
+$route['api/v1/apis/(:num)']['PUT'] = 'api/v1/apis/put/$1';
+$route['api/v1/apis/(:num)']['DELETE'] = 'api/v1/apis/delete/$1';

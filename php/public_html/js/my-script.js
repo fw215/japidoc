@@ -45,7 +45,13 @@ function showWarningBox() {
 * @param {event} MouseEvent
 */
 function locationHref(t) {
-	href = $(t.target).data('href');
-	id = $(t.target).data('id');
-	window.location.href = href + id;
+	var href = $(t.target).data('href');
+	var id = $(t.target).data('id');
+
+	var project = $(t.target).data('project');
+	if (project) {
+		window.location.href = href + project + '/' + id;
+	} else {
+		window.location.href = href + id;
+	}
 }

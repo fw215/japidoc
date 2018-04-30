@@ -66,6 +66,7 @@ $autoload['libraries'] = array(
 	'form_validation' => 'validation',
 	'Users_lib' => 'Users_lib',
 	'Projects_lib' => 'Projects_lib',
+	'Apis_lib' => 'Apis_lib',
 );
 
 /*
@@ -138,6 +139,7 @@ $autoload['language'] = array(
 	'my/users',
 	'my/dashboard',
 	'my/projects',
+	'my/apis',
 );
 
 /*
@@ -157,4 +159,5 @@ $autoload['model'] = array(
 	'Users_model' => 'Users',
 	'AccessTokens_model' => 'AccessTokens',
 	'Projects_model' => 'Projects',
+	'Apis_model' => 'Apis',
 );

@@ -454,7 +454,8 @@ $config['csrf_cookie_name'] = 'csrf_japidoc_cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
-	'api/v1/projects'
+	'api/v1/projects',
+	'api/v1/apis',
 );
 
 /*

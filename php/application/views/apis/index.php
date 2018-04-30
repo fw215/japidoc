@@ -1,16 +1,21 @@
 
 			<section class="content-header">
 				<h1>
-					<?= lang('projects_title'); ?>
-					<small><?= lang('projects_index'); ?></small>
+					<?= $project->name; ?>&ensp;<?= lang('apis_title'); ?>
+					<small><?= lang('apis_index'); ?></small>
 				</h1>
 				<ol class="breadcrumb">
 					<li>
-						<a href="<?= base_url('/projects'); ?>">
-							<i class="fa fa-star" aria-hidden="true"></i> <?= lang('projects_title'); ?>
+						<a href="<?= base_url('/projects/edit/').$project->project_id; ?>">
+							<i class="fa fa-star" aria-hidden="true"></i> <?= $project->name; ?>
 						</a>
 					</li>
-					<li class="active"><?= lang('projects_index'); ?></li>
+					<li>
+						<a href="<?= base_url('/apis/index/').$project->project_id; ?>">
+							<i class="fa fa-paper-plane" aria-hidden="true"></i> <?= lang('apis_title'); ?>
+						</a>
+					</li>
+					<li class="active"><?= lang('apis_index'); ?></li>
 				</ol>
 			</section>
 
@@ -32,7 +37,7 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<div v-if="projects.length > 0">
+						<div v-if="apis.length > 0">
 							<div class="w110px mb20px">
 								<select class="form-control input-sm" v-model="search.page">
 									<option :value="page" v-for="page in pages">{{page}} <?= lang('app_pages'); ?></option>
@@ -42,26 +47,26 @@
 								<table class="table table-bordered table-hover">
 									<thead>
 										<tr class="success">
-											<th class="success"><?= lang('projects_id'); ?></th>
-											<th><?= lang('projects_name'); ?></th>
-											<th><?= lang('projects_description'); ?></th>
-											<th class="w90px"><?= lang('projects_created'); ?></th>
+											<th class="success"><?= lang('apis_id'); ?></th>
+											<th><?= lang('apis_name'); ?></th>
+											<th><?= lang('apis_description'); ?></th>
+											<th class="w90px"><?= lang('apis_created'); ?></th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr v-for="project in projects">
-											<td class="pointer w110px bg-teal" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">{{project.project_id}}</td>
-											<td class="break-word">{{project.name}}</td>
-											<td class="break-word">{{project.description}}</td>
-											<td :title="project.created_ymd_his">{{project.created_ymd}}</td>
+										<tr v-for="api in apis">
+											<td class="pointer w110px bg-teal" @click="locationHref" data-href="<?= base_url('/apis/edit/'); ?>" :data-project="<?= $project->project_id; ?>" :data-id="api.api_id">{{api.api_id}}</td>
+											<td class="break-word">{{api.name}}</td>
+											<td class="break-word">{{api.description}}</td>
+											<td :title="api.created_ymd_his">{{api.created_ymd}}</td>
 										</tr>
 									</tbody>
 									<tfoot>
 										<tr class="success">
-											<th><?= lang('projects_id'); ?></th>
-											<th><?= lang('projects_name'); ?></th>
-											<th><?= lang('projects_description'); ?></th>
-											<th class="w90px"><?= lang('projects_created'); ?></th>
+											<th><?= lang('apis_id'); ?></th>
+											<th><?= lang('apis_name'); ?></th>
+											<th><?= lang('apis_description'); ?></th>
+											<th class="w90px"><?= lang('apis_created'); ?></th>
 										</tr>
 									</tfoot>
 								</table>

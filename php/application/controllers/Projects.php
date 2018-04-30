@@ -30,6 +30,14 @@ class Projects extends MY_Controller
 	 */
 	public function edit($project_id=0)
 	{
+		$search = array(
+			'project_id' => $project_id,
+		);
+
+		$project = $this->Projects->get($search);
+		if( $project ){
+			$this->_data['project'] = $project;
+		}
 		$this->_data['project_id'] = $project_id;
 
 		$this->set();
