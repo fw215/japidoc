@@ -97,6 +97,9 @@ class MY_Controller extends CI_Controller
 		$this->_data['aside'] = lang('app_aside');
 		$this->load->view('templates'.DS.'header', $this->_data);
 
+		/* sidebar */
+		$this->load->view('templates'.DS.'sidebar', $this->_data);
+
 		/* contents */
 		if( $otherview ){
 			$this->load->view( $this->_data['class'].DS.$otherview, $this->_data );

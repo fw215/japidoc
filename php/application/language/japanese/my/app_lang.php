@@ -14,6 +14,12 @@ $lang['app_edit'] = '編集';
 $lang['app_delete'] = '削除';
 
 $lang['app_aside_header'] = 'メニュー';
+$lang['app_aside_index'] = '一覧';
+$lang['app_aside_edit'] = '登録&ensp;&middot;&ensp;編集';
+$lang['app_aside_dashboard'] = 'ダッシュボード';
+$lang['app_aside_project'] = 'プロジェクト';
+$lang['app_aside_api'] = 'API';
+
 $lang['app_aside'] = array();
 $lang['app_aside'][] = array(
 	'icon' => '<i class="fa fa-tachometer" aria-hidden="true"></i>',

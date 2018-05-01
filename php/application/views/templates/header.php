@@ -46,40 +46,4 @@
 			</nav>
 		</header>
 
-		<aside class="main-sidebar">
-			<section class="sidebar">
-				<ul class="sidebar-menu" data-widget="tree">
-					<li class="header"><?= lang('app_aside_header'); ?></li>
-<?php foreach($aside as $side): ?>
-<?php if($side['children']): ?>
-					<li class="treeview <?php if(in_array($class, $side['class'])): ?>active<?php endif; ?>">
-						<a href="#"><?= $side['icon']; ?> <span><?= $side['name']; ?></span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu">
-<?php foreach($side['children'] as $child): if($child['project'] && !isset($project)): continue; endif; ?>
-							<li class="<?php if(in_array($class, $child['class']) && $method == $child['method']): ?>active<?php endif; ?>">
-								<a href="<?= base_url('/').$child['link']; if($child['project'] && isset($project)): echo $project->project_id; endif; ?>">
-									<?= $child['name']; ?>
-								</a>
-							</li>
-<?php endforeach; ?>
-						</ul>
-					</li>
-<?php else: ?>
-					<li class="<?php if(in_array($class, $side['class'])): ?>active<?php endif; ?>">
-						<a href="<?= base_url('/').$side['link']; ?>">
-							<?= $side['icon']; ?> <span><?= $side['name']; ?></span>
-						</a>
-					</li>
-<?php endif; ?>
-<?php endforeach; ?>
-				</ul>
-			</section>
-		</aside>
-
-		<div class="content-wrapper">
-
 <?php endif; ?>
