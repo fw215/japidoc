@@ -20,49 +20,49 @@ $lang['app_aside_dashboard'] = 'ダッシュボード';
 $lang['app_aside_project'] = 'プロジェクト';
 $lang['app_aside_api'] = 'API';
 
-$lang['app_aside'] = array();
-$lang['app_aside'][] = array(
-	'icon' => '<i class="fa fa-tachometer" aria-hidden="true"></i>',
-	'class' => array('dashboard'),
-	'method' => 'index',
-	'link' => '',
-	'name' => 'ダッシュボード',
-	'children' => array(),
-);
-$lang['app_aside'][] = array(
-	'icon' => '<i class="fa fa-star" aria-hidden="true"></i>',
-	'class' => array('projects','apis'),
-	'method' => 'index',
-	'link' => '',
-	'name' => 'プロジェクト',
-	'children' => array(
-		array(
-			'class' => array('projects'),
-			'method' => 'index',
-			'link' => 'projects',
-			'name' => '一覧',
-			'project' => FALSE
-		),
-		array(
-			'class' => array('projects'),
-			'method' => 'edit',
-			'link' => 'projects/edit',
-			'name' => '登録&ensp;&middot;&ensp;編集',
-			'project' => FALSE
-		),
-		array(
-			'class' => array('apis'),
-			'method' => 'index',
-			'link' => 'apis/index/',
-			'name' => 'API <i class="fa fa-angle-right"></i>一覧',
-			'project' => TRUE
-		),
-		array(
-			'class' => array('apis'),
-			'method' => 'edit',
-			'link' => 'apis/edit/',
-			'name' => 'API <i class="fa fa-angle-right"></i>登録&ensp;&middot;&ensp;編集',
-			'project' => TRUE
-		),
-	),
-);
+// $lang['app_aside'] = array();
+// $lang['app_aside'][] = array(
+// 	'icon' => '<i class="fa fa-tachometer" aria-hidden="true"></i>',
+// 	'class' => array('dashboard'),
+// 	'method' => 'index',
+// 	'link' => '',
+// 	'name' => 'ダッシュボード',
+// 	'children' => array(),
+// );
+// $lang['app_aside'][] = array(
+// 	'icon' => '<i class="fa fa-star" aria-hidden="true"></i>',
+// 	'class' => array('projects','apis'),
+// 	'method' => 'index',
+// 	'link' => '',
+// 	'name' => 'プロジェクト',
+// 	'children' => array(
+// 		array(
+// 			'class' => array('projects'),
+// 			'method' => 'index',
+// 			'link' => 'projects',
+// 			'name' => '一覧',
+// 			'project' => FALSE
+// 		),
+// 		array(
+// 			'class' => array('projects'),
+// 			'method' => 'edit',
+// 			'link' => 'projects/edit',
+// 			'name' => '登録&ensp;&middot;&ensp;編集',
+// 			'project' => FALSE
+// 		),
+// 		array(
+// 			'class' => array('apis'),
+// 			'method' => 'index',
+// 			'link' => 'apis/index/',
+// 			'name' => 'API <i class="fa fa-angle-right"></i>一覧',
+// 			'project' => TRUE
+// 		),
+// 		array(
+// 			'class' => array('apis'),
+// 			'method' => 'edit',
+// 			'link' => 'apis/edit/',
+// 			'name' => 'API <i class="fa fa-angle-right"></i>登録&ensp;&middot;&ensp;編集',
+// 			'project' => TRUE
+// 		),
+// 	),
+// );
