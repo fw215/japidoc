@@ -3,6 +3,7 @@
 new Vue({
 	el: '#main-container',
 	data: {
+		showBox: 'description',
 		api: {
 			project_id: 0,
 			api_id: 0,
@@ -50,6 +51,14 @@ new Vue({
 		},
 	},
 	methods: {
+		showNewEnv: function () {
+			var self = this;
+			self.showBox = 'newEnv';
+		},
+		showDescription: function () {
+			var self = this;
+			self.showBox = 'description';
+		},
 		registerApi: function () {
 			var self = this;
 			self.reset();

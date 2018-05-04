@@ -32,64 +32,85 @@
 				</div>
 
 				<div class="box">
-					<div class="box-body">
+					<div class="box-header with-border" v-if="api.api_id > 0">
+						<div class="row form-group">
+							<div class="col-xs-12">
+								<button class="btn bg-maroon" :class="{disabled: showBox == 'description'}" @click="showDescription"><?= lang('app_description'); ?></button>
+								<button class="btn bg-orange" :class="{disabled: showBox == 'newEnv'}"  @click="showNewEnv"><?= lang('apis_add_env'); ?></button>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="box-body" v-if="loading.get" v-cloak>
+								<button class="btn bg-orange disabled" v-show="showBox == 'newEnv'"><?= lang(''); ?></button>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-body" v-show="showBox == 'newEnv'">
+						<div class="row form-group">
+							<div class="col-xs-12">
+								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+							</div>
+						</div>
+					</div>
+					<div class="box-body" v-show="showBox == 'description'" v-cloak>
+						<div v-if="loading.get">
+							<div class="row form-group">
+								<div class="col-xs-12">
 									<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 								</div>
-								<div class="box-body" v-else v-cloak>
-									<input type="hidden" id="project_id" value="<?= $project_id; ?>">
-									<input type="hidden" id="api_id" value="<?= $api_id; ?>">
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"></label>
-										<div class="col-sm-9 form-control-static">
-											<?= $project->name; ?>
-										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('apis_id'); ?></label>
-										<div class="col-sm-9 form-control-static">
-											<span v-if="api.api_id > 0">{{api.api_id}}</span>
-											<span v-else>#</span>
-										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('apis_name'); ?><?= lang('app_required'); ?></label>
-										<div class="col-sm-9" :class="{'has-error': isErrorName}">
-											<input type="text" class="form-control" v-model="api.name">
-											<span class="help-block">{{errors.name}}</span>
-										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('apis_description'); ?></label>
-										<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
-											<textarea class="form-control" rows="5" v-model="api.description"></textarea>
-											<span class="help-block">{{errors.description}}</span>
-										</div>
-									</div>
-									<div class="row form-group" v-if="api.modified_ymd_his">
-										<label class="col-sm-3 form-control-static"><?= lang('apis_modified'); ?></label>
-										<div class="col-sm-9 form-control-static">
-											{{api.modified_ymd_his}}
-										</div>
-									</div>
-									<div class="row form-group" v-if="api.created_ymd_his">
-										<label class="col-sm-3 form-control-static"><?= lang('apis_created'); ?></label>
-										<div class="col-sm-9 form-control-static">
-											{{api.created_ymd_his}}
-										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"></label>
-										<div class="col-sm-9">
-											<button class="btn btn-info" @click="registerApi" v-if="!loading.register">
-												<span v-if="api.api_id > 0"><?= lang('app_edit'); ?></span>
-												<span v-else><?= lang('app_add'); ?></span>
-											</button>
-											<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
-										</div>
-									</div>
+							</div>
+						</div>
+						<div v-else v-cloak>
+							<input type="hidden" id="project_id" value="<?= $project_id; ?>">
+							<input type="hidden" id="api_id" value="<?= $api_id; ?>">
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"></label>
+								<div class="col-sm-9 form-control-static">
+									<?= $project->name; ?>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('apis_id'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									<span v-if="api.api_id > 0">{{api.api_id}}</span>
+									<span v-else>#</span>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('apis_name'); ?><?= lang('app_required'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorName}">
+									<input type="text" class="form-control" v-model="api.name">
+									<span class="help-block">{{errors.name}}</span>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('apis_description'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
+									<textarea class="form-control" rows="5" v-model="api.description"></textarea>
+									<span class="help-block">{{errors.description}}</span>
+								</div>
+							</div>
+							<div class="row form-group" v-if="api.modified_ymd_his">
+								<label class="col-sm-3 form-control-static"><?= lang('apis_modified'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									{{api.modified_ymd_his}}
+								</div>
+							</div>
+							<div class="row form-group" v-if="api.created_ymd_his">
+								<label class="col-sm-3 form-control-static"><?= lang('apis_created'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									{{api.created_ymd_his}}
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"></label>
+								<div class="col-sm-9">
+									<button class="btn btn-info" @click="registerApi" v-if="!loading.register">
+										<span v-if="api.api_id > 0"><?= lang('app_edit'); ?></span>
+										<span v-else><?= lang('app_add'); ?></span>
+									</button>
+									<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
 								</div>
 							</div>
 						</div>
