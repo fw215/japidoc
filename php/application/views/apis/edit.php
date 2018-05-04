@@ -35,30 +35,45 @@
 					<div class="box-header with-border" v-if="api.api_id > 0">
 						<div class="row form-group">
 							<div class="col-xs-12">
-								<button class="btn bg-maroon" :class="{disabled: showBox == 'description'}" @click="showDescription"><?= lang('app_description'); ?></button>
-								<button class="btn bg-orange" :class="{disabled: showBox == 'newEnv'}"  @click="showNewEnv"><?= lang('apis_add_env'); ?></button>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12">
-								<button class="btn bg-orange disabled" v-show="showBox == 'newEnv'"><?= lang(''); ?></button>
+								<button class="btn bg-maroon" :class="{disabled: isDescription, 'btn-lg': isDescription}" @click="showDescription"><?= lang('app_description'); ?></button>
+								<button class="btn bg-orange" :class="{disabled: isNewEnv, 'btn-lg': isNewEnv}"  @click="showNewEnv"><?= lang('apis_add_env'); ?></button>
 							</div>
 						</div>
 					</div>
 
-					<div class="box-body" v-show="showBox == 'newEnv'">
-						<div class="row form-group">
+					<div class="box-body" v-show="isNewEnv">
+						<div class="row form-group" v-if="loading.get">
 							<div class="col-xs-12">
 								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 							</div>
 						</div>
+						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_name'); ?></label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" v-model="env.name">
+								<span class="help-block">{{errors.name}}</span>
+							</div>
+						</div>
+						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_description'); ?></label>
+							<div class="col-sm-9">
+								<textarea class="form-control" rows="5" v-model="env.description"></textarea>
+								<span class="help-block">{{errors.description}}</span>
+							</div>
+						</div>
+						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_url'); ?></label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" v-model="env.url">
+								<span class="help-block">{{errors.url}}</span>
+							</div>
+						</div>
 					</div>
-					<div class="box-body" v-show="showBox == 'description'" v-cloak>
-						<div v-if="loading.get">
-							<div class="row form-group">
-								<div class="col-xs-12">
-									<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
-								</div>
+
+					<div class="box-body" v-show="isDescription" v-cloak>
+						<div class="row form-group" v-if="loading.get">
+							<div class="col-xs-12">
+								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 							</div>
 						</div>
 						<div v-else v-cloak>

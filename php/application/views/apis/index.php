@@ -26,6 +26,7 @@
 				</div>
 
 				<div class="box">
+					<input type="hidden" id="project_id" value="<?= $project->project_id; ?>">
 					<div class="box-header with-border">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4">

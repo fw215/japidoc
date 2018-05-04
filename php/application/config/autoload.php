@@ -140,6 +140,7 @@ $autoload['language'] = array(
 	'my/dashboard',
 	'my/projects',
 	'my/apis',
+	'my/envs',
 );
 
 /*

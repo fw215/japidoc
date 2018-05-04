@@ -4,6 +4,13 @@ new Vue({
 	el: '#main-container',
 	data: {
 		showBox: 'description',
+		env: {
+			api_id: 0,
+			env_id: 0,
+			name: '',
+			url: '',
+			description: '',
+		},
 		api: {
 			project_id: 0,
 			api_id: 0,
@@ -16,7 +23,8 @@ new Vue({
 		},
 		errors: {
 			name: null,
-			description: null
+			description: null,
+			url: null
 		},
 		warning: [],
 		successful: [],
@@ -35,6 +43,20 @@ new Vue({
 		}
 	},
 	computed: {
+		isDescription: function () {
+			var self = this;
+			if (self.showBox !== 'description') {
+				return false;
+			}
+			return true;
+		},
+		isNewEnv: function () {
+			var self = this;
+			if (self.showBox !== 'newEnv') {
+				return false;
+			}
+			return true;
+		},
 		isErrorName: function () {
 			var self = this;
 			if (self.errors.name === null) {

@@ -21,6 +21,7 @@ class Apis extends MY_Controller
 	public function search()
 	{
 		$search = array(
+			'project_id' => $this->input->get('project_id'),
 			'page' => $this->input->get('page'),
 		);
 

@@ -7,6 +7,7 @@ new Vue({
 		apis: [],
 		pages: 0,
 		search: {
+			project_id: 0,
 			page: 1,
 		},
 		loading: {
@@ -17,6 +18,7 @@ new Vue({
 	},
 	created: function () {
 		var self = this;
+		self.search.project_id = parseInt($("#project_id").val());
 		self.getApis();
 	},
 	computed: {
@@ -39,6 +41,7 @@ new Vue({
 			axios.get(
 				base_url + "api/v1/apis/search", {
 					params: {
+						project_id: self.search.project_id,
 						page: self.search.page,
 					}
 				}

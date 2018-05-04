@@ -24,64 +24,64 @@
 
 				<div class="box">
 					<div class="box-body">
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="box-body" v-if="loading.get" v-cloak>
+						<div v-if="loading.get" v-cloak>
+							<div class="row">
+								<div class="col-xs-12">
 									<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 								</div>
-								<div class="box-body" v-else v-cloak>
-									<input type="hidden" id="project_id" value="<?= $project_id; ?>">
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('projects_id'); ?></label>
-										<div class="col-sm-9 form-control-static">
-											<span v-if="project.project_id > 0">{{project.project_id}}</span>
-											<span v-else>#</span>
-										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('projects_name'); ?><?= lang('app_required'); ?></label>
-										<div class="col-sm-9" :class="{'has-error': isErrorName}">
-											<input type="text" class="form-control" v-model="project.name">
-											<span class="help-block">{{errors.name}}</span>
-										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('projects_description'); ?></label>
-										<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
-											<textarea class="form-control" rows="5" v-model="project.description"></textarea>
-											<span class="help-block">{{errors.description}}</span>
-										</div>
-									</div>
-									<div class="row form-group" v-if="project.project_id">
-										<label class="col-sm-3 form-control-static"><?= lang('apis_title'); ?></label>
-										<div class="col-sm-9">
-											<button class="btn bg-teal" @click="locationHref" data-href="<?= base_url('/apis/index/'); ?>" :data-id="project.project_id">
-												<?= lang('apis_index'); ?>
-											</button>
-										</div>
-									</div>
-									<div class="row form-group" v-if="project.modified_ymd_his">
-										<label class="col-sm-3 form-control-static"><?= lang('projects_modified'); ?></label>
-										<div class="col-sm-9 form-control-static">
-											{{project.modified_ymd_his}}
-										</div>
-									</div>
-									<div class="row form-group" v-if="project.created_ymd_his">
-										<label class="col-sm-3 form-control-static"><?= lang('projects_created'); ?></label>
-										<div class="col-sm-9 form-control-static">
-											{{project.created_ymd_his}}
-										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"></label>
-										<div class="col-sm-9">
-											<button class="btn btn-info" @click="registerProject" v-if="!loading.register">
-												<span v-if="project.project_id > 0"><?= lang('app_edit'); ?></span>
-												<span v-else><?= lang('app_add'); ?></span>
-											</button>
-											<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
-										</div>
-									</div>
+							</div>
+						</div>
+						<div v-else v-cloak>
+							<input type="hidden" id="project_id" value="<?= $project_id; ?>">
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('projects_id'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									<span v-if="project.project_id > 0">{{project.project_id}}</span>
+									<span v-else>#</span>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('projects_name'); ?><?= lang('app_required'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorName}">
+									<input type="text" class="form-control" v-model="project.name">
+									<span class="help-block">{{errors.name}}</span>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('projects_description'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
+									<textarea class="form-control" rows="5" v-model="project.description"></textarea>
+									<span class="help-block">{{errors.description}}</span>
+								</div>
+							</div>
+							<div class="row form-group" v-if="project.project_id">
+								<label class="col-sm-3 form-control-static"><?= lang('apis_title'); ?></label>
+								<div class="col-sm-9">
+									<button class="btn bg-teal" @click="locationHref" data-href="<?= base_url('/apis/index/'); ?>" :data-id="project.project_id">
+										<?= lang('apis_index'); ?>
+									</button>
+								</div>
+							</div>
+							<div class="row form-group" v-if="project.modified_ymd_his">
+								<label class="col-sm-3 form-control-static"><?= lang('projects_modified'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									{{project.modified_ymd_his}}
+								</div>
+							</div>
+							<div class="row form-group" v-if="project.created_ymd_his">
+								<label class="col-sm-3 form-control-static"><?= lang('projects_created'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									{{project.created_ymd_his}}
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"></label>
+								<div class="col-sm-9">
+									<button class="btn btn-info" @click="registerProject" v-if="!loading.register">
+										<span v-if="project.project_id > 0"><?= lang('app_edit'); ?></span>
+										<span v-else><?= lang('app_add'); ?></span>
+									</button>
+									<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
 								</div>
 							</div>
 						</div>

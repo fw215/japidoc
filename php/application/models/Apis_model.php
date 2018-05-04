@@ -39,6 +39,11 @@ class Apis_model extends CI_Model
 			if($search && is_array($search)){
 				foreach($search as $column => $value){
 					switch ($column) {
+						case 'project_id':
+							if( $this->validation->required($value) ){
+								$this->db->where('project_id', $value);
+							}
+							break;
 						case 'page':
 							if( $isCount == false && $this->validation->required($value) ){
 								$offset = DEFAULT_PAGE_LIMIT * ($value - 1);
