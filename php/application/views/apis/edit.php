@@ -32,17 +32,24 @@
 				</div>
 
 				<div class="box">
-					<div class="box-header with-border" v-if="api.api_id > 0">
+					<div class="box-header with-border" v-if="api.api_id > 0" v-cloak>
 						<div class="row form-group">
 							<div class="col-xs-12">
-								<button class="btn bg-maroon" :class="{disabled: isDescription, 'btn-lg': isDescription}" @click="showDescription"><?= lang('app_description'); ?></button>
-								<button class="btn bg-orange" :class="{disabled: isNewEnv, 'btn-lg': isNewEnv}"  @click="showNewEnv"><?= lang('apis_add_env'); ?></button>
+								<button class="btn" :class="{'bg-orange': isApi, 'btn-default': !isApi}" @click="showApi"><?= lang('app_description'); ?></button>
+								<button class="btn" :class="{'bg-teal': isNewEnv, 'btn-default': !isNewEnv}" @click="newEnv"><?= lang('apis_add_env'); ?></button>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-xs-12">
+								<div class="btn-toolbar">
+									<button class="btn" :class="{'bg-teal': isEnv(env.env_id), 'btn-default': !isEnv(env.env_id)}" v-for="env in envs" @click="getEnv(env.env_id)">{{env.name}}</button>
+								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="box-body" v-show="isNewEnv">
-						<div class="row form-group" v-if="loading.get">
+					<div class="box-body" v-show="isNewEnv || isEnv(0)">
+						<div class="row form-group" v-if="loading.getENV">
 							<div class="col-xs-12">
 								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 							</div>
@@ -68,10 +75,20 @@
 								<span class="help-block">{{errors.url}}</span>
 							</div>
 						</div>
+						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"></label>
+							<div class="col-sm-9">
+								<button class="btn btn-info" @click="registerEnv" v-if="!loading.registerENV">
+									<span v-if="env.env_id > 0"><?= lang('app_edit'); ?></span>
+									<span v-else><?= lang('app_add'); ?></span>
+								</button>
+								<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+							</div>
+						</div>
 					</div>
 
-					<div class="box-body" v-show="isDescription" v-cloak>
-						<div class="row form-group" v-if="loading.get">
+					<div class="box-body" v-show="isApi" v-cloak>
+						<div class="row form-group" v-if="loading.getAPI">
 							<div class="col-xs-12">
 								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 							</div>
@@ -121,7 +138,7 @@
 							<div class="row form-group">
 								<label class="col-sm-3 form-control-static"></label>
 								<div class="col-sm-9">
-									<button class="btn btn-info" @click="registerApi" v-if="!loading.register">
+									<button class="btn btn-info" @click="registerApi" v-if="!loading.registerAPI">
 										<span v-if="api.api_id > 0"><?= lang('app_edit'); ?></span>
 										<span v-else><?= lang('app_add'); ?></span>
 									</button>

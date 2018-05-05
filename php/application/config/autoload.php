@@ -161,4 +161,5 @@ $autoload['model'] = array(
 	'AccessTokens_model' => 'AccessTokens',
 	'Projects_model' => 'Projects',
 	'Apis_model' => 'Apis',
+	'Envs_model' => 'Envs',
 );
