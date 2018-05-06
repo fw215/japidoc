@@ -15,7 +15,7 @@ class Migration_CreateBodies extends CI_Migration
 				'type'           => 'bigint',
 				'unsigned'       => TRUE,
 				'auto_increment' => TRUE,
-				'comment'        => 'ボディID'
+				'comment'        => 'BodyID'
 			),
 			'env_id' => array(
 				'type'           => 'bigint',
@@ -25,7 +25,7 @@ class Migration_CreateBodies extends CI_Migration
 			'body' => array(
 				'type'           => 'text',
 				'null'           => FALSE,
-				'comment'        => 'ボディ'
+				'comment'        => 'Body'
 			),
 		);
 		$this->dbforge->add_field($fields);

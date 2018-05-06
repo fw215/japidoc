@@ -456,6 +456,7 @@ $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array(
 	'api/v1/projects',
 	'api/v1/apis',
+	'api/v1/envs',
 );
 
 /*

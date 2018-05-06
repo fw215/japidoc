@@ -79,6 +79,13 @@ new Vue({
 			}
 			return true;
 		},
+		isErrorUrl: function () {
+			var self = this;
+			if (self.errors.url === null) {
+				return false;
+			}
+			return true;
+		},
 	},
 	methods: {
 		isEnv: function (env_id) {
@@ -98,7 +105,7 @@ new Vue({
 		newEnv: function () {
 			var self = this;
 			self.env = {
-				api_id: 0,
+				api_id: self.api.api_id,
 				env_id: 0,
 				name: '',
 				url: '',
@@ -121,6 +128,7 @@ new Vue({
 				).then(function (res) {
 					if (res.data.code == 200) {
 						self.env = res.data.env;
+						self.getEnvs();
 						self.successful.push('更新しました');
 						showSuccessBox();
 					} else {
@@ -134,7 +142,7 @@ new Vue({
 				});
 			} else {
 				axios.post(
-					base_url + "env/v1/envs",
+					base_url + "api/v1/envs",
 					self.env
 				).then(function (res) {
 					if (res.data.code == 200) {
@@ -293,7 +301,8 @@ new Vue({
 			self.successful = [];
 			self.errors = {
 				name: null,
-				description: null
+				description: null,
+				url: null
 			};
 		}
 

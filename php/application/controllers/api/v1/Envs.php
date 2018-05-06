@@ -63,25 +63,27 @@ class Envs extends MY_Controller
 	 *
 	 * 1件更新
 	 */
-	public function put($api_id=0)
+	public function put($env_id=0)
 	{
 		$update = array(
-			'project_id' => isset($this->_stream['project_id']) ? $this->space_trim($this->_stream['project_id']) : NULL,
+			'env_id' => isset($this->_stream['env_id']) ? $this->space_trim($this->_stream['env_id']) : NULL,
+			'api_id' => isset($this->_stream['api_id']) ? $this->space_trim($this->_stream['api_id']) : NULL,
 			'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
 			'description' => isset($this->_stream['description']) ? $this->space_trim($this->_stream['description']) : NULL,
+			'url' => isset($this->_stream['url']) ? $this->space_trim($this->_stream['url']) : NULL,
 		);
-		$errors = $this->Apis_lib->register_validation( $update );
+		$errors = $this->Envs_lib->register_validation( $update );
 		if( $errors ){
 			$this->_api['code'] = API_BAD_REQUEST;
 			$this->_api['errors'] = $errors;
 			$this->json();
 		}
 
-		$api = $this->Apis->update($api_id, $update);
-		if( !$api ){
+		$env = $this->Envs->update($env_id, $update);
+		if( !$env ){
 			show_404();
 		}
-		$this->_api['api'] = $api;
+		$this->_api['env'] = $env;
 
 		$this->json();
 	}
@@ -94,22 +96,23 @@ class Envs extends MY_Controller
 	public function post()
 	{
 		$insert = array(
-			'project_id' => isset($this->_stream['project_id']) ? $this->space_trim($this->_stream['project_id']) : NULL,
+			'api_id' => isset($this->_stream['api_id']) ? $this->space_trim($this->_stream['api_id']) : NULL,
 			'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
 			'description' => isset($this->_stream['description']) ? $this->space_trim($this->_stream['description']) : NULL,
+			'url' => isset($this->_stream['url']) ? $this->space_trim($this->_stream['url']) : NULL,
 		);
-		$errors = $this->Apis_lib->register_validation( $insert );
+		$errors = $this->Envs_lib->register_validation( $insert );
 		if( $errors ){
 			$this->_api['code'] = API_BAD_REQUEST;
 			$this->_api['errors'] = $errors;
 			$this->json();
 		}
 
-		$api = $this->Apis->insert($insert);
-		if( !$api ){
+		$env = $this->Envs->insert($insert);
+		if( !$env ){
 			show_404();
 		}
-		$this->_api['api'] = $api;
+		$this->_api['env'] = $env;
 
 		$this->json();
 	}

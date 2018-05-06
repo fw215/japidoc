@@ -29,6 +29,7 @@ class Envs_model extends CI_Model
 				'envs.api_id',
 				'envs.name',
 				'envs.description',
+				'envs.url',
 				'DATE_FORMAT(envs.created, "%Y/%m/%d") as created_ymd',
 				'DATE_FORMAT(envs.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(envs.modified, "%Y/%m/%d") as modified_ymd',
@@ -39,9 +40,9 @@ class Envs_model extends CI_Model
 			if($search && is_array($search)){
 				foreach($search as $column => $value){
 					switch ($column) {
-						case 'env_id':
+						case 'api_id':
 							if( $this->validation->required($value) ){
-								$this->db->where('env_id', $value);
+								$this->db->where('api_id', $value);
 							}
 							break;
 						case 'page':
@@ -88,6 +89,7 @@ class Envs_model extends CI_Model
 				'envs.api_id',
 				'envs.name',
 				'envs.description',
+				'envs.url',
 				'DATE_FORMAT(envs.created, "%Y/%m/%d") as created_ymd',
 				'DATE_FORMAT(envs.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(envs.modified, "%Y/%m/%d") as modified_ymd',
@@ -130,8 +132,8 @@ class Envs_model extends CI_Model
 			$conditions = array(
 				'env_id' => $env_id
 			);
-			$api = $this->get($conditions);
-			if( !$api ){
+			$env = $this->get($conditions);
+			if( !$env ){
 				return false;
 			}
 
@@ -183,8 +185,8 @@ class Envs_model extends CI_Model
 			$conditions = array(
 				'env_id' => $env_id
 			);
-			$api = $this->get($conditions);
-			if( !$api ){
+			$env = $this->get($conditions);
+			if( !$env ){
 				return false;
 			}
 

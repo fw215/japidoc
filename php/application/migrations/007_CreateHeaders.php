@@ -17,10 +17,10 @@ class Migration_CreateHeaders extends CI_Migration
 				'auto_increment' => TRUE,
 				'comment'        => 'HTTPヘッダーID'
 			),
-			'api_id' => array(
+			'env_id' => array(
 				'type'           => 'bigint',
 				'unsigned'       => TRUE,
-				'comment'        => 'ApiID'
+				'comment'        => '環境ID'
 			),
 			'name' => array(
 				'type'           => 'varchar',

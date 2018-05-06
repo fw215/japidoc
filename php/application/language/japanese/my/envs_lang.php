@@ -8,3 +8,4 @@ $lang['envs_url'] = 'URL';
 $lang['envs_modified'] = '更新日時';
 $lang['envs_created'] = '登録日時';
 $lang['envs_delete_alert'] = 'ID:{{env.env_id}} を削除します';
+$lang['envs_api_not_exist'] = '存在しないAPIです';

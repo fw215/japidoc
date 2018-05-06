@@ -67,6 +67,7 @@ $autoload['libraries'] = array(
 	'Users_lib' => 'Users_lib',
 	'Projects_lib' => 'Projects_lib',
 	'Apis_lib' => 'Apis_lib',
+	'Envs_lib' => 'Envs_lib',
 );
 
 /*

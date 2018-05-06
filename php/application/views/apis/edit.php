@@ -55,8 +55,8 @@
 							</div>
 						</div>
 						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_name'); ?></label>
-							<div class="col-sm-9">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_name'); ?><?= lang('app_required'); ?></label>
+							<div class="col-sm-9" :class="{'has-error': isErrorName}">
 								<input type="text" class="form-control" v-model="env.name">
 								<span class="help-block">{{errors.name}}</span>
 							</div>
@@ -69,10 +69,22 @@
 							</div>
 						</div>
 						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_url'); ?></label>
-							<div class="col-sm-9">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_url'); ?><?= lang('app_required'); ?></label>
+							<div class="col-sm-9" :class="{'has-error': isErrorUrl}">
 								<input type="text" class="form-control" v-model="env.url">
 								<span class="help-block">{{errors.url}}</span>
+							</div>
+						</div>
+						<div class="row form-group" v-if="env.modified_ymd_his">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_modified'); ?></label>
+							<div class="col-sm-9 form-control-static">
+								{{env.modified_ymd_his}}
+							</div>
+						</div>
+						<div class="row form-group" v-if="env.created_ymd_his">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_created'); ?></label>
+							<div class="col-sm-9 form-control-static">
+								{{env.created_ymd_his}}
 							</div>
 						</div>
 						<div class="row form-group">
