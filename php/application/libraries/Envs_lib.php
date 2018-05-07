@@ -42,6 +42,11 @@ class Envs_lib
 			'trim|max_length[20000]'
 		);
 		$this->CI->validation->set_rules(
+			'method',
+			'lang:envs_method',
+			'required|trim'
+		);
+		$this->CI->validation->set_rules(
 			'url',
 			'lang:envs_url',
 			'required|trim|max_length[255]|valid_url'
@@ -50,6 +55,7 @@ class Envs_lib
 			$result['api_id'] = !empty($this->CI->validation->error('api_id')) ? $this->CI->validation->error('api_id') : NULL;
 			$result['name'] = !empty($this->CI->validation->error('name')) ? $this->CI->validation->error('name') : NULL;
 			$result['description'] = !empty($this->CI->validation->error('description')) ? $this->CI->validation->error('description') : NULL;
+			$result['method'] = !empty($this->CI->validation->error('method')) ? $this->CI->validation->error('method') : NULL;
 			$result['url'] = !empty($this->CI->validation->error('url')) ? $this->CI->validation->error('url') : NULL;
 		}
 		/* 追加バリデーション */

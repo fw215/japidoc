@@ -1,9 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$lang['envs_title'] = '環境';
 $lang['envs_id'] = 'ID';
 $lang['envs_name'] = '名称';
 $lang['envs_description'] = '説明';
+$lang['envs_method'] = 'METHOD';
+$lang['envs_method_get'] = 'GET';
+$lang['envs_method_post'] = 'POST';
+$lang['envs_method_put'] = 'PUT';
+$lang['envs_method_delete'] = 'DELETE';
 $lang['envs_url'] = 'URL';
 $lang['envs_modified'] = '更新日時';
 $lang['envs_created'] = '登録日時';

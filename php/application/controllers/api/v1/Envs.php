@@ -70,6 +70,7 @@ class Envs extends MY_Controller
 			'api_id' => isset($this->_stream['api_id']) ? $this->space_trim($this->_stream['api_id']) : NULL,
 			'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
 			'description' => isset($this->_stream['description']) ? $this->space_trim($this->_stream['description']) : NULL,
+			'method' => isset($this->_stream['method']) ? $this->space_trim($this->_stream['method']) : NULL,
 			'url' => isset($this->_stream['url']) ? $this->space_trim($this->_stream['url']) : NULL,
 		);
 		$errors = $this->Envs_lib->register_validation( $update );

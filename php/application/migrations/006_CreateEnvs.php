@@ -33,6 +33,12 @@ class Migration_CreateEnvs extends CI_Migration
 				'null'           => FALSE,
 				'comment'        => '説明'
 			),
+			'method' => array(
+				'type'           => 'int',
+				'unsigned'       => TRUE,
+				'null'           => FALSE,
+				'comment'        => 'METHOD'
+			),
 			'url' => array(
 				'type'           => 'varchar',
 				'constraint'     => '255',

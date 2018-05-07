@@ -69,6 +69,18 @@
 							</div>
 						</div>
 						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_method'); ?><?= lang('app_required'); ?></label>
+							<div class="col-sm-9" :class="{'has-error': isErrorMethod}">
+								<select class="form-control" v-model="env.method">
+									<option value="<?= ENV_METHOD_GET; ?>"><?= lang('envs_method_get'); ?></option>
+									<option value="<?= ENV_METHOD_POST; ?>"><?= lang('envs_method_post'); ?></option>
+									<option value="<?= ENV_METHOD_PUT; ?>"><?= lang('envs_method_put'); ?></option>
+									<option value="<?= ENV_METHOD_DELETE; ?>"><?= lang('envs_method_delete'); ?></option>
+								</select>
+								<span class="help-block">{{errors.method}}</span>
+							</div>
+						</div>
+						<div class="row form-group">
 							<label class="col-sm-3 form-control-static"><?= lang('envs_url'); ?><?= lang('app_required'); ?></label>
 							<div class="col-sm-9" :class="{'has-error': isErrorUrl}">
 								<input type="text" class="form-control" v-model="env.url">

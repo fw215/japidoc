@@ -8,8 +8,9 @@ new Vue({
 			api_id: 0,
 			env_id: 0,
 			name: '',
-			url: '',
 			description: '',
+			method: 0,
+			url: '',
 		},
 		envs: [],
 		api: {
@@ -29,6 +30,7 @@ new Vue({
 		errors: {
 			name: null,
 			description: null,
+			method: null,
 			url: null
 		},
 		warning: [],
@@ -79,6 +81,13 @@ new Vue({
 			}
 			return true;
 		},
+		isErrorMethod: function () {
+			var self = this;
+			if (self.errors.method === null) {
+				return false;
+			}
+			return true;
+		},
 		isErrorUrl: function () {
 			var self = this;
 			if (self.errors.url === null) {
@@ -108,8 +117,9 @@ new Vue({
 				api_id: self.api.api_id,
 				env_id: 0,
 				name: '',
-				url: '',
 				description: '',
+				method: 0,
+				url: '',
 			};
 			self.showBox = 'env';
 		},
@@ -302,6 +312,7 @@ new Vue({
 			self.errors = {
 				name: null,
 				description: null,
+				method: null,
 				url: null
 			};
 		}
