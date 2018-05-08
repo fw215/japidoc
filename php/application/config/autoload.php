@@ -68,6 +68,7 @@ $autoload['libraries'] = array(
 	'Projects_lib' => 'Projects_lib',
 	'Apis_lib' => 'Apis_lib',
 	'Envs_lib' => 'Envs_lib',
+	'Headers_lib' => 'Headers_lib',
 );
 
 /*
@@ -142,6 +143,7 @@ $autoload['language'] = array(
 	'my/projects',
 	'my/apis',
 	'my/envs',
+	'my/headers',
 );
 
 /*
@@ -163,4 +165,5 @@ $autoload['model'] = array(
 	'Projects_model' => 'Projects',
 	'Apis_model' => 'Apis',
 	'Envs_model' => 'Envs',
+	'Headers_model' => 'Headers',
 );
