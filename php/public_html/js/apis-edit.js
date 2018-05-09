@@ -172,6 +172,36 @@ new Vue({
 				});
 			}
 		},
+		deleleEnv: function () {
+			var self = this;
+			self.reset();
+			self.loading.deleteENV = true;
+			axios.delete(
+				base_url + "api/v1/envs/" + self.env.env_id
+			).then(function (res) {
+				if (res.data.code == 200) {
+					self.isDangerBox = false;
+					self.getEnvs();
+					self.env = {
+						api_id: self.api.api_id,
+						env_id: 0,
+						name: '',
+						description: '',
+						method: 0,
+						url: '',
+					};
+					self.successful.push('削除しました');
+					showSuccessBox();
+				} else {
+					self.errors = res.data.errors;
+				}
+				self.loading.deleteENV = false;
+			}).catch(function (error) {
+				self.loading.deleteENV = false;
+				self.warning.push('削除に失敗しました');
+				showWarningBox();
+			});
+		},
 		getEnv: function (env_id) {
 			var self = this;
 			self.reset();
