@@ -55,6 +55,13 @@
 							</div>
 						</div>
 						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_id'); ?></label>
+							<div class="col-sm-9 form-control-static">
+								<span v-if="env.env_id > 0">{{env.env_id}}</span>
+								<span v-else>#</span>
+							</div>
+						</div>
+						<div class="row form-group">
 							<label class="col-sm-3 form-control-static"><?= lang('envs_name'); ?><?= lang('app_required'); ?></label>
 							<div class="col-sm-9" :class="{'has-error': isErrorName}">
 								<input type="text" class="form-control" v-model="env.name">
@@ -85,6 +92,20 @@
 							<div class="col-sm-9" :class="{'has-error': isErrorUrl}">
 								<input type="text" class="form-control" v-model="env.url">
 								<span class="help-block">{{errors.url}}</span>
+							</div>
+						</div>
+						<div class="row form-group" v-if="env.env_id > 0">
+							<label class="col-xs-12 col-sm-3 form-control-static"><?= lang('headers_title'); ?></label>
+							<div class="col-xs-12 col-sm-9">
+								<div class="input-group form-group" v-for="(header, index) in env.headers">
+									<input type="text" class="form-control" v-model="header.name">
+									<span class="input-group-addon bg-gray">&#58;</span>
+									<input type="text" class="form-control" v-model="header.value">
+									<span class="input-group-addon bg-navy pointer" @click="removeHeader(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+								</div>
+								<button class="btn bg-navy" @click="addHeader">
+									<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('headers_add'); ?>
+								</button>
 							</div>
 						</div>
 						<div class="row form-group" v-if="env.modified_ymd_his">
@@ -173,22 +194,45 @@
 					</div>
 				</div>
 
-				<div class="clearfix mb20px" v-cloak>
-					<div class="pull-right">
-						<button class="btn btn-danger" @click="isDangerBox = !isDangerBox" v-if="api.api_id > 0">
-							<i class="fa fa-angle-right" v-if="!isDangerBox"></i>
-							<i class="fa fa-angle-down" v-else></i>
-							<?= lang('app_delete'); ?>
-						</button>
+				<div v-show="isNewEnv || isEnv(0)">
+					<div class="clearfix mb20px" v-cloak>
+						<div class="pull-right">
+							<button class="btn btn-danger" @click="isDangerBox = !isDangerBox" v-if="env.env_id > 0">
+								<i class="fa fa-angle-right" v-if="!isDangerBox"></i>
+								<i class="fa fa-angle-down" v-else></i>
+								<?= lang('app_delete'); ?>
+							</button>
+						</div>
 					</div>
+					<transition>
+						<div class="callout bg-red disabled danger-box" v-if="isDangerBox" v-cloak>
+							<h4><i class="icon fa fa-ban"></i> Alert</h4>
+							<p><?= lang('envs_delete_alert'); ?></p>
+							<p class="text-right">
+								<button class="btn btn-default"　@click="deleleEnv"><?= lang('app_delete'); ?></button>
+							</p>
+						</div>
+					</transition>
 				</div>
-				<transition>
-					<div class="callout bg-red disabled danger-box" v-if="isDangerBox" v-cloak>
-						<h4><i class="icon fa fa-ban"></i> Alert</h4>
-						<p><?= lang('apis_delete_alert'); ?></p>
-						<p class="text-right">
-							<button class="btn btn-default"　@click="deleleApi"><?= lang('app_delete'); ?></button>
-						</p>
+
+				<div v-show="isApi">
+					<div class="clearfix mb20px" v-cloak>
+						<div class="pull-right">
+							<button class="btn btn-danger" @click="isDangerBox = !isDangerBox" v-if="api.api_id > 0">
+								<i class="fa fa-angle-right" v-if="!isDangerBox"></i>
+								<i class="fa fa-angle-down" v-else></i>
+								<?= lang('app_delete'); ?>
+							</button>
+						</div>
 					</div>
-				</transition>
+					<transition>
+						<div class="callout bg-red disabled danger-box" v-if="isDangerBox" v-cloak>
+							<h4><i class="icon fa fa-ban"></i> Alert</h4>
+							<p><?= lang('apis_delete_alert'); ?></p>
+							<p class="text-right">
+								<button class="btn btn-default"　@click="deleleApi"><?= lang('app_delete'); ?></button>
+							</p>
+						</div>
+					</transition>
+				</div>
 			</section>

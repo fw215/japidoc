@@ -97,6 +97,20 @@ new Vue({
 		},
 	},
 	methods: {
+		removeHeader: function (index) {
+			var self = this;
+			self.env.headers.splice(index, 1);
+		},
+		addHeader: function () {
+			var self = this;
+			var header = {
+				header_id: 0,
+				env_id: self.env.env_id,
+				name: '',
+				value: '',
+			}
+			self.env.headers.push(header);
+		},
 		isEnv: function (env_id) {
 			var self = this;
 			if (self.showBox !== 'env') {

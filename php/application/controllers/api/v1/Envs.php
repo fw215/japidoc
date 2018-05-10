@@ -53,6 +53,7 @@ class Envs extends MY_Controller
 		if( !$env ){
 			show_404();
 		}
+		$env->headers = $this->Headers->getList($search);
 		$this->_api['env'] = $env;
 
 		$this->json();
