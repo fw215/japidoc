@@ -9,4 +9,4 @@ $lang['headers_modified'] = '更新日時';
 $lang['headers_created'] = '登録日時';
 $lang['headers_delete_alert'] = 'ID:{{header.header_id}} を削除します';
 $lang['headers_env_not_exist'] = '存在しない環境です';
-$lang['headers_add'] = 'headerを追加';
+$lang['headers_add'] = 'HEADERを追加';

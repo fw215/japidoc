@@ -57,7 +57,11 @@ class MY_Controller extends CI_Controller
 				if( !$this->session->userdata('id') ){
 					$this->_logout();
 				}
-				$_user = $this->Users->getDetail( $this->encryption->decrypt($this->session->userdata('user')) );
+
+				$search = array(
+					'user_id' => $this->encryption->decrypt($this->session->userdata('user'))
+				);
+				$_user = $this->Users->get( $search );
 				if( $_user ){
 					/* 最新のログイン情報を取得 */
 					$this->_user = $_user;
@@ -127,7 +131,10 @@ class MY_Controller extends CI_Controller
 			$this->json();
 		}
 
-		$_user = $this->Users->getDetail( $auth->user_id );
+		$search = array(
+			'user_id' => $auth->user_id
+		);
+		$_user = $this->Users->get( $search );
 		if( !$_user ){
 			/* ログインアカウントが正しくない */
 			$this->_api['code'] = 403;

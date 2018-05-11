@@ -29,8 +29,8 @@ class Apis extends MY_Controller
 			$search['page'] = 1;
 		}
 
-		$this->_api['apis'] = $this->Apis->getList($search);
-		$this->_api['count'] = $this->Apis->getList($search, TRUE);
+		$this->_api['apis'] = $this->Apis->search($search);
+		$this->_api['count'] = $this->Apis->search($search, TRUE);
 		$this->_api['pages'] = ceil($this->_api['count'] / DEFAULT_PAGE_LIMIT);
 
 		$this->json();

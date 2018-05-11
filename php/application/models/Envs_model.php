@@ -12,7 +12,7 @@ class Envs_model extends CI_Model
 	}
 
 	/**
-	 * getList
+	 * search
 	 *
 	 * 一覧情報を取得
 	 *
@@ -20,7 +20,7 @@ class Envs_model extends CI_Model
 	 * @param bool $isCount
 	 * @return object|bool
 	 */
-	public function getList($search=false, $isCount=false)
+	public function search($search=false, $isCount=false)
 	{
 		$result = false;
 		try{

@@ -29,9 +29,9 @@ class Envs extends MY_Controller
 			$search['page'] = 1;
 		}
 
-		$this->_api['envs'] = $this->Envs->getList($search);
+		$this->_api['envs'] = $this->Envs->search($search);
 		if($search['page'] > 0){
-			$this->_api['count'] = $this->Envs->getList($search, TRUE);
+			$this->_api['count'] = $this->Envs->search($search, TRUE);
 			$this->_api['pages'] = ceil($this->_api['count'] / DEFAULT_PAGE_LIMIT);
 		}
 
@@ -53,7 +53,7 @@ class Envs extends MY_Controller
 		if( !$env ){
 			show_404();
 		}
-		$env->headers = $this->Headers->getList($search);
+		$env->headers = $this->Headers->search($search);
 		$this->_api['env'] = $env;
 
 		$this->json();

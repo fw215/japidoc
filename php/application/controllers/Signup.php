@@ -21,20 +21,24 @@ class Signup extends MY_Controller
 	public function index()
 	{
 		if($this->input->method(TRUE) === 'POST' ){
-			$postdata = $this->input->post();
-			if( $this->_data['errors'] = $this->Users_lib->signup_validation( $postdata ) ){
+			if( $this->_data['errors'] = $this->Users_lib->signup_validation( $this->input->post() ) ){
 				/* エラーチェック */
 				$this->_data['data']['nickname'] = $this->input->post('nickname');
 				$this->_data['data']['email'] = $this->input->post('email');
 				$this->_data['data']['terms'] = $this->input->post('terms');
 			}else{
 				/* 新規登録 */
-				$postdata['user_id'] = 0;
-				$user_id = $this->Users->register( $postdata );
+				$insert = array(
+					'nickname' => $this->input->post('nickname'),
+					'email' => $this->input->post('email'),
+					'password' => $this->input->post('password'),
+				);
+				$user = $this->Users->insert($insert);
 				/* ログイン */
 				$this->session->sess_regenerate(TRUE);
 				$this->session->set_userdata('id', $this->session->session_id);
-				$this->session->set_userdata('user', $this->encryption->encrypt($user_id));
+				$this->session->set_userdata('user', $this->encryption->encrypt($user->user_id));
+				$this->AccessTokens->generateToken( $user->user_id, ACCESS_TOKEN_API );
 				redirect( base_url('/') );
 			}
 		}

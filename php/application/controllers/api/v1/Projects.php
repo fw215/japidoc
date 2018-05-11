@@ -28,8 +28,8 @@ class Projects extends MY_Controller
 			$search['page'] = 1;
 		}
 
-		$this->_api['projects'] = $this->Projects->getList($search);
-		$this->_api['count'] = $this->Projects->getList($search, TRUE);
+		$this->_api['projects'] = $this->Projects->search($search);
+		$this->_api['count'] = $this->Projects->search($search, TRUE);
 		$this->_api['pages'] = ceil($this->_api['count'] / DEFAULT_PAGE_LIMIT);
 
 		$this->json();

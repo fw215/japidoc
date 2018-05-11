@@ -12,7 +12,7 @@ class Projects_model extends CI_Model
 	}
 
 	/**
-	 * getList
+	 * search
 	 *
 	 * 一覧情報を取得
 	 *
@@ -20,7 +20,7 @@ class Projects_model extends CI_Model
 	 * @param bool $isCount
 	 * @return object|bool
 	 */
-	public function getList($search=false, $isCount=false)
+	public function search($search=false, $isCount=false)
 	{
 		$result = false;
 		try{
@@ -32,6 +32,7 @@ class Projects_model extends CI_Model
 				'DATE_FORMAT(projects.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'COUNT(apis.api_id) as api_count',
 			);
 			$this->db->select($select);
 
@@ -49,7 +50,8 @@ class Projects_model extends CI_Model
 					}
 				}
 			}
-
+			$this->db->join('apis', 'projects.project_id = apis.project_id', 'left');
+			$this->db->group_by('apis.project_id');
 			$this->db->order_by('projects.name', 'ASC');
 
 			if( $isCount === true ){
@@ -83,6 +85,7 @@ class Projects_model extends CI_Model
 				'DATE_FORMAT(projects.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'COUNT(apis.api_id) as api_count',
 			);
 			$this->db->select($select);
 
@@ -90,7 +93,7 @@ class Projects_model extends CI_Model
 				foreach($search as $column => $value){
 					switch ($column) {
 						case 'project_id':
-							$this->db->where('project_id', $value);
+							$this->db->where('projects.project_id', $value);
 							break;
 						default:
 							break;
@@ -98,6 +101,8 @@ class Projects_model extends CI_Model
 				}
 			}
 
+			$this->db->join('apis', 'projects.project_id = apis.project_id', 'left');
+			$this->db->group_by('apis.project_id');
 			$result = $this->db->get($this->_table)->row();
 		}catch(Exception $e){
 			log_message('error', $e->getMessage());
@@ -119,7 +124,7 @@ class Projects_model extends CI_Model
 		$result = false;
 		try{
 			$conditions = array(
-				'project_id' => $project_id
+				'projects.project_id' => $project_id
 			);
 			$project = $this->get($conditions);
 			if( !$project ){
