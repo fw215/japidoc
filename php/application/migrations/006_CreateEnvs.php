@@ -45,6 +45,11 @@ class Migration_CreateEnvs extends CI_Migration
 				'null'           => FALSE,
 				'comment'        => 'URL'
 			),
+			'body' => array(
+				'type'           => 'text',
+				'null'           => FALSE,
+				'comment'        => 'BODY'
+			),
 		);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_field('created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "登録日時"');

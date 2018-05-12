@@ -194,4 +194,35 @@ class Headers_model extends CI_Model
 		}
 		return $result;
 	}
+
+	/**
+	 * eliminate
+	 *
+	 * 不要なHEADERを削除
+	 *
+	 * @param int $env_id
+	 * @param array $IDs
+	 * @return array
+	 */
+	public function eliminate($env_id, $IDs=false)
+	{
+		$result = false;
+		try{
+			$this->db->select('header_id');
+			$this->db->where('env_id', $env_id);
+			if( $IDs ){
+				$this->db->where_not_in('header_id', $IDs);
+			}
+			$headers = $this->db->get($this->_table)->result();
+			if( $headers ){
+				foreach($headers as $header){
+					$result[] = $this->delete($header->header_id);
+				}
+			}
+
+		}catch(Exception $e){
+			log_message('error', $e->getMessage());
+		}
+		return $result;
+	}
 }

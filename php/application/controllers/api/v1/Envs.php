@@ -74,6 +74,26 @@ class Envs extends MY_Controller
 			'url' => isset($this->_stream['url']) ? $this->space_trim($this->_stream['url']) : NULL,
 		);
 		$errors = $this->Envs_lib->register_validation( $update );
+
+		// HEADER
+		$headers = isset($this->_stream['headers']) ? (array)$this->_stream['headers'] : array();
+		$not_delete_headers = array();
+		foreach($headers as $k => $header){
+			$upsert = array(
+				'env_id' => isset($header['env_id']) ? $this->_stream['env_id'] : NULL,
+				'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
+				'value' => isset($this->_stream['value']) ? $this->space_trim($this->_stream['value']) : NULL,
+			);
+			$header_errors = $this->Headers_lib->register_validation( $upsert );
+			if($header_errors){
+				$errors['headers'][$k] = $header_errors;
+			}else{
+				$header_id = isset($header['header_id']) ? $header['header_id'] : 0;
+				if( $header_id > 0 ){
+					$not_delete_headers[] = $header_id;
+				}
+			}
+		}
 		if( $errors ){
 			$this->_api['code'] = API_BAD_REQUEST;
 			$this->_api['errors'] = $errors;
@@ -84,6 +104,30 @@ class Envs extends MY_Controller
 		if( !$env ){
 			show_404();
 		}
+
+		// HEADER
+		$this->Headers->eliminate($env_id, $not_delete_headers);
+		foreach($headers as $k => $header){
+			$upsert = array(
+				'env_id' => isset($header['env_id']) ? $this->_stream['env_id'] : NULL,
+				'name' => isset($header['name']) ? $this->space_trim($header['name']) : NULL,
+				'value' => isset($header['value']) ? $this->space_trim($header['value']) : NULL,
+			);
+			$header_id = isset($header['header_id']) ? $header['header_id'] : 0;
+			if( $header_id > 0 ){
+				$header_errors = $this->Headers->update($header_id, $upsert);
+			}else{
+				$header_errors = $this->Headers->insert($upsert);
+			}
+			if($header_errors){
+				$errors['headers'][$k] = $header_errors;
+			}
+		}
+
+		$search = array(
+			'env_id' => $env->env_id,
+		);
+		$env->headers = $this->Headers->search($search);
 		$this->_api['env'] = $env;
 
 		$this->json();
@@ -114,6 +158,7 @@ class Envs extends MY_Controller
 		if( !$env ){
 			show_404();
 		}
+		$env->headers = array();
 		$this->_api['env'] = $env;
 
 		$this->json();

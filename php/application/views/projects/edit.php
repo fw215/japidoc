@@ -58,7 +58,7 @@
 								<label class="col-sm-3 form-control-static"><?= lang('apis_title'); ?></label>
 								<div class="col-sm-9">
 									<button class="btn bg-teal" @click="locationHref" data-href="<?= base_url('/apis/index/'); ?>" :data-id="project.project_id">
-										<?= lang('apis_index'); ?>
+										<?= lang('apis_index'); ?>&ensp;<span class="badge bg-maroon">{{project.api_count}}</span>
 									</button>
 								</div>
 							</div>

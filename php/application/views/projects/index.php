@@ -45,6 +45,7 @@
 											<th class="success"><?= lang('projects_id'); ?></th>
 											<th><?= lang('projects_name'); ?></th>
 											<th><?= lang('projects_description'); ?></th>
+											<th class="w90px"><?= lang('apis_title'); ?></th>
 											<th class="w90px"><?= lang('projects_created'); ?></th>
 										</tr>
 									</thead>
@@ -53,6 +54,11 @@
 											<td class="pointer w110px bg-teal" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">{{project.project_id}}</td>
 											<td class="break-word">{{project.name}}</td>
 											<td class="break-word">{{project.description}}</td>
+											<td>
+												<a :href="'<?= base_url('/apis/index/'); ?>' + project.project_id">
+													<span class="badge bg-maroon">{{project.api_count}}</span>
+												</a>
+											</td>
 											<td :title="project.created_ymd_his">{{project.created_ymd}}</td>
 										</tr>
 									</tbody>
@@ -61,6 +67,7 @@
 											<th><?= lang('projects_id'); ?></th>
 											<th><?= lang('projects_name'); ?></th>
 											<th><?= lang('projects_description'); ?></th>
+											<th class="w90px"><?= lang('apis_title'); ?></th>
 											<th class="w90px"><?= lang('projects_created'); ?></th>
 										</tr>
 									</tfoot>

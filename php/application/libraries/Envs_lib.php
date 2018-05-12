@@ -65,6 +65,35 @@ class Envs_lib
 				$result['api_id'] = $api_validation;
 			}
 		}
+		/* 追加バリデーション */
+		// $is_headers_error = false;
+		// if( isset($data['headers']) ){
+		// 	foreach((array)$data['headers'] as $k => $header){
+		// 		$this->CI->validation->set_data($header);
+		// 		$this->CI->validation->set_rules(
+		// 			'name',
+		// 			'lang:headers_name',
+		// 			'trim|max_length[50]'
+		// 		);
+		// 		$this->CI->validation->set_rules(
+		// 			'value',
+		// 			'lang:headers_value',
+		// 			'trim|max_length[20000]'
+		// 		);
+		// 		if( !$this->CI->validation->run() ){
+		// 			$is_headers_error = true;
+		// 			$result['headers'][$k]['name'] = !empty($this->CI->validation->error('name')) ? $this->CI->validation->error('name') : NULL;
+		// 			$result['headers'][$k]['value'] = !empty($this->CI->validation->error('value')) ? $this->CI->validation->error('value') : NULL;
+		// 		}
+		// 	}
+		// }
+		// if( $is_headers_error ){
+		// 	$result['api_id'] = isset($result['api_id']) ? $result['api_id'] : NULL;
+		// 	$result['name'] = isset($result['name']) ? $result['name'] : NULL;
+		// 	$result['description'] = isset($result['description']) ? $result['description'] : NULL;
+		// 	$result['method'] = isset($result['method']) ? $result['method'] : NULL;
+		// 	$result['url'] = isset($result['url']) ? $result['url'] : NULL;
+		// }
 
 		return $result;
 	}

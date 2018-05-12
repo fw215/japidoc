@@ -11,6 +11,7 @@ new Vue({
 			description: '',
 			method: 0,
 			url: '',
+			headers: [],
 		},
 		envs: [],
 		api: {
@@ -31,7 +32,8 @@ new Vue({
 			name: null,
 			description: null,
 			method: null,
-			url: null
+			url: null,
+			headers: [],
 		},
 		warning: [],
 		successful: [],
@@ -110,6 +112,36 @@ new Vue({
 				value: '',
 			}
 			self.env.headers.push(header);
+		},
+		isErrorHeaderName: function (index) {
+			var self = this;
+			if (!self.errors.headers[index]) {
+				return '';
+			}
+			if (self.errors.headers[index].name === null) {
+				return '';
+			}
+			return self.errors.headers[index].name;
+		},
+		isErrorHeaderValue: function (index) {
+			var self = this;
+			if (!self.errors.headers[index]) {
+				return '';
+			}
+			if (self.errors.headers[index].value === null) {
+				return '';
+			}
+			return self.errors.headers[index].value;
+		},
+		isErrorHeader: function (index) {
+			var self = this;
+			if (!self.errors.headers[index]) {
+				return false;
+			}
+			if (self.errors.headers[index].name === null && self.errors.headers[index].value === null) {
+				return false;
+			}
+			return true;
 		},
 		isEnv: function (env_id) {
 			var self = this;
@@ -357,7 +389,8 @@ new Vue({
 				name: null,
 				description: null,
 				method: null,
-				url: null
+				url: null,
+				headers: [],
 			};
 		}
 
