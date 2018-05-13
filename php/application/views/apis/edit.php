@@ -102,12 +102,12 @@
 										<input type="text" class="form-control" v-model="header.name">
 										<span class="input-group-addon bg-gray">&#58;</span>
 										<input type="text" class="form-control" v-model="header.value">
-										<span class="input-group-addon bg-navy pointer" @click="removeHeader(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+										<span class="input-group-addon bg-red pointer" @click="removeHeader(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
 									</div>
 									<span class="help-block">{{isErrorHeaderName(index)}}</span>
 									<span class="help-block">{{isErrorHeaderValue(index)}}</span>
 								</div>
-								<button class="btn bg-navy" @click="addHeader">
+								<button class="btn btn-sm bg-navy" @click="addHeader">
 									<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('headers_add'); ?>
 								</button>
 							</div>
