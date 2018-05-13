@@ -112,6 +112,19 @@
 								</button>
 							</div>
 						</div>
+						<div class="row form-group" v-if="env.env_id > 0">
+							<label class="col-xs-12 col-sm-3 form-control-static">
+								<span v-show="env.is_body === 0"><?= lang('envs_body'); ?><br></span>
+								<span v-show="env.is_body === 1"><?= lang('forms_title'); ?><br></span>
+								<button class="btn btn-sm bg-navy" @click="changeBody">
+									<i class="fa fa-random" aria-hidden="true"></i></i>&ensp;<?= lang('apis_body'); ?>
+								</button>
+							</label>
+							<div class="col-xs-12 col-sm-9">
+								<textarea class="form-control" rows="5" v-model="env.body"></textarea>
+								<span class="help-block">{{errors.body}}</span>
+							</div>
+						</div>
 						<div class="row form-group" v-if="env.modified_ymd_his">
 							<label class="col-sm-3 form-control-static"><?= lang('envs_modified'); ?></label>
 							<div class="col-sm-9 form-control-static">

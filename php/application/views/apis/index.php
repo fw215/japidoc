@@ -51,6 +51,7 @@
 											<th class="success"><?= lang('apis_id'); ?></th>
 											<th><?= lang('apis_name'); ?></th>
 											<th><?= lang('apis_description'); ?></th>
+											<th class="w90px"><?= lang('envs_title'); ?></th>
 											<th class="w90px"><?= lang('apis_created'); ?></th>
 										</tr>
 									</thead>
@@ -59,6 +60,7 @@
 											<td class="pointer w110px bg-teal" @click="locationHref" data-href="<?= base_url('/apis/edit/'); ?>" :data-project="<?= $project->project_id; ?>" :data-id="api.api_id">{{api.api_id}}</td>
 											<td class="break-word">{{api.name}}</td>
 											<td class="break-word">{{api.description}}</td>
+											<td><span class="badge bg-maroon pointer" @click="locationHref" data-href="<?= base_url('/apis/edit/'); ?>" :data-project="<?= $project->project_id; ?>" :data-id="api.api_id">{{api.env_count}}</span></td>
 											<td :title="api.created_ymd_his">{{api.created_ymd}}</td>
 										</tr>
 									</tbody>
@@ -67,6 +69,7 @@
 											<th><?= lang('apis_id'); ?></th>
 											<th><?= lang('apis_name'); ?></th>
 											<th><?= lang('apis_description'); ?></th>
+											<th class="w90px"><?= lang('envs_title'); ?></th>
 											<th class="w90px"><?= lang('apis_created'); ?></th>
 										</tr>
 									</tfoot>

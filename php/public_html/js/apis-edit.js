@@ -11,6 +11,8 @@ new Vue({
 			description: '',
 			method: 0,
 			url: '',
+			body: '',
+			is_body: 0,
 			headers: [],
 		},
 		envs: [],
@@ -99,6 +101,14 @@ new Vue({
 		},
 	},
 	methods: {
+		changeBody: function () {
+			var self = this;
+			if (self.env.is_body === 0) {
+				self.env.is_body = 1;
+			} else {
+				self.env.is_body = 0;
+			}
+		},
 		removeHeader: function (index) {
 			var self = this;
 			self.env.headers.splice(index, 1);

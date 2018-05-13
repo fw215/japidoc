@@ -54,6 +54,7 @@ class Envs extends MY_Controller
 			show_404();
 		}
 		$env->headers = $this->Headers->search($search);
+		$env->is_body = (int)$env->is_body;
 		$this->_api['env'] = $env;
 
 		$this->json();

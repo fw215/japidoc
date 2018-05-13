@@ -144,6 +144,7 @@ $autoload['language'] = array(
 	'my/apis',
 	'my/envs',
 	'my/headers',
+	'my/forms',
 );
 
 /*

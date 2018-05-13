@@ -33,6 +33,7 @@ class Apis_model extends CI_Model
 				'DATE_FORMAT(apis.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'COUNT(envs.env_id) as env_count',
 			);
 			$this->db->select($select);
 
@@ -41,7 +42,7 @@ class Apis_model extends CI_Model
 					switch ($column) {
 						case 'project_id':
 							if( $this->validation->required($value) ){
-								$this->db->where('project_id', $value);
+								$this->db->where('apis.project_id', $value);
 							}
 							break;
 						case 'page':
@@ -55,7 +56,8 @@ class Apis_model extends CI_Model
 					}
 				}
 			}
-
+			$this->db->join('envs', 'apis.api_id = envs.api_id', 'left');
+			$this->db->group_by('envs.api_id');
 			$this->db->order_by('apis.name', 'ASC');
 
 			if( $isCount === true ){
@@ -90,6 +92,7 @@ class Apis_model extends CI_Model
 				'DATE_FORMAT(apis.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'COUNT(envs.env_id) as env_count',
 			);
 			$this->db->select($select);
 
@@ -97,7 +100,7 @@ class Apis_model extends CI_Model
 				foreach($search as $column => $value){
 					switch ($column) {
 						case 'api_id':
-							$this->db->where('api_id', $value);
+							$this->db->where('apis.api_id', $value);
 							break;
 						default:
 							break;
@@ -105,6 +108,8 @@ class Apis_model extends CI_Model
 				}
 			}
 
+			$this->db->join('envs', 'apis.api_id = envs.api_id', 'left');
+			$this->db->group_by('envs.api_id');
 			$result = $this->db->get($this->_table)->row();
 		}catch(Exception $e){
 			log_message('error', $e->getMessage());
