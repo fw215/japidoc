@@ -51,12 +51,24 @@ class Envs_lib
 			'lang:envs_url',
 			'required|trim|max_length[255]|valid_url'
 		);
+		$this->CI->validation->set_rules(
+			'body',
+			'lang:envs_body',
+			'trim|max_length[20000]'
+		);
+		$this->CI->validation->set_rules(
+			'is_body',
+			'lang:envs_is_body',
+			'trim'
+		);
 		if( !$this->CI->validation->run() ){
 			$result['api_id'] = !empty($this->CI->validation->error('api_id')) ? $this->CI->validation->error('api_id') : NULL;
 			$result['name'] = !empty($this->CI->validation->error('name')) ? $this->CI->validation->error('name') : NULL;
 			$result['description'] = !empty($this->CI->validation->error('description')) ? $this->CI->validation->error('description') : NULL;
 			$result['method'] = !empty($this->CI->validation->error('method')) ? $this->CI->validation->error('method') : NULL;
 			$result['url'] = !empty($this->CI->validation->error('url')) ? $this->CI->validation->error('url') : NULL;
+			$result['body'] = !empty($this->CI->validation->error('body')) ? $this->CI->validation->error('body') : NULL;
+			$result['is_body'] = !empty($this->CI->validation->error('is_body')) ? $this->CI->validation->error('is_body') : NULL;
 		}
 		/* 追加バリデーション */
 		if( !isset($result['api_id']) ){
@@ -65,35 +77,6 @@ class Envs_lib
 				$result['api_id'] = $api_validation;
 			}
 		}
-		/* 追加バリデーション */
-		// $is_headers_error = false;
-		// if( isset($data['headers']) ){
-		// 	foreach((array)$data['headers'] as $k => $header){
-		// 		$this->CI->validation->set_data($header);
-		// 		$this->CI->validation->set_rules(
-		// 			'name',
-		// 			'lang:headers_name',
-		// 			'trim|max_length[50]'
-		// 		);
-		// 		$this->CI->validation->set_rules(
-		// 			'value',
-		// 			'lang:headers_value',
-		// 			'trim|max_length[20000]'
-		// 		);
-		// 		if( !$this->CI->validation->run() ){
-		// 			$is_headers_error = true;
-		// 			$result['headers'][$k]['name'] = !empty($this->CI->validation->error('name')) ? $this->CI->validation->error('name') : NULL;
-		// 			$result['headers'][$k]['value'] = !empty($this->CI->validation->error('value')) ? $this->CI->validation->error('value') : NULL;
-		// 		}
-		// 	}
-		// }
-		// if( $is_headers_error ){
-		// 	$result['api_id'] = isset($result['api_id']) ? $result['api_id'] : NULL;
-		// 	$result['name'] = isset($result['name']) ? $result['name'] : NULL;
-		// 	$result['description'] = isset($result['description']) ? $result['description'] : NULL;
-		// 	$result['method'] = isset($result['method']) ? $result['method'] : NULL;
-		// 	$result['url'] = isset($result['url']) ? $result['url'] : NULL;
-		// }
 
 		return $result;
 	}

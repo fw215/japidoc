@@ -69,6 +69,7 @@ $autoload['libraries'] = array(
 	'Apis_lib' => 'Apis_lib',
 	'Envs_lib' => 'Envs_lib',
 	'Headers_lib' => 'Headers_lib',
+	'Forms_lib' => 'Forms_lib',
 );
 
 /*
@@ -167,4 +168,5 @@ $autoload['model'] = array(
 	'Apis_model' => 'Apis',
 	'Envs_model' => 'Envs',
 	'Headers_model' => 'Headers',
+	'Forms_model' => 'Forms',
 );

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Headers_lib
+class Forms_lib
 {
 	protected $CI;
 
@@ -33,12 +33,12 @@ class Headers_lib
 		);
 		$this->CI->validation->set_rules(
 			'name',
-			'lang:headers_name',
+			'lang:forms_name',
 			'trim|max_length[50]'
 		);
 		$this->CI->validation->set_rules(
 			'value',
-			'lang:headers_value',
+			'lang:forms_value',
 			'trim|max_length[20000]'
 		);
 		if( !$this->CI->validation->run() ){
@@ -72,7 +72,7 @@ class Headers_lib
 			'env_id' => $env_id,
 		);
 		if( !$this->CI->Envs->get($search) ){
-			return lang('headers_env_not_exist');
+			return lang('forms_env_not_exist');
 		}
 		return NULL;
 	}

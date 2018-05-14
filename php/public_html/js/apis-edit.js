@@ -14,6 +14,9 @@ new Vue({
 			body: '',
 			is_body: 0,
 			headers: [],
+			forms: [],
+			body: '',
+			is_body: 0,
 		},
 		envs: [],
 		api: {
@@ -36,6 +39,9 @@ new Vue({
 			method: null,
 			url: null,
 			headers: [],
+			forms: [],
+			body: null,
+			is_body: null,
 		},
 		warning: [],
 		successful: [],
@@ -108,6 +114,50 @@ new Vue({
 			} else {
 				self.env.is_body = 0;
 			}
+		},
+		removeForm: function (index) {
+			var self = this;
+			self.env.forms.splice(index, 1);
+		},
+		addForm: function () {
+			var self = this;
+			var form = {
+				form_id: 0,
+				env_id: self.env.env_id,
+				name: '',
+				value: '',
+			}
+			self.env.forms.push(form);
+		},
+		isErrorFormName: function (index) {
+			var self = this;
+			if (!self.errors.forms[index]) {
+				return '';
+			}
+			if (self.errors.forms[index].name === null) {
+				return '';
+			}
+			return self.errors.forms[index].name;
+		},
+		isErrorFormValue: function (index) {
+			var self = this;
+			if (!self.errors.forms[index]) {
+				return '';
+			}
+			if (self.errors.forms[index].value === null) {
+				return '';
+			}
+			return self.errors.forms[index].value;
+		},
+		isErrorForm: function (index) {
+			var self = this;
+			if (!self.errors.forms[index]) {
+				return false;
+			}
+			if (self.errors.forms[index].name === null && self.errors.forms[index].value === null) {
+				return false;
+			}
+			return true;
 		},
 		removeHeader: function (index) {
 			var self = this;
@@ -401,6 +451,9 @@ new Vue({
 				method: null,
 				url: null,
 				headers: [],
+				forms: [],
+				body: null,
+				is_body: null,
 			};
 		}
 

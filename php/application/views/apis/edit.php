@@ -112,17 +112,36 @@
 								</button>
 							</div>
 						</div>
-						<div class="row form-group" v-if="env.env_id > 0">
+						<div class="row form-group" v-if="env.env_id > 0 && env.method != <?= ENV_METHOD_GET; ?> && env.method != <?= ENV_METHOD_DELETE; ?>">
 							<label class="col-xs-12 col-sm-3 form-control-static">
-								<span v-show="env.is_body === 0"><?= lang('envs_body'); ?><br></span>
-								<span v-show="env.is_body === 1"><?= lang('forms_title'); ?><br></span>
+								<span v-if="env.is_body == <?= ENV_IS_BODY; ?>"><?= lang('envs_body'); ?><br></span>
+								<span v-else><?= lang('forms_title'); ?><br></span>
 								<button class="btn btn-sm bg-navy" @click="changeBody">
-									<i class="fa fa-random" aria-hidden="true"></i></i>&ensp;<?= lang('apis_body'); ?>
+									<i class="fa fa-random" aria-hidden="true"></i></i>
+									<span v-if="env.is_body == <?= ENV_IS_NOT_BODY; ?>"><?= lang('envs_body'); ?></span>
+									<span v-else><?= lang('forms_title'); ?></span>
 								</button>
 							</label>
 							<div class="col-xs-12 col-sm-9">
-								<textarea class="form-control" rows="5" v-model="env.body"></textarea>
-								<span class="help-block">{{errors.body}}</span>
+								<div v-if="env.is_body == <?= ENV_IS_BODY; ?>">
+									<textarea class="form-control" rows="5" v-model="env.body"></textarea>
+									<span class="help-block">{{errors.body}}</span>
+								</div>
+								<div v-else>
+									<div class="break-word" v-for="(form, index) in env.forms" :class="{'has-error': isErrorForm(index)}">
+										<div class="input-group form-group">
+											<input type="text" class="form-control" v-model="form.name">
+											<span class="input-group-addon bg-gray">&#58;</span>
+											<input type="text" class="form-control" v-model="form.value">
+											<span class="input-group-addon bg-red pointer" @click="removeForm(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+										</div>
+										<span class="help-block">{{isErrorFormName(index)}}</span>
+										<span class="help-block">{{isErrorFormValue(index)}}</span>
+									</div>
+									<button class="btn btn-sm bg-navy" @click="addForm">
+										<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('forms_add'); ?>
+									</button>
+								</div>
 							</div>
 						</div>
 						<div class="row form-group" v-if="env.modified_ymd_his">

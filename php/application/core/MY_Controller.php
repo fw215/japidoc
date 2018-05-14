@@ -98,7 +98,7 @@ class MY_Controller extends CI_Controller
 	protected function set($otherview = NULL)
 	{
 		/* header */
-		$this->_data['aside'] = lang('app_aside');
+		// $this->_data['aside'] = lang('app_aside');
 		$this->load->view('templates'.DS.'header', $this->_data);
 
 		/* sidebar */

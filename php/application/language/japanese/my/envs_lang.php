@@ -12,6 +12,7 @@ $lang['envs_method_put'] = 'PUT';
 $lang['envs_method_delete'] = 'DELETE';
 $lang['envs_url'] = 'URL';
 $lang['envs_body'] = 'BODY';
+$lang['envs_is_body'] = 'BODY';
 $lang['envs_modified'] = '更新日時';
 $lang['envs_created'] = '登録日時';
 $lang['envs_delete_alert'] = 'ID:{{env.env_id}} を削除します';

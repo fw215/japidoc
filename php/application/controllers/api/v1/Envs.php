@@ -54,6 +54,7 @@ class Envs extends MY_Controller
 			show_404();
 		}
 		$env->headers = $this->Headers->search($search);
+		$env->forms = $this->Forms->search($search);
 		$env->is_body = (int)$env->is_body;
 		$this->_api['env'] = $env;
 
@@ -73,6 +74,8 @@ class Envs extends MY_Controller
 			'description' => isset($this->_stream['description']) ? $this->space_trim($this->_stream['description']) : NULL,
 			'method' => isset($this->_stream['method']) ? $this->space_trim($this->_stream['method']) : NULL,
 			'url' => isset($this->_stream['url']) ? $this->space_trim($this->_stream['url']) : NULL,
+			'body' => isset($this->_stream['body']) ? $this->space_trim($this->_stream['body']) : NULL,
+			'is_body' => isset($this->_stream['is_body']) ? $this->space_trim($this->_stream['is_body']) : NULL,
 		);
 		$errors = $this->Envs_lib->register_validation( $update );
 
@@ -81,9 +84,9 @@ class Envs extends MY_Controller
 		$not_delete_headers = array();
 		foreach($headers as $k => $header){
 			$upsert = array(
-				'env_id' => isset($header['env_id']) ? $this->_stream['env_id'] : NULL,
-				'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
-				'value' => isset($this->_stream['value']) ? $this->space_trim($this->_stream['value']) : NULL,
+				'env_id' => $env_id,
+				'name' => isset($header['name']) ? $this->space_trim($header['name']) : NULL,
+				'value' => isset($header['value']) ? $this->space_trim($header['value']) : NULL,
 			);
 			$header_errors = $this->Headers_lib->register_validation( $upsert );
 			if($header_errors){
@@ -95,7 +98,35 @@ class Envs extends MY_Controller
 				}
 			}
 		}
+		// FORMS
+		$forms = isset($this->_stream['forms']) ? (array)$this->_stream['forms'] : array();
+		$not_delete_forms = array();
+		foreach($forms as $k => $form){
+			$upsert = array(
+				'env_id' => $env_id,
+				'name' => isset($form['name']) ? $this->space_trim($form['name']) : NULL,
+				'value' => isset($form['value']) ? $this->space_trim($form['value']) : NULL,
+			);
+			$form_errors = $this->Forms_lib->register_validation( $upsert );
+			if($form_errors){
+				$errors['forms'][$k] = $form_errors;
+			}else{
+				$form_id = isset($form['form_id']) ? $form['form_id'] : 0;
+				if( $form_id > 0 ){
+					$not_delete_forms[] = $form_id;
+				}
+			}
+		}
 		if( $errors ){
+			$errors['api_id'] = isset($errors['api_id']) ? $errors['api_id'] : NULL;
+			$errors['name'] = isset($errors['name']) ? $errors['name'] : NULL;
+			$errors['description'] = isset($errors['description']) ? $errors['description'] : NULL;
+			$errors['method'] = isset($errors['method']) ? $errors['method'] : NULL;
+			$errors['url'] = isset($errors['url']) ? $errors['url'] : NULL;
+			$errors['body'] = isset($errors['body']) ? $errors['body'] : NULL;
+			$errors['is_body'] = isset($errors['is_body']) ? $errors['is_body'] : NULL;
+			$errors['forms'] = isset($errors['forms']) ? $errors['forms'] : array();
+			$errors['headers'] = isset($errors['headers']) ? $errors['headers'] : array();
 			$this->_api['code'] = API_BAD_REQUEST;
 			$this->_api['errors'] = $errors;
 			$this->json();
@@ -110,7 +141,7 @@ class Envs extends MY_Controller
 		$this->Headers->eliminate($env_id, $not_delete_headers);
 		foreach($headers as $k => $header){
 			$upsert = array(
-				'env_id' => isset($header['env_id']) ? $this->_stream['env_id'] : NULL,
+				'env_id' => isset($header['env_id']) ? $header['env_id'] : NULL,
 				'name' => isset($header['name']) ? $this->space_trim($header['name']) : NULL,
 				'value' => isset($header['value']) ? $this->space_trim($header['value']) : NULL,
 			);
@@ -124,11 +155,31 @@ class Envs extends MY_Controller
 				$errors['headers'][$k] = $header_errors;
 			}
 		}
+		// FORM
+		$this->Forms->eliminate($env_id, $not_delete_forms);
+		foreach($forms as $k => $form){
+			$upsert = array(
+				'env_id' => isset($form['env_id']) ? $form['env_id'] : NULL,
+				'name' => isset($form['name']) ? $this->space_trim($form['name']) : NULL,
+				'value' => isset($form['value']) ? $this->space_trim($form['value']) : NULL,
+			);
+			$form_id = isset($form['form_id']) ? $form['form_id'] : 0;
+			if( $form_id > 0 ){
+				$form_errors = $this->Forms->update($form_id, $upsert);
+			}else{
+				$form_errors = $this->Forms->insert($upsert);
+			}
+			if($form_errors){
+				$errors['forms'][$k] = $form_errors;
+			}
+		}
 
 		$search = array(
 			'env_id' => $env->env_id,
 		);
 		$env->headers = $this->Headers->search($search);
+		$env->forms = $this->Forms->search($search);
+		$env->is_body = (int)$env->is_body;
 		$this->_api['env'] = $env;
 
 		$this->json();
@@ -160,6 +211,7 @@ class Envs extends MY_Controller
 			show_404();
 		}
 		$env->headers = array();
+		$env->is_body = (int)$env->is_body;
 		$this->_api['env'] = $env;
 
 		$this->json();
@@ -176,6 +228,8 @@ class Envs extends MY_Controller
 		if( !$result ){
 			show_404();
 		}
+		$this->Forms->eliminate($env_id);
+		$this->Headers->eliminate($env_id);
 
 		$this->json();
 	}
