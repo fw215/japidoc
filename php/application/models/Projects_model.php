@@ -32,7 +32,7 @@ class Projects_model extends CI_Model
 				'DATE_FORMAT(projects.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
-				'COUNT(apis.api_id) as api_count',
+				'IFNULL(apis.api_count, 0) AS api_count',
 			);
 			$this->db->select($select);
 
@@ -50,8 +50,7 @@ class Projects_model extends CI_Model
 					}
 				}
 			}
-			$this->db->join('apis', 'projects.project_id = apis.project_id', 'left');
-			$this->db->group_by('apis.project_id');
+			$this->db->join('(SELECT apis.project_id, COUNT(apis.api_id) AS api_count FROM apis GROUP BY apis.project_id ) AS apis', 'projects.project_id = apis.project_id', 'left');
 			$this->db->order_by('projects.name', 'ASC');
 
 			if( $isCount === true ){
@@ -85,7 +84,7 @@ class Projects_model extends CI_Model
 				'DATE_FORMAT(projects.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(projects.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
-				'COUNT(apis.api_id) as api_count',
+				'IFNULL(apis.api_count, 0) AS api_count',
 			);
 			$this->db->select($select);
 
@@ -101,8 +100,7 @@ class Projects_model extends CI_Model
 				}
 			}
 
-			$this->db->join('apis', 'projects.project_id = apis.project_id', 'left');
-			$this->db->group_by('apis.project_id');
+			$this->db->join('(SELECT apis.project_id, COUNT(apis.api_id) AS api_count FROM apis GROUP BY apis.project_id ) AS apis', 'projects.project_id = apis.project_id', 'left');
 			$result = $this->db->get($this->_table)->row();
 		}catch(Exception $e){
 			log_message('error', $e->getMessage());

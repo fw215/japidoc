@@ -164,6 +164,7 @@
 									<span v-else><?= lang('app_add'); ?></span>
 								</button>
 								<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+								<button class="btn bg-purple pull-right"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 							</div>
 						</div>
 					</div>

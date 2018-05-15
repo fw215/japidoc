@@ -33,7 +33,7 @@ class Apis_model extends CI_Model
 				'DATE_FORMAT(apis.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
-				'COUNT(envs.env_id) as env_count',
+				'IFNULL(env_count, 0) AS env_count',
 			);
 			$this->db->select($select);
 
@@ -56,8 +56,7 @@ class Apis_model extends CI_Model
 					}
 				}
 			}
-			$this->db->join('envs', 'apis.api_id = envs.api_id', 'left');
-			$this->db->group_by('envs.api_id');
+			$this->db->join('(SELECT envs.api_id, COUNT(envs.env_id) AS env_count FROM envs GROUP BY envs.api_id ) AS envs', 'apis.api_id = envs.api_id', 'left');
 			$this->db->order_by('apis.name', 'ASC');
 
 			if( $isCount === true ){
@@ -92,7 +91,7 @@ class Apis_model extends CI_Model
 				'DATE_FORMAT(apis.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(apis.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
-				'COUNT(envs.env_id) as env_count',
+				'IFNULL(env_count, 0) AS env_count',
 			);
 			$this->db->select($select);
 
@@ -108,8 +107,7 @@ class Apis_model extends CI_Model
 				}
 			}
 
-			$this->db->join('envs', 'apis.api_id = envs.api_id', 'left');
-			$this->db->group_by('envs.api_id');
+			$this->db->join('(SELECT envs.api_id, COUNT(envs.env_id) AS env_count FROM envs GROUP BY envs.api_id ) AS envs', 'apis.api_id = envs.api_id', 'left');
 			$result = $this->db->get($this->_table)->row();
 		}catch(Exception $e){
 			log_message('error', $e->getMessage());

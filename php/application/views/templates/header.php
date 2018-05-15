@@ -22,7 +22,7 @@
 <?php if($class == 'login' || $class == 'signup'): ?>
 <body class="hold-transition login-page">
 <?php else: ?>
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition fixed skin-purple sidebar-mini">
 	<div class="wrapper" id="main-container">
 		<header class="main-header">
 			<a href="<?= base_url('/'); ?>" class="logo">

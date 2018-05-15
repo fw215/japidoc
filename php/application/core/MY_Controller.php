@@ -124,6 +124,11 @@ class MY_Controller extends CI_Controller
 	public function apiLoginCheck()
 	{
 		$token = $this->input->get_request_header(API_AUTH_HEADER, TRUE);
+		if( !$token ){
+			/* アクセスエラー */
+			$this->_api['code'] = 403;
+			$this->json();
+		}
 		$auth = $this->AccessTokens->tryAutoLogin($token, ACCESS_TOKEN_API);
 		if( !$auth ){
 			/* 無効なトークン */
