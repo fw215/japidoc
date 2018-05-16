@@ -17,3 +17,7 @@ $lang['envs_modified'] = '更新日時';
 $lang['envs_created'] = '登録日時';
 $lang['envs_delete_alert'] = 'ID:{{env.env_id}} を削除します';
 $lang['envs_api_not_exist'] = '存在しないAPIです';
+$lang['envs_result'] = 'レスポンス';
+$lang['envs_error_code'] = 'ERROR CODE';
+$lang['envs_error_message'] = 'ERROR MESSAGE';
+$lang['envs_response'] = 'RESPONSE BODY';

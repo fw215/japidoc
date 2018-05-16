@@ -32,6 +32,7 @@ new Vue({
 			getAPI: false,
 			registerAPI: false,
 			deleteAPI: false,
+			sendAPI: false,
 		},
 		errors: {
 			name: null,
@@ -42,6 +43,11 @@ new Vue({
 			forms: [],
 			body: null,
 			is_body: null,
+		},
+		result: {
+			error_code: '',
+			error_message: '',
+			response: '',
 		},
 		warning: [],
 		successful: [],
@@ -107,6 +113,47 @@ new Vue({
 		},
 	},
 	methods: {
+		sendApi: function () {
+			var self = this;
+			self.response = {
+				error_code: '',
+				error_message: '',
+				response: '',
+			};
+			axios.put(
+				base_url + "api/v1/envs/" + self.env.env_id,
+				self.env
+			).then(function (res) {
+				if (res.data.code == 200) {
+					self.env = res.data.env;
+					self.getEnvs();
+					self.successful.push('更新しました');
+					showSuccessBox();
+					self.loading.sendAPI = true;
+					axios.get(
+						base_url + "api/v1/send/env/" + self.env.env_id
+					).then(function (res) {
+						if (res.data.code == 200) {
+							self.result = res.data.result;
+						} else {
+							self.warning.push('送信に失敗しました');
+						}
+						self.loading.sendAPI = false;
+					}).catch(function (error) {
+						self.loading.sendAPI = false;
+						self.warning.push('送信に失敗しました');
+						showWarningBox();
+					});
+				} else {
+					self.errors = res.data.errors;
+				}
+				self.loading.registerENV = false;
+			}).catch(function (error) {
+				self.loading.registerENV = false;
+				self.warning.push('更新に失敗しました');
+				showWarningBox();
+			});
+		},
 		changeBody: function () {
 			var self = this;
 			if (self.env.is_body === 0) {

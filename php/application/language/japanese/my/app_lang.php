@@ -13,6 +13,8 @@ $lang['app_search'] = '検索';
 $lang['app_add'] = '登録';
 $lang['app_edit'] = '編集';
 $lang['app_delete'] = '削除';
+$lang['app_send'] = '送信';
+$lang['app_close'] = '閉じる';
 
 $lang['app_aside_header'] = 'メニュー';
 $lang['app_aside_index'] = '一覧';

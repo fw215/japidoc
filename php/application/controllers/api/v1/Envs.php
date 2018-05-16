@@ -211,6 +211,7 @@ class Envs extends MY_Controller
 			show_404();
 		}
 		$env->headers = array();
+		$env->forms = array();
 		$env->is_body = (int)$env->is_body;
 		$this->_api['env'] = $env;
 

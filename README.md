@@ -9,8 +9,9 @@
             php composer.phar require codeigniter/framework:3.1.8
             php composer.phar require --dev phpdocumentor/phpdocumentor
                 vendor/bin/phpdoc run -d application/ -t documents
+            php composer.phar require php-curl-class/php-curl-class
 
-## docker(コマンド) 
+## docker(コマンド)
     docker-compose down
     docker-compose exec nginx bash
     docker-compose exec php bash

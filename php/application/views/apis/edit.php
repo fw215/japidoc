@@ -159,12 +159,20 @@
 						<div class="row form-group">
 							<label class="col-sm-3 form-control-static"></label>
 							<div class="col-sm-9">
+								<button class="btn bg-purple" @click="sendApi" data-toggle="modal" data-target="#modal-result" v-if="!loading.sendAPI">
+									<i class="fa fa-paper-plane" aria-hidden="true"></i> <?= lang('app_send'); ?>
+								</button>
+								<button class="btn bg-purple" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+							</div>
+						</div>
+						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"></label>
+							<div class="col-sm-9">
 								<button class="btn btn-info" @click="registerEnv" v-if="!loading.registerENV">
 									<span v-if="env.env_id > 0"><?= lang('app_edit'); ?></span>
 									<span v-else><?= lang('app_add'); ?></span>
 								</button>
 								<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
-								<button class="btn bg-purple pull-right"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 							</div>
 						</div>
 					</div>
@@ -271,5 +279,45 @@
 							</p>
 						</div>
 					</transition>
+				</div>
+
+				<div class="modal fade" id="modal-result">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title"><?= lang('envs_result'); ?></h4>
+							</div>
+							<div class="modal-body">
+								<div v-if="loading.sendAPI">
+									<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+								</div>
+								<div v-else>
+									<div class="row form-group">
+										<label class="col-sm-3 form-control-static"><?= lang('envs_error_code'); ?></label>
+										<div class="col-sm-9">
+											<p class="form-control-static">{{result.error_code}}</p>
+										</div>
+									</div>
+									<div class="row form-group">
+										<label class="col-sm-3 form-control-static"><?= lang('envs_error_message'); ?></label>
+										<div class="col-sm-9">
+											<p class="form-control-static">{{result.error_message}}</p>
+										</div>
+									</div>
+									<div class="row form-group">
+										<label class="col-sm-3 form-control-static"><?= lang('envs_response'); ?></label>
+										<div class="col-sm-9">
+											<pre>{{result.response}}</pre>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal"><?= lang('app_close'); ?></button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
