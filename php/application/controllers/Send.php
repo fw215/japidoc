@@ -61,9 +61,12 @@ class Send extends CI_Controller
 		}
 
 		$response = array(
+			'url' => $env->url,
 			'error_code' => $curl->errorCode,
 			'error_message' => $curl->errorMessage,
-			'response' => $curl->response,
+			'status_code' => $curl->httpStatusCode,
+			'response_headers' => $curl->responseHeaders,
+			'response_body' => $curl->response,
 		);
 		echo json_encode($response);
 	}

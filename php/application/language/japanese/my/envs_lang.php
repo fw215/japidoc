@@ -20,4 +20,6 @@ $lang['envs_api_not_exist'] = '存在しないAPIです';
 $lang['envs_result'] = 'レスポンス';
 $lang['envs_error_code'] = 'ERROR CODE';
 $lang['envs_error_message'] = 'ERROR MESSAGE';
-$lang['envs_response'] = 'RESPONSE BODY';
+$lang['envs_status_code'] = 'STATUS CODE';
+$lang['envs_response_headers'] = 'RESPONSE HEADERS';
+$lang['envs_response_body'] = 'RESPONSE BODY';

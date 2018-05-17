@@ -294,22 +294,38 @@
 									<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
 								</div>
 								<div v-else>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('envs_error_code'); ?></label>
-										<div class="col-sm-9">
-											<p class="form-control-static">{{result.error_code}}</p>
+									<div v-if="result.error_code > 0">
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('envs_error_code'); ?></label>
+											<div class="col-sm-9">
+												<p class="form-control-static">{{result.error_code}}</p>
+											</div>
+										</div>
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('envs_error_message'); ?></label>
+											<div class="col-sm-9">
+												<p class="form-control-static">{{result.error_message}}</p>
+											</div>
 										</div>
 									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('envs_error_message'); ?></label>
-										<div class="col-sm-9">
-											<p class="form-control-static">{{result.error_message}}</p>
+									<div v-else>
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('envs_status_code'); ?></label>
+											<div class="col-sm-9">
+												<pre>{{result.status_code}}</pre>
+											</div>
 										</div>
-									</div>
-									<div class="row form-group">
-										<label class="col-sm-3 form-control-static"><?= lang('envs_response'); ?></label>
-										<div class="col-sm-9">
-											<pre>{{result.response}}</pre>
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('envs_response_headers'); ?></label>
+											<div class="col-sm-9">
+												<pre>{{result.response_headers}}</pre>
+											</div>
+										</div>
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('envs_response_body'); ?></label>
+											<div class="col-sm-9">
+												<pre>{{result.response_body}}</pre>
+											</div>
 										</div>
 									</div>
 								</div>

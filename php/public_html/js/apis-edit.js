@@ -45,9 +45,11 @@ new Vue({
 			is_body: null,
 		},
 		result: {
-			error_code: '',
+			error_code: 0,
 			error_message: '',
-			response: '',
+			status_code: '',
+			response_headers: [],
+			response_body: '',
 		},
 		warning: [],
 		successful: [],
@@ -115,10 +117,12 @@ new Vue({
 	methods: {
 		sendApi: function () {
 			var self = this;
-			self.response = {
-				error_code: '',
+			self.result = {
+				error_code: 0,
 				error_message: '',
-				response: '',
+				status_code: '',
+				response_headers: [],
+				response_body: '',
 			};
 			axios.put(
 				base_url + "api/v1/envs/" + self.env.env_id,
