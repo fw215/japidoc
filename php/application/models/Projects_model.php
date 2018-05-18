@@ -122,7 +122,7 @@ class Projects_model extends CI_Model
 		$result = false;
 		try{
 			$conditions = array(
-				'projects.project_id' => $project_id
+				'project_id' => $project_id
 			);
 			$project = $this->get($conditions);
 			if( !$project ){

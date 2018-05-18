@@ -38,3 +38,6 @@ $lang['form_validation_greater_than']		= '{field}欄は{param}より大きい値
 $lang['form_validation_greater_than_equal_to']	= '{field}欄は{param}以上の値でなければいけません。';
 $lang['form_validation_error_message_not_set']	= '{field}欄に適切なエラーメッセージがありません';
 $lang['form_validation_in_list']		= '{field}欄は{param}のいずれかでなければなりません';
+
+$lang['form_validation_min_byte']		= '{field}は{param}byte以上で入力してください';
+$lang['form_validation_max_byte']		= '{field}は{param}byte以下で入力してください';

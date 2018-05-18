@@ -34,12 +34,12 @@ class Apis_lib
 		$this->CI->validation->set_rules(
 			'name',
 			'lang:apis_name',
-			'required|trim|max_length[50]'
+			'required|trim|max_byte[255]'
 		);
 		$this->CI->validation->set_rules(
 			'description',
 			'lang:apis_description',
-			'trim|max_length[20000]'
+			'trim|max_byte[65535]'
 		);
 		if( !$this->CI->validation->run() ){
 			$result['project_id'] = !empty($this->CI->validation->error('project_id')) ? $this->CI->validation->error('project_id') : NULL;

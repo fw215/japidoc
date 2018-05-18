@@ -34,12 +34,12 @@ class Envs_lib
 		$this->CI->validation->set_rules(
 			'name',
 			'lang:envs_name',
-			'required|trim|max_length[50]'
+			'required|trim|max_byte[255]'
 		);
 		$this->CI->validation->set_rules(
 			'description',
 			'lang:envs_description',
-			'trim|max_length[20000]'
+			'trim|max_byte[65535]'
 		);
 		$this->CI->validation->set_rules(
 			'method',
@@ -49,12 +49,12 @@ class Envs_lib
 		$this->CI->validation->set_rules(
 			'url',
 			'lang:envs_url',
-			'required|trim|max_length[255]|valid_url'
+			'required|trim|max_byte[255]|valid_url'
 		);
 		$this->CI->validation->set_rules(
 			'body',
 			'lang:envs_body',
-			'trim|max_length[20000]'
+			'trim|max_byte[65535]'
 		);
 		$this->CI->validation->set_rules(
 			'is_body',

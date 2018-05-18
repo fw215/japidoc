@@ -34,12 +34,12 @@ class Forms_lib
 		$this->CI->validation->set_rules(
 			'name',
 			'lang:forms_name',
-			'trim|max_length[50]'
+			'trim|max_byte[255]'
 		);
 		$this->CI->validation->set_rules(
 			'value',
 			'lang:forms_value',
-			'trim|max_length[20000]'
+			'trim|max_byte[65535]'
 		);
 		if( !$this->CI->validation->run() ){
 			$result['env_id'] = !empty($this->CI->validation->error('env_id')) ? $this->CI->validation->error('env_id') : NULL;
