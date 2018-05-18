@@ -41,8 +41,8 @@ function showWarningBox() {
 }
 
 /**
-* data属性のhrefとidでページ遷移します
-* @param {event} MouseEvent
+*
+* @param {string} link
 */
 var locationHrefMixin = {
 	methods: {
