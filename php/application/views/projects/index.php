@@ -51,7 +51,7 @@
 									</thead>
 									<tbody>
 										<tr v-for="project in projects">
-											<td class="pointer w110px bg-teal" @click="locationHref" data-href="<?= base_url('/projects/edit/'); ?>" :data-id="project.project_id">{{project.project_id}}</td>
+											<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/projects/edit/'); ?>' + project.project_id)">{{project.project_id}}</td>
 											<td class="break-word">{{project.name}}</td>
 											<td class="break-word">{{project.description}}</td>
 											<td>

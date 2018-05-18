@@ -2,6 +2,7 @@
 
 new Vue({
 	el: '#main-container',
+	mixins: [locationHrefMixin],
 	data: {
 		api: {},
 		apis: [],

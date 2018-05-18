@@ -57,10 +57,10 @@
 									</thead>
 									<tbody>
 										<tr v-for="api in apis">
-											<td class="pointer w110px bg-teal" @click="locationHref" data-href="<?= base_url('/apis/edit/'); ?>" :data-project="<?= $project->project_id; ?>" :data-id="api.api_id">{{api.api_id}}</td>
+											<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/apis/edit/').$project->project_id; ?>/' + api.api_id)">{{api.api_id}}</td>
 											<td class="break-word">{{api.name}}</td>
 											<td class="break-word">{{api.description}}</td>
-											<td><span class="badge bg-maroon pointer" @click="locationHref" data-href="<?= base_url('/apis/edit/'); ?>" :data-project="<?= $project->project_id; ?>" :data-id="api.api_id">{{api.env_count}}</span></td>
+											<td><a class="badge bg-maroon pointer" :href="'<?= base_url('/apis/edit/').$project->project_id; ?>/' + api.api_id">{{api.env_count}}</span></td>
 											<td :title="api.created_ymd_his">{{api.created_ymd}}</td>
 										</tr>
 									</tbody>

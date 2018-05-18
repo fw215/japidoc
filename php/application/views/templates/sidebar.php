@@ -31,7 +31,7 @@
 							</li>
 <?php if(isset($project)): ?>
 							<li class="active bg-maroon">
-								<a href="#">
+								<a href="<?= base_url('/projects/edit/').$project->project_id; ?>">
 									<i class="fa fa-star" aria-hidden="true"></i> <?= $project->name; ?>
 								</a>
 							</li>

@@ -44,14 +44,10 @@ function showWarningBox() {
 * data属性のhrefとidでページ遷移します
 * @param {event} MouseEvent
 */
-function locationHref(t) {
-	var href = $(t.target).data('href');
-	var id = $(t.target).data('id');
-
-	var project = $(t.target).data('project');
-	if (project) {
-		window.location.href = href + project + '/' + id;
-	} else {
-		window.location.href = href + id;
+var locationHrefMixin = {
+	methods: {
+		locationHref: function (link) {
+			window.location.href = link;
+		}
 	}
-}
+};
