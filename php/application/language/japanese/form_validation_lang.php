@@ -41,3 +41,4 @@ $lang['form_validation_in_list']		= '{field}欄は{param}のいずれかでな�
 
 $lang['form_validation_min_byte']		= '{field}は{param}byte以上で入力してください';
 $lang['form_validation_max_byte']		= '{field}は{param}byte以下で入力してください';
+$lang['form_validation_is_json']		= '{field}はJSON形式で入力してください';

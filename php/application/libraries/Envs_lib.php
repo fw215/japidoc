@@ -54,7 +54,7 @@ class Envs_lib
 		$this->CI->validation->set_rules(
 			'body',
 			'lang:envs_body',
-			'trim|max_byte[65535]'
+			'trim|is_json|max_byte[65535]'
 		);
 		$this->CI->validation->set_rules(
 			'is_body',

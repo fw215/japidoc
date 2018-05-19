@@ -45,15 +45,35 @@ class Send extends CI_Controller
 				$curl->setHeader($header->name, $header->value);
 			}
 		}
+		$data = array();
+		if( $env->is_body == ENV_IS_BODY ){
+			if( $this->validation->is_json($env->body) ){
+				$data = json_decode($env->body);
+			}
+		}else{
+			if( $forms ){
+				foreach($forms as $form){
+					$data[ $form->name ] = $form->value;
+				}
+			}
+		}
 		switch( $env->method ){
 			case ENV_METHOD_GET:
 				$curl->get($env->url);
 				break;
 			case ENV_METHOD_POST:
-				$curl->post($env->url);
+				if( $data ){
+					$curl->post($env->url, $data);
+				}else{
+					$curl->post($env->url);
+				}
 				break;
 			case ENV_METHOD_PUT:
-				$curl->put($env->url);
+				if( $data ){
+					$curl->put($env->url, $data);
+				}else{
+					$curl->put($env->url);
+				}
 				break;
 			case ENV_METHOD_DELETE:
 				$curl->delete($env->url);

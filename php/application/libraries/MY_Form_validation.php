@@ -39,4 +39,16 @@ class MY_Form_validation extends CI_Form_validation
 
 		return ($val >= strlen($str));
 	}
+
+	/**
+	 * is_json
+	 *
+	 * JSON形式のチェック
+	 *
+	 * @param string $str
+	 */
+	protected function is_json($str)
+	{
+		return is_string($str) && is_array(json_decode($str, TRUE)) && (json_last_error() == JSON_ERROR_NONE) ? TRUE : FALSE;
+	}
 }

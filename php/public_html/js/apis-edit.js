@@ -113,6 +113,13 @@ new Vue({
 			}
 			return true;
 		},
+		isErrorBody: function () {
+			var self = this;
+			if (self.errors.body === null) {
+				return false;
+			}
+			return true;
+		},
 	},
 	methods: {
 		sendApi: function () {
