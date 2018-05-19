@@ -156,7 +156,7 @@
 								{{env.created_ymd_his}}
 							</div>
 						</div>
-						<div class="row form-group">
+						<div class="row form-group" v-if="env.env_id > 0">
 							<label class="col-sm-3 form-control-static"></label>
 							<div class="col-sm-9">
 								<button class="btn bg-purple" @click="sendApi" data-toggle="modal" data-target="#modal-result" v-if="!loading.sendAPI">

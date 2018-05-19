@@ -150,6 +150,7 @@ new Vue({
 					});
 				} else {
 					self.errors = res.data.errors;
+					$('#modal-result').modal('hide');
 				}
 				self.loading.registerENV = false;
 			}).catch(function (error) {

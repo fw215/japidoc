@@ -29,7 +29,7 @@ class Projects_lib
 		$this->CI->validation->set_rules(
 			'name',
 			'lang:projects_name',
-			'required|trim|max_byte[255]'
+			'required|trim|max_byte[255]|max_length[100]'
 		);
 		$this->CI->validation->set_rules(
 			'description',
