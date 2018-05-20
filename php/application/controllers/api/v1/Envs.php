@@ -55,6 +55,7 @@ class Envs extends MY_Controller
 		}
 		$env->headers = $this->Headers->search($search);
 		$env->forms = $this->Forms->search($search);
+		$env->benchmarks = $this->Benchmarks->search($search);
 		$env->is_body = (int)$env->is_body;
 		$this->_api['env'] = $env;
 
@@ -212,6 +213,7 @@ class Envs extends MY_Controller
 		}
 		$env->headers = array();
 		$env->forms = array();
+		$env->benchmarks = array();
 		$env->is_body = (int)$env->is_body;
 		$this->_api['env'] = $env;
 
@@ -229,8 +231,9 @@ class Envs extends MY_Controller
 		if( !$result ){
 			show_404();
 		}
-		$this->Forms->eliminate($env_id);
 		$this->Headers->eliminate($env_id);
+		$this->Forms->eliminate($env_id);
+		$this->Benchmarks->eliminate($env_id);
 
 		$this->json();
 	}

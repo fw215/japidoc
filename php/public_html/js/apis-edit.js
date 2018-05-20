@@ -2,6 +2,7 @@
 
 new Vue({
 	el: '#main-container',
+	mixins: [benchmarksMixin],
 	data: {
 		showBox: 'api',
 		env: {
@@ -17,6 +18,7 @@ new Vue({
 			forms: [],
 			body: '',
 			is_body: 0,
+			benchmarks: [],
 		},
 		envs: [],
 		api: {
@@ -513,6 +515,9 @@ new Vue({
 				forms: [],
 				body: null,
 				is_body: null,
+			};
+			self.benchmarkErrors = {
+				times: null,
 			};
 		}
 

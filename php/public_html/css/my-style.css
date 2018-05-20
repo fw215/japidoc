@@ -18,6 +18,9 @@
 	word-break: break-all;
 	white-space: pre-line;
 }
+.mb10px {
+	margin-bottom: 10px;
+}
 .mb20px {
 	margin-bottom: 20px;
 }

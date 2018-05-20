@@ -123,7 +123,7 @@
 								</button>
 							</label>
 							<div class="col-xs-12 col-sm-9">
-								<div v-if="env.is_body == <?= ENV_IS_BODY; ?>">
+								<div v-if="env.is_body == <?= ENV_IS_BODY; ?>" :class="{'has-error': isErrorBody}">
 									<textarea class="form-control" rows="5" v-model="env.body"></textarea>
 									<span class="help-block">{{errors.body}}</span>
 								</div>
@@ -154,6 +154,19 @@
 							<label class="col-sm-3 form-control-static"><?= lang('envs_created'); ?></label>
 							<div class="col-sm-9 form-control-static">
 								{{env.created_ymd_his}}
+							</div>
+						</div>
+						<div class="row form-group" v-if="env.env_id > 0">
+							<label class="col-sm-3 form-control-static"><?= lang('benchmarks_title'); ?></label>
+							<div class="col-sm-9">
+								<div class="btn-toolbar">
+									<button class="btn btn-sm bg-purple mb10px" v-for="benchmark in env.benchmarks" @click="getBenchmark(benchmark.benchmark_id)" data-toggle="modal" data-target="#modal-benchmark">
+										{{benchmark.times}}&ensp;<?= lang('benchmarks_times'); ?>
+									</button>
+									<button class="btn btn-sm bg-navy" data-toggle="modal" data-target="#modal-benchmark" @click="newBenchmark">
+										<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('benchmarks_add'); ?>
+									</button>
+								</div>
 							</div>
 						</div>
 						<div class="row form-group" v-if="env.env_id > 0">
@@ -332,6 +345,86 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal"><?= lang('app_close'); ?></button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal fade" id="modal-benchmark">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title"><?= lang('benchmarks_title'); ?></h4>
+							</div>
+							<div class="modal-body">
+								<div v-if="loading.getBENCHMARK">
+									<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+								</div>
+								<div v-else>
+									<div v-if="benchmark.benchmark_id > 0">
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('benchmarks_times'); ?></label>
+											<div class="col-sm-9">
+												<p class="form-control-static">{{benchmark.times}}</p>
+											</div>
+										</div>
+										<div v-show="benchmark.is_benchmarked">
+											<div class="row form-group">
+												<label class="col-sm-3 form-control-static"><?= lang('benchmarks_average'); ?></label>
+												<div class="col-sm-9 form-control-static">
+													{{benchmark.average}}
+												</div>
+											</div>
+											<div class="row form-group">
+												<label class="col-sm-3 form-control-static"><?= lang('benchmarks_shortest'); ?></label>
+												<div class="col-sm-9 form-control-static">
+													{{benchmark.shortest}}
+												</div>
+											</div>
+											<div class="row form-group">
+												<label class="col-sm-3 form-control-static"><?= lang('benchmarks_longest'); ?></label>
+												<div class="col-sm-9 form-control-static">
+													{{benchmark.longest}}
+												</div>
+											</div>
+										</div>
+										<div v-show="!benchmark.is_benchmarked">
+											<div class="row form-group">
+												<label class="col-sm-3 form-control-static"></label>
+												<div class="col-sm-9 form-control-static">
+													<?= lang('benchmarks_not_benchmarked'); ?>
+												</div>
+											</div>
+										</div>
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('benchmarks_modified'); ?></label>
+											<div class="col-sm-9 form-control-static">
+												{{benchmark.modified_ymd_his}}
+											</div>
+										</div>
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('benchmarks_created'); ?></label>
+											<div class="col-sm-9 form-control-static">
+												{{benchmark.created_ymd_his}}
+											</div>
+										</div>
+									</div>
+									<div v-else>
+										<div class="row form-group">
+											<label class="col-sm-3 form-control-static"><?= lang('benchmarks_times'); ?></label>
+											<div class="col-sm-9" :class="{'has-error': isErrorTimes}">
+												<input type="number" class="form-control" v-model="benchmark.times" min="1">
+												<span class="help-block">{{benchmarkErrors.times}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal"><?= lang('app_close'); ?></button>
+								<button type="button" class="btn bg-purple" @click="registerBENCHMARK" v-show="benchmark.benchmark_id == 0"><?= lang('app_add'); ?></button>
 							</div>
 						</div>
 					</div>

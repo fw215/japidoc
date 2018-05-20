@@ -70,6 +70,7 @@ $autoload['libraries'] = array(
 	'Envs_lib' => 'Envs_lib',
 	'Headers_lib' => 'Headers_lib',
 	'Forms_lib' => 'Forms_lib',
+	'Benchmarks_lib' => 'Benchmarks_lib',
 );
 
 /*
@@ -146,6 +147,7 @@ $autoload['language'] = array(
 	'my/envs',
 	'my/headers',
 	'my/forms',
+	'my/benchmarks',
 );
 
 /*
@@ -169,4 +171,5 @@ $autoload['model'] = array(
 	'Envs_model' => 'Envs',
 	'Headers_model' => 'Headers',
 	'Forms_model' => 'Forms',
+	'Benchmarks_model' => 'Benchmarks',
 );
