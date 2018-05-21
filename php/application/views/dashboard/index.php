@@ -13,28 +13,59 @@
 			</section>
 
 			<section class="content container-fluid">
+				<div class="callout callout-warning warning-box" v-cloak hidden>
+					<h4><i class="icon fa fa-warning"></i> Warning</h4>
+					<p><span v-for="warn in warning">{{warn}}<br></span></p>
+				</div>
+
 				<div class="box">
-					<div class="box-header with-border">
-						<div class="row">
-							<div class="col-xs-12">
-								<h1>Welcome to CodeIgniter!</h1>
-							</div>
-						</div>
-					</div>
 					<div class="box-body">
 						<div class="row">
 							<div class="col-xs-12">
+								<h3><?= lang('dashboard_benchmarks'); ?></h3>
 								<div class="box-body" v-cloak>
-									<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-									<p>If you would like to edit this page you'll find it located at:</p>
-									<code>application/views/welcome_message.php</code>
-
-									<p>The corresponding controller for this page is found at:</p>
-									<code>application/controllers/Welcome.php</code>
-
-									<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-									<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?= (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover">
+											<thead>
+												<tr class="success">
+													<th class="success"><?= lang('projects_id'); ?></th>
+													<th><?= lang('projects_name'); ?></th>
+													<th><?= lang('projects_description'); ?></th>
+													<th class="w90px"><?= lang('apis_title'); ?></th>
+													<th class="w90px"><?= lang('envs_title'); ?></th>
+													<th class="w90px"><?= lang('projects_created'); ?></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="project in projects">
+													<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/projects/edit/'); ?>' + project.project_id)">{{project.project_id}}</td>
+													<td class="break-word">{{project.name}}</td>
+													<td class="break-word">{{project.description}}</td>
+													<td>
+														<a :href="'<?= base_url('/apis/edit/'); ?>' + project.project_id + '/' + project.api_id">
+															<span class="badge bg-maroon">{{project.api_name}}</span>
+														</a>
+													</td>
+													<td>
+														<a :href="'<?= base_url('/apis/edit/'); ?>' + project.project_id + '/' + project.api_id">
+															<span class="badge bg-maroon">{{project.env_name}}</span>
+														</a>
+													</td>
+													<td :title="project.created_ymd_his">{{project.created_ymd}}</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr class="success">
+													<th><?= lang('projects_id'); ?></th>
+													<th><?= lang('projects_name'); ?></th>
+													<th><?= lang('projects_description'); ?></th>
+													<th class="w90px"><?= lang('apis_title'); ?></th>
+													<th class="w90px"><?= lang('envs_title'); ?></th>
+													<th class="w90px"><?= lang('projects_created'); ?></th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

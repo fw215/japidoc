@@ -12,6 +12,51 @@ class Benchmarks_model extends CI_Model
 	}
 
 	/**
+	 * recent
+	 *
+	 * 最近の一覧情報を取得
+	 *
+	 * @return object|bool
+	 */
+	public function recent()
+	{
+		$result = false;
+		try{
+			$select = array(
+				'benchmarks.benchmark_id',
+				'benchmarks.env_id',
+				'benchmarks.times',
+				'benchmarks.shortest',
+				'benchmarks.longest',
+				'benchmarks.average',
+				'DATE_FORMAT(benchmarks.created, "%Y/%m/%d") as created_ymd',
+				'DATE_FORMAT(benchmarks.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
+				'DATE_FORMAT(benchmarks.modified, "%Y/%m/%d") as modified_ymd',
+				'DATE_FORMAT(benchmarks.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'projects.project_id',
+				'projects.name',
+				'projects.description',
+				'apis.api_id AS api_id',
+				'apis.name AS api_name',
+				'envs.name AS env_name',
+			);
+			$this->db->select($select);
+
+			$this->db->join('envs', 'benchmarks.env_id = envs.env_id');
+			$this->db->join('apis', 'apis.api_id = envs.api_id');
+			$this->db->join('projects', 'projects.project_id = apis.project_id');
+			$this->db->order_by('benchmarks.modified', 'DESC');
+			$this->db->group_by('projects.project_id');
+			$this->db->limit(5);
+
+			$result = $this->db->get($this->_table)->result();
+		}catch(Exception $e){
+			log_message('error', $e->getMessage());
+		}
+		return $result;
+	}
+
+	/**
 	 * search
 	 *
 	 * 一覧情報を取得
