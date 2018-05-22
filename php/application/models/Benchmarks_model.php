@@ -46,7 +46,6 @@ class Benchmarks_model extends CI_Model
 			$this->db->join('apis', 'apis.api_id = envs.api_id');
 			$this->db->join('projects', 'projects.project_id = apis.project_id');
 			$this->db->order_by('benchmarks.modified', 'DESC');
-			$this->db->group_by('projects.project_id');
 			$this->db->limit(5);
 
 			$result = $this->db->get($this->_table)->result();
