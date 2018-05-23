@@ -15,6 +15,8 @@ php/application/logs/*
 php/!application/logs/index.html
 php/!application/logs/.htaccess
 php/vendor/
+php/application/tests/_ci_phpunit_test/*
+!php/application/tests/_ci_phpunit_test/.gitkeep
 
 #composer
 php/composer.phar

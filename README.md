@@ -10,6 +10,8 @@
             php composer.phar require --dev phpdocumentor/phpdocumentor
                 vendor/bin/phpdoc run -d application/ -t documents
             php composer.phar require php-curl-class/php-curl-class
+            php composer.phar require --dev phpunit/phpunit ^7.0
+            php composer.phar require --dev kenjis/ci-phpunit-test
 
 ## docker(コマンド)
     docker-compose down
@@ -22,3 +24,7 @@
     php development.php migrate current
     php development.php migrate rollback 0
     php development.php migrate latest
+
+## phpunit(ci-phpunit-test)
+    cd application/tests/
+    ../../vendor/bin/phpunit
