@@ -26,5 +26,4 @@
     php development.php migrate latest
 
 ## phpunit(ci-phpunit-test)
-    cd application/tests/
-    ../../vendor/bin/phpunit
+    vendor/bin/phpunit -c application/tests/

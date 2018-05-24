@@ -27,8 +27,33 @@ class Users_test extends TestCase
 	/**
 	 * @test
 	*/
-	// public function get()
-	// {
-	// 	$hoge = "";
-	// }
+	public function get()
+	{
+		$result = $this->CI->Users->get();
+		$this->assertNull($result);
+	}
+
+	/**
+	 * @test
+	*/
+	public function update()
+	{
+		$data = array();
+		$result = $this->CI->Users->update(0, $data);
+		$this->assertFalse($result);
+	}
+
+	/**
+	 * @test
+	*/
+	public function insert()
+	{
+		$data = array();
+		$result = $this->CI->Users->insert($data);
+		$this->assertFalse($result);
+
+		$data = array('password' => 'password');
+		$result = $this->CI->Users->insert($data);
+		$this->assertEquals(1, $result->user_id);
+	}
 }

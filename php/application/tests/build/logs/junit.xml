@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.485339">
-    <testsuite name="Users_test" file="/var/www/html/application/tests/models/Users_test.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.485339">
-      <testcase name="search" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="21" assertions="1" time="0.485339"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="4" assertions="5" errors="0" failures="0" skipped="0" time="1.952122">
+    <testsuite name="Users_test" file="/var/www/html/application/tests/models/Users_test.php" tests="4" assertions="5" errors="0" failures="0" skipped="0" time="1.952122">
+      <testcase name="search" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="21" assertions="1" time="0.472205"/>
+      <testcase name="get" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="30" assertions="1" time="0.452921"/>
+      <testcase name="update" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="39" assertions="1" time="0.488679"/>
+      <testcase name="insert" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="49" assertions="2" time="0.538317"/>
     </testsuite>
   </testsuite>
 </testsuites>

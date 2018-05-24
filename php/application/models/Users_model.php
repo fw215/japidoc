@@ -199,6 +199,9 @@ class Users_model extends CI_Model
 	{
 		$result = false;
 		try{
+			if( !isset($insert['password']) ){
+				return $result;
+			}
 			$insert['password'] = password_hash($insert['password'], PASSWORD_DEFAULT);
 			if( $this->db->insert($this->_table, $insert) ){
 				$conditions = array(
