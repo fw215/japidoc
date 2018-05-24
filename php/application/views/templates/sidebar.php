@@ -57,6 +57,25 @@
 <?php endif; ?>
 						</ul>
 					</li>
+					<li class="treeview <?php if(in_array($class, array('categories'))): ?>active<?php endif; ?>">
+						<a href="#"><i class="fa fa-star" aria-hidden="true"></i> <span><?= lang('app_aside_category'); ?></span>
+							<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu">
+							<li class="<?php if(in_array($class, array('categories')) && $method == 'index'): ?>active<?php endif; ?>">
+								<a href="<?= base_url('/categories'); ?>">
+									<?= lang('app_aside_index'); ?>
+								</a>
+							</li>
+							<li class="<?php if(in_array($class, array('categories')) && $method == 'edit'): ?>active<?php endif; ?>">
+								<a href="<?= base_url('/categories/edit'); ?>">
+									<?= lang('app_aside_edit'); ?>
+								</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</section>
 		</aside>
