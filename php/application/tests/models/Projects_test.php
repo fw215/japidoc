@@ -1,6 +1,6 @@
 <?php
 
-class Users_test extends TestCase
+class Projects_test extends TestCase
 {
 	public function setUp()
 	{
@@ -10,7 +10,7 @@ class Users_test extends TestCase
 		$this->CI->migration->version(0);
 		$this->CI->migration->latest();
 
-		$this->CI->load->model('Users_model', 'Users');
+		$this->CI->load->model('Projects_model', 'Projects');
 	}
 
 	/**
@@ -18,7 +18,7 @@ class Users_test extends TestCase
 	 */
 	public function search()
 	{
-		$result = $this->CI->Users->search();
+		$result = $this->CI->Projects->search();
 		$this->assertEmpty($result);
 	}
 
@@ -27,7 +27,7 @@ class Users_test extends TestCase
 	*/
 	public function get()
 	{
-		$result = $this->CI->Users->get();
+		$result = $this->CI->Projects->get();
 		$this->assertNull($result);
 	}
 
@@ -37,7 +37,7 @@ class Users_test extends TestCase
 	public function update()
 	{
 		$data = array();
-		$result = $this->CI->Users->update(0, $data);
+		$result = $this->CI->Projects->update(0, $data);
 		$this->assertFalse($result);
 	}
 
@@ -46,12 +46,8 @@ class Users_test extends TestCase
 	*/
 	public function insert()
 	{
-		$data = array();
-		$result = $this->CI->Users->insert($data);
-		$this->assertFalse($result);
-
-		$data = array('password' => 'password');
-		$result = $this->CI->Users->insert($data);
-		$this->assertEquals(1, $result->user_id);
+		$data = array('name' => 'name');
+		$result = $this->CI->Projects->insert($data);
+		$this->assertEquals('name', $result->name);
 	}
 }
