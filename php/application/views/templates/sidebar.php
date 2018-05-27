@@ -58,7 +58,7 @@
 						</ul>
 					</li>
 					<li class="treeview <?php if(in_array($class, array('categories'))): ?>active<?php endif; ?>">
-						<a href="#"><i class="fa fa-star" aria-hidden="true"></i> <span><?= lang('app_aside_category'); ?></span>
+						<a href="#"><i class="fa fa-tags" aria-hidden="true"></i> <span><?= lang('app_aside_category'); ?></span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>

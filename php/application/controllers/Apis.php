@@ -53,6 +53,8 @@ class Apis extends MY_Controller
 		$this->_data['project_id'] = $project_id;
 		$this->_data['api_id'] = $api_id;
 
+		$this->_data['categories'] = $this->Categories->search();
+
 		$this->set();
 	}
 }

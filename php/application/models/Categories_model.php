@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Envs_model extends CI_Model
+class Categories_model extends CI_Model
 {
 	protected $_table;
 
 	public function __construct() {
 		parent::__construct();
 
-		$this->_table = 'envs';
+		$this->_table = 'categories';
 	}
 
 	/**
@@ -25,33 +25,19 @@ class Envs_model extends CI_Model
 		$result = false;
 		try{
 			$select = array(
-				'envs.env_id',
-				'envs.api_id',
-				'envs.category_id',
-				'envs.method',
-				'envs.url',
-				'envs.body',
-				'envs.is_body',
-				'DATE_FORMAT(envs.created, "%Y/%m/%d") as created_ymd',
-				'DATE_FORMAT(envs.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
-				'DATE_FORMAT(envs.modified, "%Y/%m/%d") as modified_ymd',
-				'DATE_FORMAT(envs.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'categories.category_id',
+				'categories.name',
+				'categories.description',
+				'DATE_FORMAT(categories.created, "%Y/%m/%d") as created_ymd',
+				'DATE_FORMAT(categories.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
+				'DATE_FORMAT(categories.modified, "%Y/%m/%d") as modified_ymd',
+				'DATE_FORMAT(categories.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
 			);
 			$this->db->select($select);
 
 			if($search && is_array($search)){
 				foreach($search as $column => $value){
 					switch ($column) {
-						case 'api_id':
-							if( $this->validation->required($value) ){
-								$this->db->where('api_id', $value);
-							}
-							break;
-						case 'category_id':
-							if( $this->validation->required($value) ){
-								$this->db->where('category_id', $value);
-							}
-							break;
 						case 'page':
 							if( $isCount == false && $this->validation->required($value) ){
 								if($value > 0){
@@ -66,7 +52,7 @@ class Envs_model extends CI_Model
 				}
 			}
 
-			$this->db->order_by('envs.category_id', 'ASC');
+			$this->db->order_by('categories.name', 'ASC');
 
 			if( $isCount === true ){
 				$result = $this->db->from($this->_table)->count_all_results();
@@ -92,25 +78,21 @@ class Envs_model extends CI_Model
 		$result = false;
 		try{
 			$select = array(
-				'envs.env_id',
-				'envs.api_id',
-				'envs.category_id',
-				'envs.method',
-				'envs.url',
-				'envs.body',
-				'envs.is_body',
-				'DATE_FORMAT(envs.created, "%Y/%m/%d") as created_ymd',
-				'DATE_FORMAT(envs.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
-				'DATE_FORMAT(envs.modified, "%Y/%m/%d") as modified_ymd',
-				'DATE_FORMAT(envs.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'categories.category_id',
+				'categories.name',
+				'categories.description',
+				'DATE_FORMAT(categories.created, "%Y/%m/%d") as created_ymd',
+				'DATE_FORMAT(categories.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
+				'DATE_FORMAT(categories.modified, "%Y/%m/%d") as modified_ymd',
+				'DATE_FORMAT(categories.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
 			);
 			$this->db->select($select);
 
 			if($search && is_array($search)){
 				foreach($search as $column => $value){
 					switch ($column) {
-						case 'env_id':
-							$this->db->where('env_id', $value);
+						case 'category_id':
+							$this->db->where('category_id', $value);
 							break;
 						default:
 							break;
@@ -130,19 +112,19 @@ class Envs_model extends CI_Model
 	 *
 	 * 1件更新
 	 *
-	 * @param int $env_id
+	 * @param int $category_id
 	 * @param array $update
 	 * @return object|bool
 	 */
-	public function update(int $env_id, array $update)
+	public function update(int $category_id, array $update)
 	{
 		$result = false;
 		try{
 			$conditions = array(
-				'env_id' => $env_id
+				'category_id' => $category_id
 			);
-			$env = $this->get($conditions);
-			if( !$env ){
+			$category = $this->get($conditions);
+			if( !$category ){
 				return false;
 			}
 
@@ -169,7 +151,7 @@ class Envs_model extends CI_Model
 		try{
 			if( $this->db->insert($this->_table, $insert) ){
 				$conditions = array(
-					'env_id' => $this->db->insert_id()
+					'category_id' => $this->db->insert_id()
 				);
 				$result = $this->get($conditions);
 			}
@@ -184,18 +166,18 @@ class Envs_model extends CI_Model
 	 *
 	 * 1件削除
 	 *
-	 * @param int $env_id
+	 * @param int $category_id
 	 * @return bool
 	 */
-	public function delete(int $env_id)
+	public function delete(int $category_id)
 	{
 		$result = false;
 		try{
 			$conditions = array(
-				'env_id' => $env_id
+				'category_id' => $category_id
 			);
-			$env = $this->get($conditions);
-			if( !$env ){
+			$category = $this->get($conditions);
+			if( !$category ){
 				return false;
 			}
 

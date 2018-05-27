@@ -62,17 +62,14 @@
 							</div>
 						</div>
 						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_name'); ?><?= lang('app_required'); ?></label>
-							<div class="col-sm-9" :class="{'has-error': isErrorName}">
-								<input type="text" class="form-control" v-model="env.name">
-								<span class="help-block">{{errors.name}}</span>
-							</div>
-						</div>
-						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_description'); ?></label>
-							<div class="col-sm-9">
-								<textarea class="form-control" rows="5" v-model="env.description"></textarea>
-								<span class="help-block">{{errors.description}}</span>
+							<label class="col-sm-3 form-control-static"><?= lang('envs_category'); ?><?= lang('app_required'); ?></label>
+							<div class="col-sm-9" :class="{'has-error': isErrorCategory}">
+								<select class="form-control" v-model="env.category_id">
+<?php foreach($categories as $category): ?>
+									<option value="<?= $category->category_id; ?>"><?= $category->name; ?></option>
+<?php endforeach; ?>
+								</select>
+								<span class="help-block">{{errors.category_id}}</span>
 							</div>
 						</div>
 						<div class="row form-group">

@@ -71,8 +71,7 @@ class Envs extends MY_Controller
 	{
 		$update = array(
 			'api_id' => isset($this->_stream['api_id']) ? $this->space_trim($this->_stream['api_id']) : NULL,
-			'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
-			'description' => isset($this->_stream['description']) ? $this->space_trim($this->_stream['description']) : NULL,
+			'category_id' => isset($this->_stream['category_id']) ? $this->space_trim($this->_stream['category_id']) : NULL,
 			'method' => isset($this->_stream['method']) ? $this->space_trim($this->_stream['method']) : NULL,
 			'url' => isset($this->_stream['url']) ? $this->space_trim($this->_stream['url']) : NULL,
 			'body' => isset($this->_stream['body']) ? $this->space_trim($this->_stream['body']) : NULL,
@@ -120,8 +119,7 @@ class Envs extends MY_Controller
 		}
 		if( $errors ){
 			$errors['api_id'] = isset($errors['api_id']) ? $errors['api_id'] : NULL;
-			$errors['name'] = isset($errors['name']) ? $errors['name'] : NULL;
-			$errors['description'] = isset($errors['description']) ? $errors['description'] : NULL;
+			$errors['category_id'] = isset($errors['category_id']) ? $errors['category_id'] : NULL;
 			$errors['method'] = isset($errors['method']) ? $errors['method'] : NULL;
 			$errors['url'] = isset($errors['url']) ? $errors['url'] : NULL;
 			$errors['body'] = isset($errors['body']) ? $errors['body'] : NULL;
@@ -195,8 +193,7 @@ class Envs extends MY_Controller
 	{
 		$insert = array(
 			'api_id' => isset($this->_stream['api_id']) ? $this->space_trim($this->_stream['api_id']) : NULL,
-			'name' => isset($this->_stream['name']) ? $this->space_trim($this->_stream['name']) : NULL,
-			'description' => isset($this->_stream['description']) ? $this->space_trim($this->_stream['description']) : NULL,
+			'category_id' => isset($this->_stream['category_id']) ? $this->space_trim($this->_stream['category_id']) : NULL,
 			'method' => isset($this->_stream['method']) ? $this->space_trim($this->_stream['method']) : NULL,
 			'url' => isset($this->_stream['url']) ? $this->space_trim($this->_stream['url']) : NULL,
 		);

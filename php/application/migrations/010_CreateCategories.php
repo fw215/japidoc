@@ -35,6 +35,9 @@ class Migration_CreateCategories extends CI_Migration
 
 		$this->dbforge->add_key('category_id', TRUE);
 		$this->dbforge->create_table('categories');
+
+		$sql = "INSERT INTO `categories` (`name`, `description`) VALUES ('本番環境', '');";
+		$this->db->query($sql);
 	}
 
 	/**

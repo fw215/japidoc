@@ -71,6 +71,7 @@ $autoload['libraries'] = array(
 	'Headers_lib' => 'Headers_lib',
 	'Forms_lib' => 'Forms_lib',
 	'Benchmarks_lib' => 'Benchmarks_lib',
+	'Categories_lib' => 'Categories_lib',
 );
 
 /*
@@ -148,6 +149,7 @@ $autoload['language'] = array(
 	'my/headers',
 	'my/forms',
 	'my/benchmarks',
+	'my/categories',
 );
 
 /*
@@ -172,4 +174,5 @@ $autoload['model'] = array(
 	'Headers_model' => 'Headers',
 	'Forms_model' => 'Forms',
 	'Benchmarks_model' => 'Benchmarks',
+	'Categories_model' => 'Categories',
 );

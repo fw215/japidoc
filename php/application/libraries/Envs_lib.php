@@ -32,14 +32,9 @@ class Envs_lib
 			'required|trim'
 		);
 		$this->CI->validation->set_rules(
-			'name',
-			'lang:envs_name',
-			'required|trim|max_byte[255]|max_length[100]'
-		);
-		$this->CI->validation->set_rules(
-			'description',
-			'lang:envs_description',
-			'trim|max_byte[65535]'
+			'category_id',
+			'lang:categories_title',
+			'required|trim'
 		);
 		$this->CI->validation->set_rules(
 			'method',
@@ -63,8 +58,7 @@ class Envs_lib
 		);
 		if( !$this->CI->validation->run() ){
 			$result['api_id'] = !empty($this->CI->validation->error('api_id')) ? $this->CI->validation->error('api_id') : NULL;
-			$result['name'] = !empty($this->CI->validation->error('name')) ? $this->CI->validation->error('name') : NULL;
-			$result['description'] = !empty($this->CI->validation->error('description')) ? $this->CI->validation->error('description') : NULL;
+			$result['category_id'] = !empty($this->CI->validation->error('category_id')) ? $this->CI->validation->error('category_id') : NULL;
 			$result['method'] = !empty($this->CI->validation->error('method')) ? $this->CI->validation->error('method') : NULL;
 			$result['url'] = !empty($this->CI->validation->error('url')) ? $this->CI->validation->error('url') : NULL;
 			$result['body'] = !empty($this->CI->validation->error('body')) ? $this->CI->validation->error('body') : NULL;
@@ -75,6 +69,13 @@ class Envs_lib
 			$api_validation = $this->api_validation($data);
 			if( isset($api_validation) ){
 				$result['api_id'] = $api_validation;
+			}
+		}
+		/* 追加バリデーション */
+		if( !isset($result['category_id']) ){
+			$category_validation = $this->api_validation($data);
+			if( isset($category_validation) ){
+				$result['category_id'] = $category_validation;
 			}
 		}
 
@@ -97,6 +98,26 @@ class Envs_lib
 		);
 		if( !$this->CI->Apis->get($search) ){
 			return lang('envs_api_not_exist');
+		}
+		return NULL;
+	}
+
+	/**
+	 * category_validation
+	 *
+	 * カテゴリのチェック
+	 *
+	 * @param array $data
+	 * @return string|null
+	 */
+	public function category_validation(array $data){
+		/* プロジェクトが存在しているかチェック */
+		$category_id = isset($data['category_id']) ? $data['category_id'] : 0;
+		$search = array(
+			'category_id' => $category_id,
+		);
+		if( !$this->CI->Categories->get($search) ){
+			return lang('envs_category_not_exist');
 		}
 		return NULL;
 	}

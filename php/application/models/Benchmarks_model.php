@@ -38,7 +38,7 @@ class Benchmarks_model extends CI_Model
 				'projects.description',
 				'apis.api_id AS api_id',
 				'apis.name AS api_name',
-				'envs.name AS env_name',
+				// 'envs.name AS env_name',
 			);
 			$this->db->select($select);
 

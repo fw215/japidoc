@@ -8,8 +8,7 @@ new Vue({
 		env: {
 			api_id: 0,
 			env_id: 0,
-			name: '',
-			description: '',
+			category_id: 1,
 			method: 0,
 			url: '',
 			body: '',
@@ -31,6 +30,7 @@ new Vue({
 			getENV: false,
 			registerENV: false,
 			deleteENV: false,
+			getCATEGORY: false,
 			getAPI: false,
 			registerAPI: false,
 			deleteAPI: false,
@@ -39,6 +39,7 @@ new Vue({
 		errors: {
 			name: null,
 			description: null,
+			category_id: null,
 			method: null,
 			url: null,
 			headers: [],
@@ -97,6 +98,13 @@ new Vue({
 		isErrorDescription: function () {
 			var self = this;
 			if (self.errors.description === null) {
+				return false;
+			}
+			return true;
+		},
+		isErrorCategory: function () {
+			var self = this;
+			if (self.errors.category_id === null) {
 				return false;
 			}
 			return true;
@@ -283,8 +291,7 @@ new Vue({
 			self.env = {
 				api_id: self.api.api_id,
 				env_id: 0,
-				name: '',
-				description: '',
+				category_id: 1,
 				method: 0,
 				url: '',
 			};
@@ -352,8 +359,7 @@ new Vue({
 					self.env = {
 						api_id: self.api.api_id,
 						env_id: 0,
-						name: '',
-						description: '',
+						category_id: 1,
 						method: 0,
 						url: '',
 					};
@@ -509,6 +515,7 @@ new Vue({
 			self.errors = {
 				name: null,
 				description: null,
+				category_id: null,
 				method: null,
 				url: null,
 				headers: [],

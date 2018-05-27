@@ -22,16 +22,10 @@ class Migration_CreateEnvs extends CI_Migration
 				'unsigned'       => TRUE,
 				'comment'        => 'ApiID'
 			),
-			'name' => array(
-				'type'           => 'varchar',
-				'constraint'     => '255',
-				'null'           => FALSE,
-				'comment'        => '名称'
-			),
-			'description' => array(
-				'type'           => 'text',
-				'null'           => FALSE,
-				'comment'        => '説明'
+			'category_id' => array(
+				'type'           => 'bigint',
+				'unsigned'       => TRUE,
+				'comment'        => 'カテゴリID'
 			),
 			'method' => array(
 				'type'           => 'int',
