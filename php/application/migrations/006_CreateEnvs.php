@@ -27,6 +27,11 @@ class Migration_CreateEnvs extends CI_Migration
 				'unsigned'       => TRUE,
 				'comment'        => 'カテゴリID'
 			),
+			'description' => array(
+				'type'           => 'text',
+				'null'           => FALSE,
+				'comment'        => '概要'
+			),
 			'method' => array(
 				'type'           => 'int',
 				'unsigned'       => TRUE,

@@ -31,7 +31,7 @@ class Migration_CreateApis extends CI_Migration
 			'description' => array(
 				'type'           => 'text',
 				'null'           => FALSE,
-				'comment'        => '説明'
+				'comment'        => '概要'
 			),
 		);
 		$this->dbforge->add_field($fields);

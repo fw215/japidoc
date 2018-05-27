@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $lang['envs_title'] = '環境';
 $lang['envs_id'] = 'ID';
 $lang['envs_category'] = 'カテゴリ';
+$lang['envs_description'] = '概要';
 $lang['envs_method'] = 'METHOD';
 $lang['envs_method_get'] = 'GET';
 $lang['envs_method_post'] = 'POST';

@@ -44,7 +44,6 @@
 										<tr class="success">
 											<th class="success"><?= lang('categories_id'); ?></th>
 											<th><?= lang('categories_name'); ?></th>
-											<th><?= lang('categories_description'); ?></th>
 											<th class="w90px"><?= lang('categories_created'); ?></th>
 										</tr>
 									</thead>
@@ -52,7 +51,6 @@
 										<tr v-for="category in categories">
 											<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/categories/edit/'); ?>' + category.category_id)">{{category.category_id}}</td>
 											<td class="break-word">{{category.name}}</td>
-											<td class="break-word">{{category.description}}</td>
 											<td :title="category.created_ymd_his">{{category.created_ymd}}</td>
 										</tr>
 									</tbody>
@@ -60,7 +58,6 @@
 										<tr class="success">
 											<th><?= lang('categories_id'); ?></th>
 											<th><?= lang('categories_name'); ?></th>
-											<th><?= lang('categories_description'); ?></th>
 											<th class="w90px"><?= lang('categories_created'); ?></th>
 										</tr>
 									</tfoot>

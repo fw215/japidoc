@@ -28,6 +28,7 @@ class Envs_model extends CI_Model
 				'envs.env_id',
 				'envs.api_id',
 				'envs.category_id',
+				'envs.description',
 				'envs.method',
 				'envs.url',
 				'envs.body',
@@ -36,6 +37,7 @@ class Envs_model extends CI_Model
 				'DATE_FORMAT(envs.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(envs.modified, "%Y/%m/%d") as modified_ymd',
 				'DATE_FORMAT(envs.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+				'categories.name AS category_name'
 			);
 			$this->db->select($select);
 
@@ -66,6 +68,7 @@ class Envs_model extends CI_Model
 				}
 			}
 
+			$this->db->join('categories', 'envs.category_id = categories.category_id');
 			$this->db->order_by('envs.category_id', 'ASC');
 
 			if( $isCount === true ){
@@ -95,6 +98,7 @@ class Envs_model extends CI_Model
 				'envs.env_id',
 				'envs.api_id',
 				'envs.category_id',
+				'envs.description',
 				'envs.method',
 				'envs.url',
 				'envs.body',

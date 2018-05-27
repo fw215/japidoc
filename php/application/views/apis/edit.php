@@ -42,7 +42,7 @@
 						<div class="row form-group">
 							<div class="col-xs-12">
 								<div class="btn-toolbar">
-									<button class="btn" :class="{'bg-teal': isEnv(env.env_id), 'btn-default': !isEnv(env.env_id)}" v-for="env in envs" @click="getEnv(env.env_id)">{{env.name}}</button>
+									<button class="btn" :class="{'bg-teal': isEnv(env.env_id), 'btn-default': !isEnv(env.env_id)}" v-for="env in envs" @click="getEnv(env.env_id)">{{env.category_name}}</button>
 								</div>
 							</div>
 						</div>
@@ -61,7 +61,7 @@
 								<span v-else>#</span>
 							</div>
 						</div>
-						<div class="row form-group">
+						<div class="row form-group" v-if="env.env_id == 0">
 							<label class="col-sm-3 form-control-static"><?= lang('envs_category'); ?><?= lang('app_required'); ?></label>
 							<div class="col-sm-9" :class="{'has-error': isErrorCategory}">
 								<select class="form-control" v-model="env.category_id">
@@ -70,6 +70,13 @@
 <?php endforeach; ?>
 								</select>
 								<span class="help-block">{{errors.category_id}}</span>
+							</div>
+						</div>
+						<div class="row form-group">
+							<label class="col-sm-3 form-control-static"><?= lang('envs_description'); ?></label>
+							<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
+								<textarea class="form-control" rows="5" v-model="env.description"></textarea>
+								<span class="help-block">{{errors.description}}</span>
 							</div>
 						</div>
 						<div class="row form-group">
