@@ -23,7 +23,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h3><?= lang('dashboard_benchmarks'); ?></h3>
-								<div class="table-responsive">
+								<div class="table-responsive" v-if="projects.length > 0">
 									<table class="table table-bordered table-hover">
 										<thead>
 											<tr class="success">
@@ -64,6 +64,9 @@
 											</tr>
 										</tfoot>
 									</table>
+								</div>
+								<div v-else>
+									<p class="form-control-static"><?= lang('benchmarks_not_exist'); ?></p>
 								</div>
 							</div>
 						</div>
