@@ -9,6 +9,15 @@
 	opacity: 0;
 }
 
+.vue-notifyjs .alert {
+	z-index: 2000;
+}
+.vue-notifyjs .alert[data-notify="container"] {
+	max-width: 350px;
+	min-width: 200px;
+	width: auto;
+}
+
 .pointer {
 	cursor: pointer;
 }

@@ -53,6 +53,8 @@ var locationHrefMixin = {
 	}
 };
 
+Vue.use(vueNotifyjs);
+
 /**
  * Benchmarks
  */

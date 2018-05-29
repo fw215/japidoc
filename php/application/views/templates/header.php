@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/AdminLTE.min.css?v=2.4.2"/>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.2/css/skins/skin-purple.min.css?v=2.4.2"/>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/all.css?v=1.0.2"/>
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/vue-notifyjs@0.4.2/themes/default.css?v=0.4.2"/>
 	<link rel="stylesheet" type="text/css" href="<?= base_url('/'); ?>css/my-style.css?v=<?= get_file_info(FCPATH.'css'.DS.'my-style.css')['date']; ?>"/>
 
 	<!--[if lt IE 9]>
@@ -45,5 +46,6 @@
 				</div>
 			</nav>
 		</header>
+		<notifications></notifications>
 
 <?php endif; ?>

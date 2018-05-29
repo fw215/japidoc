@@ -19,6 +19,13 @@ new Vue({
 	created: function () {
 		var self = this;
 		self.getCategories();
+		this.$notify({
+			message: 'Welcome ',
+			horizontalAlign: 'right',
+			verticalAlign: 'bottom',
+			type: "success",
+			timeout: 20000,
+		})
 	},
 	computed: {
 	},
