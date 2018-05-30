@@ -142,6 +142,5 @@ new Vue({
 				description: null
 			};
 		}
-
 	}
 });

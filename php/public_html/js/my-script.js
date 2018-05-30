@@ -54,6 +54,29 @@ var locationHrefMixin = {
 };
 
 Vue.use(vueNotifyjs);
+var notificationMixin = {
+	data() {
+		return {
+			notifies: ''
+		}
+	},
+	methods: {
+		notification: function (type) {
+			var self = this;
+			self.$notify({
+				message: self.notifies,
+				horizontalAlign: 'right',
+				verticalAlign: 'bottom',
+				type: type,
+				timeout: 1000,
+			})
+		},
+		resetNotify: function () {
+			var self = this;
+			self.notifies = '';
+		}
+	}
+};
 
 /**
  * Benchmarks

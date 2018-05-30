@@ -2,7 +2,7 @@
 
 new Vue({
 	el: '#main-container',
-	mixins: [locationHrefMixin],
+	mixins: [notificationMixin, locationHrefMixin],
 	data: {
 		category: {},
 		categories: [],
@@ -19,13 +19,6 @@ new Vue({
 	created: function () {
 		var self = this;
 		self.getCategories();
-		this.$notify({
-			message: 'Welcome ',
-			horizontalAlign: 'right',
-			verticalAlign: 'bottom',
-			type: "success",
-			timeout: 20000,
-		})
 	},
 	computed: {
 	},
@@ -43,6 +36,7 @@ new Vue({
 		},
 		getCategories: function () {
 			var self = this;
+			self.resetNotify();
 			self.loading.search = true;
 			axios.get(
 				base_url + "api/v1/categories/search", {
@@ -60,8 +54,8 @@ new Vue({
 				self.loading.search = false;
 			}).catch(function (error) {
 				self.loading.search = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 	}
