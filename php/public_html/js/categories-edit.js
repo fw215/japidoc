@@ -2,7 +2,7 @@
 
 new Vue({
 	el: '#main-container',
-	mixins: [locationHrefMixin],
+	mixins: [notificationMixin, locationHrefMixin],
 	data: {
 		category: {
 			category_id: 0,
@@ -17,8 +17,6 @@ new Vue({
 			name: null,
 			description: null
 		},
-		warning: [],
-		successful: [],
 		isDangerBox: false
 	},
 	created: function () {
@@ -31,6 +29,7 @@ new Vue({
 	computed: {
 		isErrorName: function () {
 			var self = this;
+			console.log(self.errors);
 			if (self.errors.name === null) {
 				return false;
 			}
@@ -56,16 +55,16 @@ new Vue({
 				).then(function (res) {
 					if (res.data.code == 200) {
 						self.category = res.data.category;
-						self.successful.push('更新しました');
-						showSuccessBox();
+						self.notifies = '更新しました';
+						self.notification('success');
 					} else {
 						self.errors = res.data.errors;
 					}
 					self.loading.register = false;
 				}).catch(function (error) {
 					self.loading.register = false;
-					self.warning.push('更新に失敗しました');
-					showWarningBox();
+					self.notifies = '更新に失敗しました';
+					self.notification('warning');
 				});
 			} else {
 				axios.post(
@@ -74,17 +73,16 @@ new Vue({
 				).then(function (res) {
 					if (res.data.code == 200) {
 						self.category = res.data.category;
-						// window.location.href = base_url + "categories/edit/" + self.category.category_id;
-						self.successful.push('登録しました');
-						showSuccessBox();
+						self.notifies = '登録しました';
+						self.notification('success');
 					} else {
 						self.errors = res.data.errors;
 					}
 					self.loading.register = false;
 				}).catch(function (error) {
 					self.loading.register = false;
-					self.warning.push('登録に失敗しました');
-					showWarningBox();
+					self.notifies = '登録に失敗しました';
+					self.notification('warning');
 				});
 			}
 		},
@@ -102,16 +100,16 @@ new Vue({
 						name: '',
 						description: '',
 					};
-					self.successful.push('削除しました');
-					showSuccessBox();
+					self.notifies = '削除しました';
+					self.notification('success');
 				} else {
 					self.errors = res.data.errors;
 				}
 				self.loading.delete = false;
 			}).catch(function (error) {
 				self.loading.delete = false;
-				self.warning.push('削除に失敗しました');
-				showWarningBox();
+				self.notifies = '削除に失敗しました';
+				self.notification('warning');
 			});
 		},
 		getCategory: function (category_id) {
@@ -129,14 +127,12 @@ new Vue({
 				self.loading.get = false;
 			}).catch(function (error) {
 				self.loading.get = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 		reset: function () {
 			var self = this;
-			self.warning = [];
-			self.successful = [];
 			self.errors = {
 				name: null,
 				description: null

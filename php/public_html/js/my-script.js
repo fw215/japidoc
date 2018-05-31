@@ -13,34 +13,6 @@ $(function () {
 var base_url = $('#base_url').val();
 
 /**
- * アニメーション付き成功表示
- */
-function showSuccessBox() {
-	$(".success-box").slideDown('normal', function () {
-		$(this).show();
-	});
-	setTimeout(function () {
-		$(".success-box").slideUp('normal', function () {
-			$(this).hide();
-		});
-	}, 2500);
-}
-
-/**
- * アニメーション付き警告表示
- */
-function showWarningBox() {
-	$(".warning-box").slideDown('normal', function () {
-		$(this).show();
-	});
-	setTimeout(function () {
-		$(".warning-box").slideUp('normal', function () {
-			$(this).hide();
-		});
-	}, 2500);
-}
-
-/**
  * ページ遷移
  *
  * @param {string} link
@@ -53,6 +25,9 @@ var locationHrefMixin = {
 	}
 };
 
+/**
+ * Notification
+ */
 Vue.use(vueNotifyjs);
 var notificationMixin = {
 	data() {
@@ -68,7 +43,7 @@ var notificationMixin = {
 				horizontalAlign: 'right',
 				verticalAlign: 'bottom',
 				type: type,
-				timeout: 1000,
+				timeout: 1500,
 			})
 		},
 		resetNotify: function () {
@@ -82,6 +57,7 @@ var notificationMixin = {
  * Benchmarks
  */
 var benchmarksMixin = {
+	mixins: [notificationMixin],
 	data() {
 		return {
 			benchmark: {
@@ -123,8 +99,8 @@ var benchmarksMixin = {
 				self.loading.getBENCHMARK = false;
 			}).catch(function (error) {
 				self.loading.getBENCHMARK = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 		registerBENCHMARK: function () {
@@ -144,8 +120,8 @@ var benchmarksMixin = {
 					self.loading.registerBENCHMARK = false;
 				}).catch(function (error) {
 					self.loading.registerBENCHMARK = false;
-					self.warning.push('更新に失敗しました');
-					showWarningBox();
+					self.notifies = '更新に失敗しました';
+					self.notification('warning');
 				});
 			} else {
 				axios.post(
@@ -161,8 +137,8 @@ var benchmarksMixin = {
 					self.loading.registerBENCHMARK = false;
 				}).catch(function (error) {
 					self.loading.registerBENCHMARK = false;
-					self.warning.push('登録に失敗しました');
-					showWarningBox();
+					self.notifies = '登録に失敗しました';
+					self.notification('warning');
 				});
 			}
 		},

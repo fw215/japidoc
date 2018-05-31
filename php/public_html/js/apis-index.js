@@ -2,7 +2,7 @@
 
 new Vue({
 	el: '#main-container',
-	mixins: [locationHrefMixin],
+	mixins: [notificationMixin, locationHrefMixin],
 	data: {
 		api: {},
 		apis: [],
@@ -14,7 +14,6 @@ new Vue({
 		loading: {
 			search: false,
 		},
-		warning: [],
 		errors: {}
 	},
 	created: function () {
@@ -56,8 +55,8 @@ new Vue({
 				self.loading.search = false;
 			}).catch(function (error) {
 				self.loading.search = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 	}

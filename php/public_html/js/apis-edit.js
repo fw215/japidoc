@@ -2,7 +2,7 @@
 
 new Vue({
 	el: '#main-container',
-	mixins: [benchmarksMixin],
+	mixins: [notificationMixin, benchmarksMixin],
 	data: {
 		showBox: 'api',
 		env: {
@@ -54,8 +54,6 @@ new Vue({
 			response_headers: [],
 			response_body: '',
 		},
-		warning: [],
-		successful: [],
 		isDangerBox: false
 	},
 	created: function () {
@@ -148,8 +146,8 @@ new Vue({
 				if (res.data.code == 200) {
 					self.env = res.data.env;
 					self.getEnvs();
-					self.successful.push('更新しました');
-					showSuccessBox();
+					self.notifies = '更新しました';
+					self.notification('success');
 					self.loading.sendAPI = true;
 					axios.get(
 						base_url + "api/v1/send/env/" + self.env.env_id
@@ -157,13 +155,14 @@ new Vue({
 						if (res.data.code == 200) {
 							self.result = res.data.result;
 						} else {
-							self.warning.push('送信に失敗しました');
+							self.notifies = '送信に失敗しました';
+							self.notification('warning');
 						}
 						self.loading.sendAPI = false;
 					}).catch(function (error) {
 						self.loading.sendAPI = false;
-						self.warning.push('送信に失敗しました');
-						showWarningBox();
+						self.notifies = '送信に失敗しました';
+						self.notification('warning');
 					});
 				} else {
 					self.errors = res.data.errors;
@@ -172,8 +171,8 @@ new Vue({
 				self.loading.registerENV = false;
 			}).catch(function (error) {
 				self.loading.registerENV = false;
-				self.warning.push('更新に失敗しました');
-				showWarningBox();
+				self.notifies = '更新に失敗しました';
+				self.notification('warning');
 			});
 		},
 		changeBody: function () {
@@ -292,6 +291,7 @@ new Vue({
 				api_id: self.api.api_id,
 				env_id: 0,
 				category_id: 1,
+				description: '',
 				method: 0,
 				url: '',
 			};
@@ -313,16 +313,16 @@ new Vue({
 					if (res.data.code == 200) {
 						self.env = res.data.env;
 						self.getEnvs();
-						self.successful.push('更新しました');
-						showSuccessBox();
+						self.notifies = '更新しました';
+						self.notification('success');
 					} else {
 						self.errors = res.data.errors;
 					}
 					self.loading.registerENV = false;
 				}).catch(function (error) {
 					self.loading.registerENV = false;
-					self.warning.push('更新に失敗しました');
-					showWarningBox();
+					self.notifies = '更新に失敗しました';
+					self.notification('warning');
 				});
 			} else {
 				axios.post(
@@ -332,17 +332,16 @@ new Vue({
 					if (res.data.code == 200) {
 						self.env = res.data.env;
 						self.getEnvs();
-						// window.location.href = base_url + "projects/edit/" + self.project.project_id;
-						self.successful.push('登録しました');
-						showSuccessBox();
+						self.notifies = '登録しました';
+						self.notification('success');
 					} else {
 						self.errors = res.data.errors;
 					}
 					self.loading.registerENV = false;
 				}).catch(function (error) {
 					self.loading.registerENV = false;
-					self.warning.push('登録に失敗しました');
-					showWarningBox();
+					self.notifies = '登録に失敗しました';
+					self.notification('warning');
 				});
 			}
 		},
@@ -363,16 +362,16 @@ new Vue({
 						method: 0,
 						url: '',
 					};
-					self.successful.push('削除しました');
-					showSuccessBox();
+					self.notifies = '削除しました';
+					self.notification('success');
 				} else {
 					self.errors = res.data.errors;
 				}
 				self.loading.deleteENV = false;
 			}).catch(function (error) {
 				self.loading.deleteENV = false;
-				self.warning.push('削除に失敗しました');
-				showWarningBox();
+				self.notifies = '削除に失敗しました';
+				self.notification('warning');
 			});
 		},
 		getEnv: function (env_id) {
@@ -391,8 +390,8 @@ new Vue({
 				self.loading.getENV = false;
 			}).catch(function (error) {
 				self.loading.getENV = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 		getEnvs: function () {
@@ -414,8 +413,8 @@ new Vue({
 				self.loading.search = false;
 			}).catch(function (error) {
 				self.loading.search = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 		registerApi: function () {
@@ -429,16 +428,16 @@ new Vue({
 				).then(function (res) {
 					if (res.data.code == 200) {
 						self.api = res.data.api;
-						self.successful.push('更新しました');
-						showSuccessBox();
+						self.notifies = '更新しました';
+						self.notification('success');
 					} else {
 						self.errors = res.data.errors;
 					}
 					self.loading.registerAPI = false;
 				}).catch(function (error) {
 					self.loading.registerAPI = false;
-					self.warning.push('更新に失敗しました');
-					showWarningBox();
+					self.notifies = '更新に失敗しました';
+					self.notification('warning');
 				});
 			} else {
 				axios.post(
@@ -447,17 +446,16 @@ new Vue({
 				).then(function (res) {
 					if (res.data.code == 200) {
 						self.api = res.data.api;
-						// window.location.href = base_url + "projects/edit/" + self.project.project_id;
-						self.successful.push('登録しました');
-						showSuccessBox();
+						self.notifies = '登録しました';
+						self.notification('success');
 					} else {
 						self.errors = res.data.errors;
 					}
 					self.loading.registerAPI = false;
 				}).catch(function (error) {
 					self.loading.registerAPI = false;
-					self.warning.push('登録に失敗しました');
-					showWarningBox();
+					self.notifies = '登録に失敗しました';
+					self.notification('warning');
 				});
 			}
 		},
@@ -476,16 +474,16 @@ new Vue({
 						name: '',
 						description: '',
 					};
-					self.successful.push('削除しました');
-					showSuccessBox();
+					self.notifies = '削除しました';
+					self.notification('success');
 				} else {
 					self.errors = res.data.errors;
 				}
 				self.loading.deleteAPI = false;
 			}).catch(function (error) {
 				self.loading.deleteAPI = false;
-				self.warning.push('削除に失敗しました');
-				showWarningBox();
+				self.notifies = '削除に失敗しました';
+				self.notification('warning');
 			});
 		},
 		getApi: function (api_id) {
@@ -504,14 +502,12 @@ new Vue({
 				self.loading.getAPI = false;
 			}).catch(function (error) {
 				self.loading.getAPI = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 		reset: function () {
 			var self = this;
-			self.warning = [];
-			self.successful = [];
 			self.errors = {
 				name: null,
 				description: null,

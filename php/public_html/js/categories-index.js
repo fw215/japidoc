@@ -13,7 +13,6 @@ new Vue({
 		loading: {
 			search: false,
 		},
-		warning: [],
 		errors: {}
 	},
 	created: function () {

@@ -13,11 +13,6 @@
 			</section>
 
 			<section class="content container-fluid">
-				<div class="callout callout-warning warning-box" v-cloak hidden>
-					<h4><i class="icon fa fa-warning"></i> Warning</h4>
-					<p><span v-for="warn in warning">{{warn}}<br></span></p>
-				</div>
-
 				<div class="box">
 					<div class="box-body">
 						<div class="row">

@@ -2,13 +2,12 @@
 
 new Vue({
 	el: '#main-container',
-	mixins: [locationHrefMixin],
+	mixins: [notificationMixin, locationHrefMixin],
 	data: {
 		projects: [],
 		loading: {
 			recent: false,
 		},
-		warning: [],
 		errors: {}
 	},
 	created: function () {
@@ -28,8 +27,8 @@ new Vue({
 				self.loading.recent = false;
 			}).catch(function (error) {
 				self.loading.recent = false;
-				self.warning.push('取得に失敗しました');
-				showWarningBox();
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
 			});
 		},
 	}
