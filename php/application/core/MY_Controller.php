@@ -126,12 +126,14 @@ class MY_Controller extends CI_Controller
 		$token = $this->input->get_request_header(API_AUTH_HEADER, TRUE);
 		if( !$token ){
 			/* アクセスエラー */
+			header('HTTP/1.1 403 Forbidden.', TRUE, 403);
 			$this->_api['code'] = 403;
 			$this->json();
 		}
 		$auth = $this->AccessTokens->tryAutoLogin($token, ACCESS_TOKEN_API);
 		if( !$auth ){
 			/* 無効なトークン */
+			header('HTTP/1.1 400 Authentication Failed.', TRUE, 400);
 			$this->_api['code'] = 400;
 			$this->json();
 		}

@@ -39,7 +39,7 @@ class Envs_lib
 		$this->CI->validation->set_rules(
 			'description',
 			'lang:envs_description',
-			'required|trim|max_byte[65535]'
+			'trim|max_byte[65535]'
 		);
 		$this->CI->validation->set_rules(
 			'method',
