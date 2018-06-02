@@ -27,7 +27,7 @@
 							<div class="row form-group">
 								<label class="col-sm-3 form-control-static"><?= lang('categories_id'); ?></label>
 								<div class="col-sm-9 form-control-static">
-									<span v-if="category.categorie_id > 0">{{category.category_id}}</span>
+									<span v-if="category.category_id > 0">{{category.category_id}}</span>
 									<span v-else>#</span>
 								</div>
 							</div>
@@ -71,7 +71,7 @@
 					</div>
 				</div>
 
-				<div class="clearfix mb20px" v-cloak>
+				<div class="clearfix mb20px" v-if="category.category_id > 1" v-cloak>
 					<div class="pull-right">
 						<button class="btn btn-danger" @click="isDangerBox = !isDangerBox" v-if="category.category_id > 0">
 							<i class="fa fa-angle-right" v-if="!isDangerBox"></i>

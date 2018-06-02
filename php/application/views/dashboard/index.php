@@ -18,7 +18,7 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h3><?= lang('dashboard_benchmarks'); ?></h3>
-								<div class="table-responsive" v-if="projects.length > 0">
+								<div class="table-responsive" v-if="projects.length > 0" v-cloak>
 									<table class="table table-bordered table-hover">
 										<thead>
 											<tr class="success">

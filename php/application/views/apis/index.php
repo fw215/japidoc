@@ -33,7 +33,7 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<div v-if="apis.length > 0">
+						<div v-if="apis.length > 0" v-cloak>
 							<div class="w110px mb20px">
 								<select class="form-control input-sm" v-model="search.page">
 									<option :value="page" v-for="page in pages">{{page}} <?= lang('app_pages'); ?></option>

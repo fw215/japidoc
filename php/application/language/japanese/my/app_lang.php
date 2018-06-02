@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['app_title'] = 'Japidoc';
-$lang['app_title_mini'] = 'JAD';
+$lang['app_title'] = 'JApidoC-K';
+$lang['app_title_mini'] = 'JACK';
 
 $lang['app_required'] = '&ensp;<span class="label label-danger">必須</span>';
 $lang['app_not_exist'] = '検索結果が0件です';
