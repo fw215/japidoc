@@ -31,12 +31,17 @@ var locationHrefMixin = {
 Vue.use(VueChartJs);
 Vue.component('line-chart', {
 	extends: VueChartJs.Line,
+	mixins: [VueChartJs.mixins.reactiveProp],
+	data() {
+		return {
+			option: {
+				responsive: true,
+				maintainAspectRatio: false,
+				height: 200,
+			}
+		}
+	},
 	props: {
-		'chart-labels':
-			{
-				type: Array,
-				required: false
-			},
 		'chart-data':
 			{
 				type: Array,
@@ -45,16 +50,7 @@ Vue.component('line-chart', {
 	},
 	mounted() {
 		var self = this;
-		self.renderChart({
-			labels: self.chartLabels,
-			datasets: [
-				{
-					label: 'Data One',
-					backgroundColor: '#f87979',
-					data: self.chartData
-				}
-			]
-		}, { responsive: true, maintainAspectRatio: false });
+		self.renderChart(self.chartData, self.option);
 	}
 });
 

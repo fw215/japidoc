@@ -68,9 +68,12 @@
 											</tfoot>
 										</table>
 									</div>
-									{{chartLabels}}
-									{{chartData}}
-									<line-chart :height="200" :chart-labels="chartLabels" :chart-data="chartData"></line-chart>
+									<div v-if="loading.getBENCHMARK">
+										<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+									</div>
+									<div v-else>
+										<line-chart :height="300" :chart-data="datacollection"></line-chart>
+									</div>
 								</div>
 								<div v-else>
 									<p class="form-control-static"><?= lang('benchmarks_not_exist'); ?></p>

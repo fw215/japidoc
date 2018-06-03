@@ -5,10 +5,10 @@ new Vue({
 	mixins: [notificationMixin, locationHrefMixin],
 	data: {
 		benchmarks: [],
-		chartLabels: [12, 15],
-		chartData: [13, 16],
+		datacollection: null,
 		loading: {
 			recent: false,
+			getBENCHMARK: false,
 		},
 		errors: {}
 	},
@@ -33,11 +33,37 @@ new Vue({
 				self.notification('warning');
 			});
 		},
-		setData: function (benchmark) {
+		setData: function (bench) {
 			var self = this;
-			var result = JSON.parse(benchmark.results);
-			self.chartLabels = result.label;
-			self.chartData = result.data;
-		}
+			self.loading.getBENCHMARK = true;
+			axios.get(
+				base_url + "api/v1/envs/" + bench.env_id + "/benchmarks/" + bench.benchmark_id,
+			).then(function (res) {
+				if (res.data.code == 200) {
+					var benchmark = res.data.benchmark;
+					if (!benchmark.results) {
+						self.notifies = 'ベンチマーク実行中';
+						self.notification('warning');
+					} else {
+						var result = JSON.parse(benchmark.results);
+						self.datacollection = {
+							labels: result.label,
+							datasets: [
+								{
+									label: 'Data',
+									backgroundColor: '#f87979',
+									data: result.data
+								}
+							]
+						};
+					}
+				}
+				self.loading.getBENCHMARK = false;
+			}).catch(function (error) {
+				self.loading.getBENCHMARK = false;
+				self.notifies = '取得に失敗しました';
+				self.notification('warning');
+			});
+		},
 	}
 });
