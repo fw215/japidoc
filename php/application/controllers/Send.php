@@ -136,6 +136,7 @@ class Send extends CI_Controller
 		}
 
 		$bench = array();
+		$results = array();
 		switch( $env->method ){
 			case ENV_METHOD_GET:
 				for($time = 0; $time < $benchmark->times; $time++){
@@ -143,6 +144,8 @@ class Send extends CI_Controller
 					$curl->get($env->url);
 					$endTime = microtime(true);
 					$bench[] = $endTime - $startTime;
+					$results['label'][] = $time;
+					$results['data'][] = end($bench);
 				}
 				break;
 			case ENV_METHOD_POST:
@@ -155,6 +158,8 @@ class Send extends CI_Controller
 					}
 					$endTime = microtime(true);
 					$bench[] = $endTime - $startTime;
+					$results['label'][] = $time;
+					$results['data'][] = end($bench);
 				}
 				break;
 			case ENV_METHOD_PUT:
@@ -167,6 +172,8 @@ class Send extends CI_Controller
 					}
 					$endTime = microtime(true);
 					$bench[] = $endTime - $startTime;
+					$results['label'][] = $time;
+					$results['data'][] = end($bench);
 				}
 				break;
 			case ENV_METHOD_DELETE:
@@ -175,6 +182,8 @@ class Send extends CI_Controller
 					$curl->delete($env->url);
 					$endTime = microtime(true);
 					$bench[] = $endTime - $startTime;
+					$results['label'][] = $time;
+					$results['data'][] = end($bench);
 				}
 				break;
 		}
@@ -186,6 +195,7 @@ class Send extends CI_Controller
 			'longest' => $longest,
 			'shortest' => $shortest,
 			'average' => array_sum($bench) / count($bench),
+			'results' => json_encode($results),
 		);
 		$this->Benchmarks->update($benchmark_id, $update);
 	}

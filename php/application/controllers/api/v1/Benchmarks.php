@@ -20,7 +20,7 @@ class Benchmarks extends MY_Controller
 	 */
 	public function recent()
 	{
-		$this->_api['projects'] = $this->Benchmarks->recent();
+		$this->_api['benchmarks'] = $this->Benchmarks->recent();
 		$this->json();
 	}
 

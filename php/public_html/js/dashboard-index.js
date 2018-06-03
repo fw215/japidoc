@@ -4,7 +4,9 @@ new Vue({
 	el: '#main-container',
 	mixins: [notificationMixin, locationHrefMixin],
 	data: {
-		projects: [],
+		benchmarks: [],
+		chartLabels: [12, 15],
+		chartData: [13, 16],
 		loading: {
 			recent: false,
 		},
@@ -22,7 +24,7 @@ new Vue({
 				base_url + "api/v1/benchmarks/recent"
 			).then(function (res) {
 				if (res.data.code == 200) {
-					self.projects = res.data.projects;
+					self.benchmarks = res.data.benchmarks;
 				}
 				self.loading.recent = false;
 			}).catch(function (error) {
@@ -31,5 +33,11 @@ new Vue({
 				self.notification('warning');
 			});
 		},
+		setData: function (benchmark) {
+			var self = this;
+			var result = JSON.parse(benchmark.results);
+			self.chartLabels = result.label;
+			self.chartData = result.data;
+		}
 	}
 });

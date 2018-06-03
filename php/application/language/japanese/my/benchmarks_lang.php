@@ -14,3 +14,4 @@ $lang['benchmarks_env_not_exist'] = '存在しない環境です';
 $lang['benchmarks_not_exist'] = 'ベンチマークはまだ実行されていません';
 $lang['benchmarks_add'] = 'ベンチマークを追加';
 $lang['benchmarks_not_benchmarked'] = 'ベンチマーク実行中';
+$lang['benchmarks_chart'] = 'グラフ';

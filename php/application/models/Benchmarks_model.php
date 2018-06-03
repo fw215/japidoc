@@ -29,6 +29,7 @@ class Benchmarks_model extends CI_Model
 				'benchmarks.shortest',
 				'benchmarks.longest',
 				'benchmarks.average',
+				'benchmarks.results',
 				'DATE_FORMAT(benchmarks.created, "%Y/%m/%d") as created_ymd',
 				'DATE_FORMAT(benchmarks.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
 				'DATE_FORMAT(benchmarks.modified, "%Y/%m/%d") as modified_ymd',
@@ -38,11 +39,12 @@ class Benchmarks_model extends CI_Model
 				'projects.description',
 				'apis.api_id AS api_id',
 				'apis.name AS api_name',
-				// 'envs.name AS env_name',
+				'categories.name AS category_name',
 			);
 			$this->db->select($select);
 
 			$this->db->join('envs', 'benchmarks.env_id = envs.env_id');
+			$this->db->join('categories', 'categories.category_id = envs.category_id');
 			$this->db->join('apis', 'apis.api_id = envs.api_id');
 			$this->db->join('projects', 'projects.project_id = apis.project_id');
 			$this->db->order_by('benchmarks.modified', 'DESC');

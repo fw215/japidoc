@@ -18,47 +18,59 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<h3><?= lang('dashboard_benchmarks'); ?></h3>
-								<div class="table-responsive" v-if="projects.length > 0" v-cloak>
-									<table class="table table-bordered table-hover">
-										<thead>
-											<tr class="success">
-												<th class="success"><?= lang('projects_id'); ?></th>
-												<th><?= lang('projects_name'); ?></th>
-												<th><?= lang('projects_description'); ?></th>
-												<th class="w90px"><?= lang('apis_title'); ?></th>
-												<th class="w90px"><?= lang('envs_title'); ?></th>
-												<th class="w90px"><?= lang('projects_created'); ?></th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr v-for="project in projects">
-												<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/projects/edit/'); ?>' + project.project_id)">{{project.project_id}}</td>
-												<td class="break-word">{{project.name}}</td>
-												<td class="break-word">{{project.description}}</td>
-												<td>
-													<a :href="'<?= base_url('/apis/edit/'); ?>' + project.project_id + '/' + project.api_id">
-														<span class="badge bg-maroon">{{project.api_name}}</span>
-													</a>
-												</td>
-												<td>
-													<a :href="'<?= base_url('/apis/edit/'); ?>' + project.project_id + '/' + project.api_id">
-														<span class="badge bg-maroon">{{project.env_name}}</span>
-													</a>
-												</td>
-												<td :title="project.created_ymd_his">{{project.created_ymd}}</td>
-											</tr>
-										</tbody>
-										<tfoot>
-											<tr class="success">
-												<th><?= lang('projects_id'); ?></th>
-												<th><?= lang('projects_name'); ?></th>
-												<th><?= lang('projects_description'); ?></th>
-												<th class="w90px"><?= lang('apis_title'); ?></th>
-												<th class="w90px"><?= lang('envs_title'); ?></th>
-												<th class="w90px"><?= lang('projects_created'); ?></th>
-											</tr>
-										</tfoot>
-									</table>
+								<div v-if="benchmarks.length > 0" v-cloak>
+									<div class="table-responsive">
+										<table class="table table-bordered table-hover">
+											<thead>
+												<tr class="success">
+													<th class="success"><?= lang('projects_id'); ?></th>
+													<th><?= lang('projects_name'); ?></th>
+													<th><?= lang('projects_description'); ?></th>
+													<th class="w90px"><?= lang('benchmarks_chart'); ?></th>
+													<th><?= lang('apis_title'); ?></th>
+													<th><?= lang('envs_title'); ?></th>
+													<th class="w90px"><?= lang('projects_created'); ?></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="benchmark in benchmarks">
+													<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/projects/edit/'); ?>' + benchmark.project_id)">{{benchmark.project_id}}</td>
+													<td class="break-word">{{benchmark.name}}</td>
+													<td class="break-word">{{benchmark.description}}</td>
+													<td>
+														<button type="button" class="btn btn-xs bg-navy" @click="setData(benchmark)">
+															<i class="fa fa-line-chart" aria-hidden="true"></i>
+														</button>
+													</td>
+													<td>
+														<a :href="'<?= base_url('/apis/edit/'); ?>' + benchmark.project_id + '/' + benchmark.api_id">
+															<span class="badge bg-maroon">{{benchmark.api_name}}</span>
+														</a>
+													</td>
+													<td>
+														<a :href="'<?= base_url('/apis/edit/'); ?>' + benchmark.project_id + '/' + benchmark.api_id">
+															<span class="badge bg-maroon">{{benchmark.category_name}}</span>
+														</a>
+													</td>
+													<td :title="benchmark.created_ymd_his">{{benchmark.created_ymd}}</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr class="success">
+													<th><?= lang('projects_id'); ?></th>
+													<th><?= lang('projects_name'); ?></th>
+													<th><?= lang('projects_description'); ?></th>
+													<th class="w90px"><?= lang('benchmarks_chart'); ?></th>
+													<th><?= lang('apis_title'); ?></th>
+													<th><?= lang('envs_title'); ?></th>
+													<th class="w90px"><?= lang('projects_created'); ?></th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+									{{chartLabels}}
+									{{chartData}}
+									<line-chart :height="200" :chart-labels="chartLabels" :chart-data="chartData"></line-chart>
 								</div>
 								<div v-else>
 									<p class="form-control-static"><?= lang('benchmarks_not_exist'); ?></p>

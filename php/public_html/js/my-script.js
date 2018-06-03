@@ -26,6 +26,39 @@ var locationHrefMixin = {
 };
 
 /**
+ * ChartJS
+ */
+Vue.use(VueChartJs);
+Vue.component('line-chart', {
+	extends: VueChartJs.Line,
+	props: {
+		'chart-labels':
+			{
+				type: Array,
+				required: false
+			},
+		'chart-data':
+			{
+				type: Array,
+				required: false
+			},
+	},
+	mounted() {
+		var self = this;
+		self.renderChart({
+			labels: self.chartLabels,
+			datasets: [
+				{
+					label: 'Data One',
+					backgroundColor: '#f87979',
+					data: self.chartData
+				}
+			]
+		}, { responsive: true, maintainAspectRatio: false });
+	}
+});
+
+/**
  * Notification
  */
 Vue.use(vueNotifyjs);

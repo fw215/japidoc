@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['app_title'] = 'JApidoC-K';
+$lang['app_title'] = 'J-ApidoC-K';
 $lang['app_title_mini'] = 'JACK';
 
 $lang['app_required'] = '&ensp;<span class="label label-danger">必須</span>';

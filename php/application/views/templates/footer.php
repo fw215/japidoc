@@ -14,6 +14,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js?v=1.0.2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js?v=2.5.13"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js?v=0.18.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js?v=2.7.2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-chartjs/3.3.1/vue-chartjs.min.js?v=3.3.1"></script>
 <script src="https://unpkg.com/vue-notifyjs@0.4.2/dist/vue-notifyjs.min.js?v=0.4.2"></script>
 <script src="<?= base_url('/'); ?>js/my-script.js?v=<?= get_file_info(FCPATH.'js'.DS.'my-script.js')['date']; ?>"></script>
 <?php if( isset($api_token) ): ?>

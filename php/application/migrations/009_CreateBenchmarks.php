@@ -46,6 +46,11 @@ class Migration_CreateBenchmarks extends CI_Migration
 				'null'           => FALSE,
 				'comment'        => '平均'
 			),
+			'results' => array(
+				'type'           => 'text',
+				'null'           => FALSE,
+				'comment'        => '結果'
+			),
 		);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_field('created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "登録日時"');
