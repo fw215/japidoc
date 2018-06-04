@@ -54,7 +54,7 @@ class Login extends MY_Controller
 	 */
 	public function logout()
 	{
-		$this->AccessTokens->deleteToken($this->_data['api_token']->access_token);
+		$this->AccessTokens->deleteToken($this->_data['api_token']);
 		$this->_logout();
 	}
 }

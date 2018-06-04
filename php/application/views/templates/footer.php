@@ -20,7 +20,7 @@
 <script src="<?= base_url('/'); ?>js/my-script.js?v=<?= get_file_info(FCPATH.'js'.DS.'my-script.js')['date']; ?>"></script>
 <?php if( isset($api_token) ): ?>
 <script>
-	axios.defaults.headers.common['<?= API_AUTH_HEADER; ?>'] = '<?= $api_token->access_token; ?>';
+	axios.defaults.headers.common['<?= API_AUTH_HEADER; ?>'] = '<?= $api_token; ?>';
 </script>
 <?php endif; ?>
 <?php if( read_file(FCPATH.'js'.DS.$class.'-'.$method.'.js') !== FALSE ): ?>

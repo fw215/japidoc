@@ -44,15 +44,15 @@ class AccessTokens_model extends CI_Model
 	/**
 	 * fetchToken
 	 *
-	 * 自動ログインを試みる
+	 * 指定のトークンを取得
 	 *
 	 * @param int $user_id
 	 * @param int $type
-	 * @return object|bool
+	 * @return string|bool
 	 */
 	public function fetchToken(int $user_id, int $type)
 	{
-		$result = false;
+		$access_token = false;
 		try{
 			$select = array(
 				'access_tokens.access_token',
@@ -64,17 +64,20 @@ class AccessTokens_model extends CI_Model
 			);
 			$this->db->join('users', 'access_tokens.user_id = users.user_id');
 			$result = $this->db->select($select)->where($conditions)->get($this->_table)->row();
+			if( $result ){
+				$access_token = $result->access_token;
+			}
 		}catch(Exception $e){
 			log_message('error', $e->getMessage());
 			return false;
 		}
-		return $result;
+		return $access_token;
 	}
 
 	/**
 	 * generateToken
 	 *
-	 * ログイントークンを生成する
+	 * アクセストークンを生成する
 	 *
 	 * @param string $user_id
 	 * @param int $type
@@ -115,7 +118,7 @@ class AccessTokens_model extends CI_Model
 	/**
 	 * deleteToken
 	 *
-	 * ログイントークンを削除する
+	 * アクセストークンを削除する
 	 *
 	 * @param string $access_token
 	 * @return bool
