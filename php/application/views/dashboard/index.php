@@ -25,7 +25,8 @@
 												<tr class="success">
 													<th class="success"><?= lang('projects_id'); ?></th>
 													<th><?= lang('projects_name'); ?></th>
-													<th><?= lang('projects_description'); ?></th>
+													<th><?= lang('benchmarks_times'); ?></th>
+													<th><?= lang('benchmarks_average'); ?></th>
 													<th class="w90px"><?= lang('benchmarks_chart'); ?></th>
 													<th><?= lang('apis_title'); ?></th>
 													<th><?= lang('envs_title'); ?></th>
@@ -36,7 +37,8 @@
 												<tr v-for="benchmark in benchmarks">
 													<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/projects/edit/'); ?>' + benchmark.project_id)">{{benchmark.project_id}}</td>
 													<td class="break-word">{{benchmark.name}}</td>
-													<td class="break-word">{{benchmark.description}}</td>
+													<td>{{benchmark.times}}</td>
+													<td class="break-word">{{benchmark.average}}</td>
 													<td>
 														<button type="button" class="btn btn-xs bg-navy" @click="setData(benchmark)">
 															<i class="fa fa-line-chart" aria-hidden="true"></i>
@@ -59,7 +61,8 @@
 												<tr class="success">
 													<th><?= lang('projects_id'); ?></th>
 													<th><?= lang('projects_name'); ?></th>
-													<th><?= lang('projects_description'); ?></th>
+													<th><?= lang('benchmarks_times'); ?></th>
+													<th><?= lang('benchmarks_average'); ?></th>
 													<th class="w90px"><?= lang('benchmarks_chart'); ?></th>
 													<th><?= lang('apis_title'); ?></th>
 													<th><?= lang('envs_title'); ?></th>
