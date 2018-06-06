@@ -41,7 +41,7 @@
 													<td class="break-word">{{benchmark.average}}</td>
 													<td>
 														<button type="button" class="btn btn-xs bg-navy" @click="setData(benchmark)">
-															<i class="fa fa-line-chart" aria-hidden="true"></i>
+															<i class="fa fa-area-chart" aria-hidden="true"></i>
 														</button>
 													</td>
 													<td>

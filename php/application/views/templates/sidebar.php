@@ -54,6 +54,25 @@
 									</li>
 								</ul>
 							</li>
+							<li class="treeview <?php if(in_array($class, array('scenarios'))): ?>active<?php endif; ?>">
+								<a href="#"><i class="fa fa-rocket" aria-hidden="true"></i> <span><?= lang('app_aside_scenario'); ?></span>
+									<span class="pull-right-container">
+										<i class="fa fa-angle-left pull-right"></i>
+									</span>
+								</a>
+								<ul class="treeview-menu">
+									<li class="<?php if(in_array($class, array('scenarios')) && $method == 'index'): ?>active<?php endif; ?>">
+										<a href="<?= base_url('/scenarios/index/').$project->project_id; ?>">
+											<?= lang('app_aside_index'); ?>
+										</a>
+									</li>
+									<li class="<?php if(in_array($class, array('scenarios')) && $method == 'edit'): ?>active<?php endif; ?>">
+										<a href="<?= base_url('/scenarios/edit/').$project->project_id; ?>">
+											<?= lang('app_aside_edit'); ?>
+										</a>
+									</li>
+								</ul>
+							</li>
 <?php endif; ?>
 						</ul>
 					</li>

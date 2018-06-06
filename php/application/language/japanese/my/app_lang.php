@@ -22,6 +22,7 @@ $lang['app_aside_edit'] = '登録&ensp;&middot;&ensp;編集';
 $lang['app_aside_dashboard'] = 'ダッシュボード';
 $lang['app_aside_project'] = 'プロジェクト';
 $lang['app_aside_api'] = 'API';
+$lang['app_aside_scenario'] = 'シナリオ';
 $lang['app_aside_category'] = 'カテゴリ';
 
 // $lang['app_aside'] = array();

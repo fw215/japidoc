@@ -150,6 +150,7 @@ $autoload['language'] = array(
 	'my/forms',
 	'my/benchmarks',
 	'my/categories',
+	'my/scenarios',
 );
 
 /*
