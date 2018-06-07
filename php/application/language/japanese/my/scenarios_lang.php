@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['scenarios_title'] = 'シナリオ';
+$lang['scenarios_index'] = '一覧';
 $lang['scenarios_id'] = 'ID';
 $lang['scenarios_name'] = '名称';
 $lang['scenarios_value'] = '値';

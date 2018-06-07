@@ -176,4 +176,5 @@ $autoload['model'] = array(
 	'Forms_model' => 'Forms',
 	'Benchmarks_model' => 'Benchmarks',
 	'Categories_model' => 'Categories',
+	'Scenarios_model' => 'Scenarios',
 );
