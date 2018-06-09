@@ -458,6 +458,7 @@ $config['csrf_exclude_uris'] = array(
 	'api/v1/apis',
 	'api/v1/envs',
 	'api/v1/envs/[0-9]+/benchmarks',
+	'api/v1/scenarios',
 	'api/v1/categories',
 );
 

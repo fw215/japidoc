@@ -71,6 +71,11 @@ $route['api/v1/envs/(:num)']['DELETE'] = 'api/v1/envs/delete/$1';
 $route['api/v1/envs/(:num)/benchmarks']['POST'] = 'api/v1/benchmarks/post/$1';
 $route['api/v1/envs/(:num)/benchmarks/(:num)']['GET'] = 'api/v1/benchmarks/get/$1/$2';
 
+$route['api/v1/scenarios']['POST'] = 'api/v1/scenarios/post';
+$route['api/v1/scenarios/(:num)']['GET'] = 'api/v1/scenarios/get/$1';
+$route['api/v1/scenarios/(:num)']['PUT'] = 'api/v1/scenarios/put/$1';
+$route['api/v1/scenarios/(:num)']['DELETE'] = 'api/v1/scenarios/delete/$1';
+
 $route['api/v1/categories']['POST'] = 'api/v1/categories/post';
 $route['api/v1/categories/(:num)']['GET'] = 'api/v1/categories/get/$1';
 $route['api/v1/categories/(:num)']['PUT'] = 'api/v1/categories/put/$1';
