@@ -12,7 +12,7 @@
 							<i class="fa fa-tachometer" aria-hidden="true"></i> <span><?= lang('app_aside_dashboard'); ?></span>
 						</a>
 					</li>
-					<li class="treeview <?php if(in_array($class, array('projects','apis'))): ?>active<?php endif; ?>">
+					<li class="treeview <?php if(in_array($class, array('projects','apis','scenarios'))): ?>active<?php endif; ?>">
 						<a href="#"><i class="fa fa-star" aria-hidden="true"></i> <span><?= lang('app_aside_project'); ?></span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>

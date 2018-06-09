@@ -33,7 +33,7 @@
 						</div>
 					</div>
 					<div class="box-body">
-						<div v-if="apis.length > 0" v-cloak>
+						<div v-if="scenarios.length > 0" v-cloak>
 							<div class="w110px mb20px">
 								<select class="form-control input-sm" v-model="search.page">
 									<option :value="page" v-for="page in pages">{{page}} <?= lang('app_pages'); ?></option>
@@ -43,29 +43,29 @@
 								<table class="table table-bordered table-hover">
 									<thead>
 										<tr class="success">
-											<th class="success"><?= lang('apis_id'); ?></th>
-											<th><?= lang('apis_name'); ?></th>
-											<th><?= lang('apis_description'); ?></th>
+											<th class="success"><?= lang('scenarios_id'); ?></th>
+											<th><?= lang('scenarios_name'); ?></th>
+											<th><?= lang('scenarios_description'); ?></th>
 											<th class="w90px"><?= lang('envs_title'); ?></th>
-											<th class="w90px"><?= lang('apis_created'); ?></th>
+											<th class="w90px"><?= lang('scenarios_created'); ?></th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr v-for="api in apis">
-											<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/apis/edit/').$project->project_id; ?>/' + api.api_id)">{{api.api_id}}</td>
-											<td class="break-word">{{api.name}}</td>
-											<td class="break-word">{{api.description}}</td>
-											<td><a class="badge bg-maroon pointer" :href="'<?= base_url('/apis/edit/').$project->project_id; ?>/' + api.api_id">{{api.env_count}}</span></td>
-											<td :title="api.created_ymd_his">{{api.created_ymd}}</td>
+										<tr v-for="scenario in scenarios">
+											<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/scenarios/edit/').$project->project_id; ?>/' + scenario.scenario_id)">{{scenario.scenario_id}}</td>
+											<td class="break-word">{{scenario.name}}</td>
+											<td class="break-word">{{scenario.description}}</td>
+											<td><a class="badge bg-maroon pointer" :href="'<?= base_url('/scenarios/edit/').$project->project_id; ?>/' + scenario.scenario_id">{{scenario.env_count}}</span></td>
+											<td :title="scenario.created_ymd_his">{{scenario.created_ymd}}</td>
 										</tr>
 									</tbody>
 									<tfoot>
 										<tr class="success">
-											<th><?= lang('apis_id'); ?></th>
-											<th><?= lang('apis_name'); ?></th>
-											<th><?= lang('apis_description'); ?></th>
+											<th><?= lang('scenarios_id'); ?></th>
+											<th><?= lang('scenarios_name'); ?></th>
+											<th><?= lang('scenarios_description'); ?></th>
 											<th class="w90px"><?= lang('envs_title'); ?></th>
-											<th class="w90px"><?= lang('apis_created'); ?></th>
+											<th class="w90px"><?= lang('scenarios_created'); ?></th>
 										</tr>
 									</tfoot>
 								</table>
