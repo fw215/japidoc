@@ -53,6 +53,8 @@ class Scenarios extends MY_Controller
 		$this->_data['project_id'] = $project_id;
 		$this->_data['scenario_id'] = $scenario_id;
 
+		$this->_data['categories'] = $this->Categories->search();
+
 		$this->set();
 	}
 }
