@@ -39,7 +39,7 @@ class Migration_CreateScenarios extends CI_Migration
 		$this->dbforge->add_field('modified datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新日時"');
 
 		$this->dbforge->add_key('scenario_id', TRUE);
-		$this->dbforge->create_table('scenario_id');
+		$this->dbforge->create_table('scenarios');
 	}
 
 	/**

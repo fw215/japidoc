@@ -12,6 +12,63 @@ class Scenarios_model extends CI_Model
 	}
 
 	/**
+	 * search
+	 *
+	 * 一覧情報を取得
+	 *
+	 * @param array $search
+	 * @param bool $isCount
+	 * @return object|bool
+	 */
+	public function search($search=false, $isCount=false)
+	{
+		$result = false;
+		try{
+			$select = array(
+				'scenarios.scenario_id',
+				'scenarios.project_id',
+				'scenarios.name',
+				'scenarios.description',
+				'DATE_FORMAT(scenarios.created, "%Y/%m/%d") as created_ymd',
+				'DATE_FORMAT(scenarios.created, "%Y/%m/%d %H:%i:%S") as created_ymd_his',
+				'DATE_FORMAT(scenarios.modified, "%Y/%m/%d") as modified_ymd',
+				'DATE_FORMAT(scenarios.modified, "%Y/%m/%d %H:%i:%S") as modified_ymd_his',
+			);
+			$this->db->select($select);
+
+			if($search && is_array($search)){
+				foreach($search as $column => $value){
+					switch ($column) {
+						case 'project_id':
+							if( $this->validation->required($value) ){
+								$this->db->where('scenarios.project_id', $value);
+							}
+							break;
+						case 'page':
+							if( $isCount == false && $this->validation->required($value) ){
+								$offset = DEFAULT_PAGE_LIMIT * ($value - 1);
+								$this->db->limit(DEFAULT_PAGE_LIMIT, $offset);
+							}
+							break;
+						default:
+							break;
+					}
+				}
+			}
+			$this->db->order_by('scenarios.name', 'ASC');
+
+			if( $isCount === true ){
+				$result = $this->db->from($this->_table)->count_all_results();
+			}else{
+				$result = $this->db->get($this->_table)->result();
+			}
+		}catch(Exception $e){
+			log_message('error', $e->getMessage());
+		}
+		return $result;
+	}
+
+	/**
 	 * update
 	 *
 	 * 1件更新

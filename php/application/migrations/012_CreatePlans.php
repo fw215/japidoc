@@ -14,12 +14,12 @@ class Migration_CreatePlans extends CI_Migration
 			'plan_id' => array(
 				'type'           => 'bigint',
 				'unsigned'       => TRUE,
+				'auto_increment' => TRUE,
 				'comment'        => 'プランID'
 			),
 			'scenario_id' => array(
 				'type'           => 'bigint',
 				'unsigned'       => TRUE,
-				'auto_increment' => TRUE,
 				'comment'        => 'シナリオID'
 			),
 			'env_id' => array(
@@ -32,8 +32,8 @@ class Migration_CreatePlans extends CI_Migration
 		$this->dbforge->add_field('created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "登録日時"');
 		$this->dbforge->add_field('modified datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新日時"');
 
-		$this->dbforge->add_key('scenario_id', TRUE);
-		$this->dbforge->create_table('scenario_id');
+		$this->dbforge->add_key('plan_id', TRUE);
+		$this->dbforge->create_table('plans');
 	}
 
 	/**

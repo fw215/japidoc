@@ -29,7 +29,7 @@ class Scenarios extends MY_Controller
 			$search['page'] = 1;
 		}
 
-		$this->_api['scenarioss'] = $this->Scenarios->search($search);
+		$this->_api['scenarios'] = $this->Scenarios->search($search);
 		$this->_api['count'] = $this->Scenarios->search($search, TRUE);
 		$this->_api['pages'] = ceil($this->_api['count'] / DEFAULT_PAGE_LIMIT);
 
