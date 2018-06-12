@@ -72,6 +72,7 @@ $autoload['libraries'] = array(
 	'Forms_lib' => 'Forms_lib',
 	'Benchmarks_lib' => 'Benchmarks_lib',
 	'Categories_lib' => 'Categories_lib',
+	'Scenarios_lib' => 'Scenarios_lib',
 );
 
 /*
