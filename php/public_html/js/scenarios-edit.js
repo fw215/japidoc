@@ -2,24 +2,9 @@
 
 new Vue({
 	el: '#main-container',
-	mixins: [notificationMixin, benchmarksMixin],
+	mixins: [notificationMixin],
 	data: {
 		showBox: 'scenario',
-		env: {
-			api_id: 0,
-			env_id: 0,
-			category_id: 1,
-			method: 0,
-			url: '',
-			body: '',
-			is_body: 0,
-			headers: [],
-			forms: [],
-			body: '',
-			is_body: 0,
-			benchmarks: [],
-		},
-		envs: [],
 		scenario: {
 			project_id: 0,
 			scenario_id: 0,
@@ -27,32 +12,13 @@ new Vue({
 			description: '',
 		},
 		loading: {
-			getENV: false,
-			registerENV: false,
-			deleteENV: false,
-			getCATEGORY: false,
-			getAPI: false,
-			registerAPI: false,
-			deleteAPI: false,
-			sendAPI: false,
+			getSCENARIO: false,
+			registerSCENARIO: false,
+			deleteSCENARIO: false,
 		},
 		errors: {
 			name: null,
 			description: null,
-			category_id: null,
-			method: null,
-			url: null,
-			headers: [],
-			forms: [],
-			body: null,
-			is_body: null,
-		},
-		result: {
-			error_code: 0,
-			error_message: '',
-			status_code: '',
-			response_headers: [],
-			response_body: '',
 		},
 		isDangerBox: false
 	},
@@ -76,16 +42,6 @@ new Vue({
 			}
 			return true;
 		},
-		isNewEnv: function () {
-			var self = this;
-			if (self.showBox !== 'env') {
-				return false;
-			}
-			if (self.env.env_id > 0) {
-				return false;
-			}
-			return true;
-		},
 		isErrorName: function () {
 			var self = this;
 			if (self.errors.name === null) {
@@ -100,323 +56,8 @@ new Vue({
 			}
 			return true;
 		},
-		isErrorCategory: function () {
-			var self = this;
-			if (self.errors.category_id === null) {
-				return false;
-			}
-			return true;
-		},
-		isErrorMethod: function () {
-			var self = this;
-			if (self.errors.method === null) {
-				return false;
-			}
-			return true;
-		},
-		isErrorUrl: function () {
-			var self = this;
-			if (self.errors.url === null) {
-				return false;
-			}
-			return true;
-		},
-		isErrorBody: function () {
-			var self = this;
-			if (self.errors.body === null) {
-				return false;
-			}
-			return true;
-		},
 	},
 	methods: {
-		sendApi: function () {
-			var self = this;
-			self.result = {
-				error_code: 0,
-				error_message: '',
-				status_code: '',
-				response_headers: [],
-				response_body: '',
-			};
-			axios.put(
-				base_url + "api/v1/envs/" + self.env.env_id,
-				self.env
-			).then(function (res) {
-				if (res.data.code == 200) {
-					self.env = res.data.env;
-					self.getEnvs();
-					self.notifies = '更新しました';
-					self.notification('success');
-					self.loading.sendAPI = true;
-					axios.get(
-						base_url + "api/v1/send/env/" + self.env.env_id
-					).then(function (res) {
-						if (res.data.code == 200) {
-							self.result = res.data.result;
-						} else {
-							self.notifies = '送信に失敗しました';
-							self.notification('warning');
-						}
-						self.loading.sendAPI = false;
-					}).catch(function (error) {
-						self.loading.sendAPI = false;
-						self.notifies = '送信に失敗しました';
-						self.notification('warning');
-					});
-				} else {
-					self.errors = res.data.errors;
-					$('#modal-result').modal('hide');
-				}
-				self.loading.registerENV = false;
-			}).catch(function (error) {
-				self.loading.registerENV = false;
-				self.notifies = '更新に失敗しました';
-				self.notification('warning');
-			});
-		},
-		changeBody: function () {
-			var self = this;
-			if (self.env.is_body === 0) {
-				self.env.is_body = 1;
-			} else {
-				self.env.is_body = 0;
-			}
-		},
-		removeForm: function (index) {
-			var self = this;
-			self.env.forms.splice(index, 1);
-		},
-		addForm: function () {
-			var self = this;
-			var form = {
-				form_id: 0,
-				env_id: self.env.env_id,
-				name: '',
-				value: '',
-			}
-			self.env.forms.push(form);
-		},
-		isErrorFormName: function (index) {
-			var self = this;
-			if (!self.errors.forms[index]) {
-				return '';
-			}
-			if (self.errors.forms[index].name === null) {
-				return '';
-			}
-			return self.errors.forms[index].name;
-		},
-		isErrorFormValue: function (index) {
-			var self = this;
-			if (!self.errors.forms[index]) {
-				return '';
-			}
-			if (self.errors.forms[index].value === null) {
-				return '';
-			}
-			return self.errors.forms[index].value;
-		},
-		isErrorForm: function (index) {
-			var self = this;
-			if (!self.errors.forms[index]) {
-				return false;
-			}
-			if (self.errors.forms[index].name === null && self.errors.forms[index].value === null) {
-				return false;
-			}
-			return true;
-		},
-		removeHeader: function (index) {
-			var self = this;
-			self.env.headers.splice(index, 1);
-		},
-		addHeader: function () {
-			var self = this;
-			var header = {
-				header_id: 0,
-				env_id: self.env.env_id,
-				name: '',
-				value: '',
-			}
-			self.env.headers.push(header);
-		},
-		isErrorHeaderName: function (index) {
-			var self = this;
-			if (!self.errors.headers[index]) {
-				return '';
-			}
-			if (self.errors.headers[index].name === null) {
-				return '';
-			}
-			return self.errors.headers[index].name;
-		},
-		isErrorHeaderValue: function (index) {
-			var self = this;
-			if (!self.errors.headers[index]) {
-				return '';
-			}
-			if (self.errors.headers[index].value === null) {
-				return '';
-			}
-			return self.errors.headers[index].value;
-		},
-		isErrorHeader: function (index) {
-			var self = this;
-			if (!self.errors.headers[index]) {
-				return false;
-			}
-			if (self.errors.headers[index].name === null && self.errors.headers[index].value === null) {
-				return false;
-			}
-			return true;
-		},
-		isEnv: function (env_id) {
-			var self = this;
-			if (self.showBox !== 'env') {
-				return false;
-			}
-			if (env_id !== 0 && self.env.env_id !== env_id) {
-				return false;
-			}
-			return true;
-		},
-		showEnv: function () {
-			var self = this;
-			self.showBox = 'env';
-		},
-		newEnv: function () {
-			var self = this;
-			self.env = {
-				api_id: self.api.api_id,
-				env_id: 0,
-				category_id: 1,
-				description: '',
-				method: 0,
-				url: '',
-			};
-			self.showBox = 'env';
-		},
-		showApi: function () {
-			var self = this;
-			self.showBox = 'api';
-		},
-		registerEnv: function () {
-			var self = this;
-			self.reset();
-			self.loading.registerENV = true;
-			if (self.env.env_id > 0) {
-				axios.put(
-					base_url + "api/v1/envs/" + self.env.env_id,
-					self.env
-				).then(function (res) {
-					if (res.data.code == 200) {
-						self.env = res.data.env;
-						self.getEnvs();
-						self.notifies = '更新しました';
-						self.notification('success');
-					} else {
-						self.errors = res.data.errors;
-					}
-					self.loading.registerENV = false;
-				}).catch(function (error) {
-					self.loading.registerENV = false;
-					self.notifies = '更新に失敗しました';
-					self.notification('warning');
-				});
-			} else {
-				axios.post(
-					base_url + "api/v1/envs",
-					self.env
-				).then(function (res) {
-					if (res.data.code == 200) {
-						self.env = res.data.env;
-						self.getEnvs();
-						self.notifies = '登録しました';
-						self.notification('success');
-					} else {
-						self.errors = res.data.errors;
-					}
-					self.loading.registerENV = false;
-				}).catch(function (error) {
-					self.loading.registerENV = false;
-					self.notifies = '登録に失敗しました';
-					self.notification('warning');
-				});
-			}
-		},
-		deleleEnv: function () {
-			var self = this;
-			self.reset();
-			self.loading.deleteENV = true;
-			axios.delete(
-				base_url + "api/v1/envs/" + self.env.env_id
-			).then(function (res) {
-				if (res.data.code == 200) {
-					self.isDangerBox = false;
-					self.getEnvs();
-					self.env = {
-						api_id: self.api.api_id,
-						env_id: 0,
-						category_id: 1,
-						method: 0,
-						url: '',
-					};
-					self.notifies = '削除しました';
-					self.notification('success');
-				} else {
-					self.errors = res.data.errors;
-				}
-				self.loading.deleteENV = false;
-			}).catch(function (error) {
-				self.loading.deleteENV = false;
-				self.notifies = '削除に失敗しました';
-				self.notification('warning');
-			});
-		},
-		getEnv: function (env_id) {
-			var self = this;
-			self.reset();
-			self.showBox = 'env';
-			self.loading.getENV = true;
-			axios.get(
-				base_url + "api/v1/envs/" + env_id
-			).then(function (res) {
-				if (res.data.code == 200) {
-					self.env = res.data.env;
-				} else {
-					self.errors = res.data.errors;
-				}
-				self.loading.getENV = false;
-			}).catch(function (error) {
-				self.loading.getENV = false;
-				self.notifies = '取得に失敗しました';
-				self.notification('warning');
-			});
-		},
-		getEnvs: function () {
-			var self = this;
-			self.loading.search = true;
-			axios.get(
-				base_url + "api/v1/envs/search", {
-					params: {
-						api_id: self.api.api_id,
-						page: -1
-					}
-				}
-			).then(function (res) {
-				if (res.data.code == 200) {
-					self.envs = res.data.envs;
-				} else {
-					self.errors = res.data.errors;
-				}
-				self.loading.search = false;
-			}).catch(function (error) {
-				self.loading.search = false;
-				self.notifies = '取得に失敗しました';
-				self.notification('warning');
-			});
-		},
 		registerScenario: function () {
 			var self = this;
 			self.reset();
@@ -441,36 +82,36 @@ new Vue({
 				});
 			} else {
 				axios.post(
-					base_url + "api/v1/apis",
-					self.api
+					base_url + "api/v1/scenarios",
+					self.scenario
 				).then(function (res) {
 					if (res.data.code == 200) {
-						self.api = res.data.api;
+						self.scenario = res.data.scenario;
 						self.notifies = '登録しました';
 						self.notification('success');
 					} else {
 						self.errors = res.data.errors;
 					}
-					self.loading.registerAPI = false;
+					self.loading.registerSCENARIO = false;
 				}).catch(function (error) {
-					self.loading.registerAPI = false;
+					self.loading.registerSCENARIO = false;
 					self.notifies = '登録に失敗しました';
 					self.notification('warning');
 				});
 			}
 		},
-		deleleApi: function () {
+		deleleScenario: function () {
 			var self = this;
 			self.reset();
-			self.loading.deleteAPI = true;
+			self.loading.deleteSCENARIO = true;
 			axios.delete(
-				base_url + "api/v1/apis/" + self.api.api_id
+				base_url + "api/v1/scenarios/" + self.scenario.scenario_id
 			).then(function (res) {
 				if (res.data.code == 200) {
 					self.isDangerBox = false;
-					self.api = {
-						project_id: self.api.project_id,
-						api_id: 0,
+					self.scenario = {
+						project_id: self.scenario.project_id,
+						scenario_id: 0,
 						name: '',
 						description: '',
 					};
@@ -479,29 +120,28 @@ new Vue({
 				} else {
 					self.errors = res.data.errors;
 				}
-				self.loading.deleteAPI = false;
+				self.loading.deleteSCENARIO = false;
 			}).catch(function (error) {
-				self.loading.deleteAPI = false;
+				self.loading.deleteSCENARIO = false;
 				self.notifies = '削除に失敗しました';
 				self.notification('warning');
 			});
 		},
-		getApi: function (api_id) {
+		getScenario: function (scenario_id) {
 			var self = this;
 			self.reset();
-			self.loading.getAPI = true;
+			self.loading.getSCENARIO = true;
 			axios.get(
-				base_url + "api/v1/apis/" + api_id
+				base_url + "api/v1/scenarios/" + scenario_id
 			).then(function (res) {
 				if (res.data.code == 200) {
-					self.api = res.data.api;
-					self.getEnvs();
+					self.scenario = res.data.scenario;
 				} else {
 					self.errors = res.data.errors;
 				}
-				self.loading.getAPI = false;
+				self.loading.getSCENARIO = false;
 			}).catch(function (error) {
-				self.loading.getAPI = false;
+				self.loading.getSCENARIO = false;
 				self.notifies = '取得に失敗しました';
 				self.notification('warning');
 			});
@@ -511,13 +151,6 @@ new Vue({
 			self.errors = {
 				name: null,
 				description: null,
-				category_id: null,
-				method: null,
-				url: null,
-				headers: [],
-				forms: [],
-				body: null,
-				is_body: null,
 			};
 			self.benchmarkErrors = {
 				times: null,

@@ -23,22 +23,6 @@
 
 			<section class="content container-fluid">
 				<div class="box">
-					<div class="box-header with-border" v-if="scenario.scenario_id > 0" v-cloak>
-						<div class="row form-group">
-							<div class="col-xs-12">
-								<button class="btn" :class="{'bg-orange': isScenario, 'btn-default': !isScenario}" @click="showScenario"><?= lang('app_description'); ?></button>
-								<button class="btn" :class="{'bg-teal': isNewEnv, 'btn-default': !isNewEnv}" @click="newEnv"><?= lang('scenarios_add_env'); ?></button>
-							</div>
-						</div>
-						<div class="row form-group">
-							<div class="col-xs-12">
-								<div class="btn-toolbar">
-									<button class="btn" :class="{'bg-teal': isEnv(env.env_id), 'btn-default': !isEnv(env.env_id)}" v-for="env in envs" @click="getEnv(env.env_id)">{{env.category_name}}</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
 					<div class="box-body" v-show="isScenario" v-cloak>
 						<div class="row form-group" v-if="loading.getSCENARIO">
 							<div class="col-xs-12">
@@ -99,27 +83,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<div v-show="isNewEnv || isEnv(0)">
-					<div class="clearfix mb20px" v-cloak>
-						<div class="pull-right">
-							<button class="btn btn-danger" @click="isDangerBox = !isDangerBox" v-if="env.env_id > 0">
-								<i class="fa fa-angle-right" v-if="!isDangerBox"></i>
-								<i class="fa fa-angle-down" v-else></i>
-								<?= lang('app_delete'); ?>
-							</button>
-						</div>
-					</div>
-					<transition>
-						<div class="callout bg-red disabled danger-box" v-if="isDangerBox" v-cloak>
-							<h4><i class="icon fa fa-ban"></i> Alert</h4>
-							<p><?= lang('envs_delete_alert'); ?></p>
-							<p class="text-right">
-								<button class="btn btn-default"　@click="deleleEnv"><?= lang('app_delete'); ?></button>
-							</p>
-						</div>
-					</transition>
 				</div>
 
 				<div v-show="isScenario">
