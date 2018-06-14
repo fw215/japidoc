@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="CodeIgniter Application Test Suite" tests="13" assertions="17" errors="0" failures="0" skipped="0" time="8.281869">
-    <testsuite name="AccessTokens_test" file="/var/www/html/application/tests/models/AccessTokens_test.php" tests="1" assertions="4" errors="0" failures="0" skipped="0" time="0.677597">
-      <testcase name="all" class="AccessTokens_test" classname="AccessTokens_test" file="/var/www/html/application/tests/models/AccessTokens_test.php" line="23" assertions="4" time="0.677597"/>
+  <testsuite name="CodeIgniter Application Test Suite" tests="17" assertions="21" errors="0" failures="0" skipped="0" time="10.919514">
+    <testsuite name="AccessTokens_test" file="/var/www/html/application/tests/models/AccessTokens_test.php" tests="1" assertions="4" errors="0" failures="0" skipped="0" time="1.749934">
+      <testcase name="all" class="AccessTokens_test" classname="AccessTokens_test" file="/var/www/html/application/tests/models/AccessTokens_test.php" line="23" assertions="4" time="1.749934"/>
     </testsuite>
-    <testsuite name="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="2.327631">
-      <testcase name="search" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="19" assertions="1" time="0.618123"/>
-      <testcase name="get" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="28" assertions="1" time="0.555666"/>
-      <testcase name="update" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="37" assertions="1" time="0.603132"/>
-      <testcase name="insert" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="47" assertions="1" time="0.550710"/>
+    <testsuite name="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="2.291042">
+      <testcase name="search" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="19" assertions="1" time="0.624656"/>
+      <testcase name="get" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="28" assertions="1" time="0.518928"/>
+      <testcase name="update" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="37" assertions="1" time="0.621686"/>
+      <testcase name="insert" class="Apis_test" classname="Apis_test" file="/var/www/html/application/tests/models/Apis_test.php" line="47" assertions="1" time="0.525772"/>
     </testsuite>
-    <testsuite name="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="2.263217">
-      <testcase name="search" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="19" assertions="1" time="0.632125"/>
-      <testcase name="get" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="28" assertions="1" time="0.518248"/>
-      <testcase name="update" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="37" assertions="1" time="0.567682"/>
-      <testcase name="insert" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="47" assertions="1" time="0.545162"/>
+    <testsuite name="Categories_test" file="/var/www/html/application/tests/models/Categories_test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="2.290356">
+      <testcase name="search" class="Categories_test" classname="Categories_test" file="/var/www/html/application/tests/models/Categories_test.php" line="19" assertions="1" time="0.613366"/>
+      <testcase name="get" class="Categories_test" classname="Categories_test" file="/var/www/html/application/tests/models/Categories_test.php" line="28" assertions="1" time="0.519860"/>
+      <testcase name="update" class="Categories_test" classname="Categories_test" file="/var/www/html/application/tests/models/Categories_test.php" line="37" assertions="1" time="0.624308"/>
+      <testcase name="insert" class="Categories_test" classname="Categories_test" file="/var/www/html/application/tests/models/Categories_test.php" line="47" assertions="1" time="0.532822"/>
     </testsuite>
-    <testsuite name="Users_test" file="/var/www/html/application/tests/models/Users_test.php" tests="4" assertions="5" errors="0" failures="0" skipped="0" time="3.013424">
-      <testcase name="search" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="19" assertions="1" time="1.555332"/>
-      <testcase name="get" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="28" assertions="1" time="0.507357"/>
-      <testcase name="update" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="37" assertions="1" time="0.431481"/>
-      <testcase name="insert" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="47" assertions="2" time="0.519254"/>
+    <testsuite name="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="2.241435">
+      <testcase name="search" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="19" assertions="1" time="0.590284"/>
+      <testcase name="get" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="28" assertions="1" time="0.519200"/>
+      <testcase name="update" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="37" assertions="1" time="0.602143"/>
+      <testcase name="insert" class="Projects_test" classname="Projects_test" file="/var/www/html/application/tests/models/Projects_test.php" line="47" assertions="1" time="0.529808"/>
+    </testsuite>
+    <testsuite name="Users_test" file="/var/www/html/application/tests/models/Users_test.php" tests="4" assertions="5" errors="0" failures="0" skipped="0" time="2.346747">
+      <testcase name="search" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="19" assertions="1" time="0.638425"/>
+      <testcase name="get" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="28" assertions="1" time="0.548708"/>
+      <testcase name="update" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="37" assertions="1" time="0.598730"/>
+      <testcase name="insert" class="Users_test" classname="Users_test" file="/var/www/html/application/tests/models/Users_test.php" line="47" assertions="2" time="0.560884"/>
     </testsuite>
   </testsuite>
 </testsuites>
