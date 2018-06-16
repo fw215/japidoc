@@ -13,7 +13,7 @@
 					</li>
 					<li>
 						<a href="<?= base_url('/scenarios/index/').$project->project_id; ?>">
-							<i class="fa fa-paper-plane" aria-hidden="true"></i> <?= lang('scenarios_title'); ?>
+							<i aria-hidden="true" class="fa fa-rocket"></i> <?= lang('scenarios_title'); ?>
 						</a>
 					</li>
 					<li class="active" v-if="scenario.scenario_id > 0"><?= lang('app_edit'); ?></li>

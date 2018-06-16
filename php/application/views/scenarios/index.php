@@ -12,7 +12,7 @@
 					</li>
 					<li>
 						<a href="<?= base_url('/scenarios/index/').$project->project_id; ?>">
-							<i class="fa fa-paper-plane" aria-hidden="true"></i> <?= lang('scenarios_title'); ?>
+							<i aria-hidden="true" class="fa fa-rocket"></i> <?= lang('scenarios_title'); ?>
 						</a>
 					</li>
 					<li class="active"><?= lang('scenarios_index'); ?></li>
@@ -46,7 +46,6 @@
 											<th class="success"><?= lang('scenarios_id'); ?></th>
 											<th><?= lang('scenarios_name'); ?></th>
 											<th><?= lang('scenarios_description'); ?></th>
-											<th class="w90px"><?= lang('envs_title'); ?></th>
 											<th class="w90px"><?= lang('scenarios_created'); ?></th>
 										</tr>
 									</thead>
@@ -55,7 +54,6 @@
 											<td class="pointer w110px bg-teal" @click="locationHref('<?= base_url('/scenarios/edit/').$project->project_id; ?>/' + scenario.scenario_id)">{{scenario.scenario_id}}</td>
 											<td class="break-word">{{scenario.name}}</td>
 											<td class="break-word">{{scenario.description}}</td>
-											<td><a class="badge bg-maroon pointer" :href="'<?= base_url('/scenarios/edit/').$project->project_id; ?>/' + scenario.scenario_id">{{scenario.env_count}}</span></td>
 											<td :title="scenario.created_ymd_his">{{scenario.created_ymd}}</td>
 										</tr>
 									</tbody>
@@ -64,7 +62,6 @@
 											<th><?= lang('scenarios_id'); ?></th>
 											<th><?= lang('scenarios_name'); ?></th>
 											<th><?= lang('scenarios_description'); ?></th>
-											<th class="w90px"><?= lang('envs_title'); ?></th>
 											<th class="w90px"><?= lang('scenarios_created'); ?></th>
 										</tr>
 									</tfoot>
