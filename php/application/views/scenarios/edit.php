@@ -23,6 +23,15 @@
 
 			<section class="content container-fluid">
 				<div class="box">
+					<div class="box-header with-border" v-if="scenario.scenario_id > 0" v-cloak>
+						<div class="row form-group">
+							<div class="col-xs-12">
+								<button class="btn" :class="{'bg-orange': isScenario, 'btn-default': !isScenario}" @click="showScenario"><?= lang('app_description'); ?></button>
+								<button class="btn" :class="{'bg-teal': !isScenario, 'btn-default': isScenario}" @click="showScenarios"><?= lang('scenarios_title'); ?></button>
+							</div>
+						</div>
+					</div>
+
 					<div class="box-body" v-show="isScenario" v-cloak>
 						<div class="row form-group" v-if="loading.getSCENARIO">
 							<div class="col-xs-12">
@@ -59,6 +68,17 @@
 									<span class="help-block">{{errors.description}}</span>
 								</div>
 							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('scenarios_category'); ?><?= lang('app_required'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorCategory}">
+									<select class="form-control" v-model="scenario.category_id">
+<?php foreach($categories as $category): ?>
+										<option value="<?= $category->category_id; ?>"><?= $category->name; ?></option>
+<?php endforeach; ?>
+									</select>
+									<span class="help-block">{{errors.category_id}}</span>
+								</div>
+							</div>
 							<div class="row form-group" v-if="scenario.modified_ymd_his">
 								<label class="col-sm-3 form-control-static"><?= lang('scenarios_modified'); ?></label>
 								<div class="col-sm-9 form-control-static">
@@ -79,6 +99,21 @@
 										<span v-else><?= lang('app_add'); ?></span>
 									</button>
 									<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-body" v-show="!isScenario" v-cloak>
+						<div class="row form-group" v-if="loading.getSCENARIO">
+							<div class="col-xs-12">
+								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+							</div>
+						</div>
+						<div v-else v-cloak>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"></label>
+								<div class="col-sm-9 form-control-static">
+									{{scenario.name}}
 								</div>
 							</div>
 						</div>

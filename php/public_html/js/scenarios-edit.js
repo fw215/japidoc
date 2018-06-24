@@ -10,6 +10,7 @@ new Vue({
 			scenario_id: 0,
 			name: '',
 			description: '',
+			category_id: 0,
 		},
 		loading: {
 			getSCENARIO: false,
@@ -19,6 +20,7 @@ new Vue({
 		errors: {
 			name: null,
 			description: null,
+			category_id: null,
 		},
 		isDangerBox: false
 	},
@@ -56,8 +58,23 @@ new Vue({
 			}
 			return true;
 		},
+		isErrorCategory: function () {
+			var self = this;
+			if (self.errors.category_id === null) {
+				return false;
+			}
+			return true;
+		},
 	},
 	methods: {
+		showScenario: function () {
+			var self = this;
+			self.showBox = 'scenario';
+		},
+		showScenarios: function () {
+			var self = this;
+			self.showBox = 'scenarios';
+		},
 		registerScenario: function () {
 			var self = this;
 			self.reset();
@@ -114,6 +131,7 @@ new Vue({
 						scenario_id: 0,
 						name: '',
 						description: '',
+						category_id: 0,
 					};
 					self.notifies = '削除しました';
 					self.notification('success');
@@ -151,11 +169,8 @@ new Vue({
 			self.errors = {
 				name: null,
 				description: null,
-			};
-			self.benchmarkErrors = {
-				times: null,
+				category_id: null,
 			};
 		}
-
 	}
 });
