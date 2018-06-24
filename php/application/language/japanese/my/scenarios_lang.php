@@ -6,6 +6,7 @@ $lang['scenarios_index'] = '一覧';
 $lang['scenarios_id'] = 'ID';
 $lang['scenarios_name'] = '名称';
 $lang['scenarios_description'] = '概要';
+$lang['scenarios_category'] = 'カテゴリ';
 $lang['scenarios_modified'] = '更新日時';
 $lang['scenarios_created'] = '登録日時';
 $lang['scenarios_delete_alert'] = 'ID:{{scenario.scenario_id}} を削除します';

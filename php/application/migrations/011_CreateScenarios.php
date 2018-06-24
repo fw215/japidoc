@@ -33,6 +33,11 @@ class Migration_CreateScenarios extends CI_Migration
 				'null'           => FALSE,
 				'comment'        => '概要'
 			),
+			'category_id' => array(
+				'type'           => 'bigint',
+				'unsigned'       => TRUE,
+				'comment'        => 'カテゴリID'
+			),
 		);
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_field('created datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "登録日時"');
