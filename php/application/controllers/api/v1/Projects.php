@@ -21,6 +21,7 @@ class Projects extends MY_Controller
 	public function search()
 	{
 		$search = array(
+			'freetext' => $this->input->get('freetext'),
 			'page' => $this->input->get('page'),
 		);
 

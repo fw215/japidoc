@@ -19,15 +19,22 @@
 					<div class="box-header with-border">
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" v-model="search.freetext">
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-4">
-								<button class="btn bg-teal"><?= lang('app_search'); ?></button>
+								<button class="btn bg-teal" @click="getSearch"><?= lang('app_search'); ?></button>
 							</div>
 						</div>
 					</div>
-					<div class="box-body">
-						<div v-if="projects.length > 0" v-cloak>
+					<div class="box-body" v-if="loading.search" v-cloak>
+						<div class="row">
+							<div class="col-xs-12">
+								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+							</div>
+						</div>
+					</div>
+					<div class="box-body" v-else>
+						<div v-if="projects.length > 0">
 							<div class="w110px mb20px">
 								<select class="form-control input-sm" v-model="search.page">
 									<option :value="page" v-for="page in pages">{{page}} <?= lang('app_pages'); ?></option>

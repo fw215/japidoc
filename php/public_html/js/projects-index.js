@@ -8,6 +8,7 @@ new Vue({
 		projects: [],
 		pages: 0,
 		search: {
+			freetext: '',
 			page: 1,
 		},
 		loading: {
@@ -39,6 +40,7 @@ new Vue({
 			axios.get(
 				base_url + "api/v1/projects/search", {
 					params: {
+						freetext: self.search.freetext,
 						page: self.search.page,
 					}
 				}
