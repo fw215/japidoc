@@ -16,16 +16,6 @@
 
 			<section class="content container-fluid">
 				<div class="box">
-					<div class="box-header with-border">
-						<div class="row">
-							<div class="col-xs-12 col-sm-6 col-md-4">
-								<input type="text" class="form-control">
-							</div>
-							<div class="col-xs-12 col-sm-6 col-md-4">
-								<button class="btn bg-teal"><?= lang('app_search'); ?></button>
-							</div>
-						</div>
-					</div>
 					<div class="box-body">
 						<div v-if="categories.length > 0" v-cloak>
 							<div class="w110px mb20px">
