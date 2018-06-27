@@ -13,8 +13,10 @@ class Envs_test extends TestCase
 		$models = array(
 			'Apis_model' => 'Apis',
 			'Envs_model' => 'Envs',
+			'Headers_model' => 'Headers',
+			'Forms_model' => 'Forms',
 		);
-		$this->CI->load->model('Envs_model', 'Envs');
+		$this->CI->load->model($models);
 	}
 
 	/**
@@ -56,5 +58,34 @@ class Envs_test extends TestCase
 		$data = array('api_id' => $api->api_id);
 		$result = $this->CI->Envs->insert($data);
 		$this->assertEquals($api->api_id, $result->api_id);
+	}
+
+	/**
+	 * @test
+	*/
+	public function put()
+	{
+		$data = array('name' => 'name');
+		$api = $this->CI->Apis->insert($data);
+
+		$data = array('api_id' => $api->api_id);
+		$result = $this->CI->Envs->insert($data);
+		$this->assertEquals($api->api_id, $result->api_id);
+
+		$header = array(
+			'env_id' => $result->env_id,
+			'name' => 'name',
+			'value' => 'value',
+		);
+		$result_header = $this->CI->Headers->insert($header);
+		$this->assertEquals(1, $result_header->header_id);
+
+		$form = array(
+			'env_id' => $result->env_id,
+			'name' => 'name',
+			'value' => 'value',
+		);
+		$result_form = $this->CI->Forms->insert($form);
+		$this->assertEquals(1, $result_form->form_id);
 	}
 }
