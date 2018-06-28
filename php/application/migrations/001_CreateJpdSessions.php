@@ -16,12 +16,12 @@ class Migration_CreateJpdSessions extends CI_Migration
 	 */
 	public function up()
 	{
-		$sql = "CREATE TABLE IF NOT EXISTS `jad_sessions` (";
+		$sql = "CREATE TABLE IF NOT EXISTS `jack_sessions` (";
 		$sql .= "	`id` varchar(40) NOT NULL,";
 		$sql .= "	`ip_address` varchar(45) NOT NULL,";
 		$sql .= "	`timestamp` int(10) unsigned DEFAULT 0 NOT NULL,";
 		$sql .= "	`data` blob NOT NULL,";
-		$sql .= "	KEY `jad_sessions_timestamp` (`timestamp`)";
+		$sql .= "	KEY `jack_sessions_timestamp` (`timestamp`)";
 		$sql .= ");";
 		$this->db->query($sql);
 	}
@@ -33,6 +33,6 @@ class Migration_CreateJpdSessions extends CI_Migration
 	 */
 	public function down()
 	{
-		$this->dbforge->drop_table('jad_sessions', TRUE);
+		$this->dbforge->drop_table('jack_sessions', TRUE);
 	}
 }

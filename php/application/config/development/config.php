@@ -378,9 +378,9 @@ $config['encryption_key'] = 'cdf9c96369ada378f4258eb85231b8af560eece0c80984a9853
 |
 */
 $config['sess_driver'] = 'database';
-$config['sess_cookie_name'] = 'jad_session';
+$config['sess_cookie_name'] = 'jack_session';
 $config['sess_expiration'] = 0;
-$config['sess_save_path'] = 'jad_sessions';
+$config['sess_save_path'] = 'jack_sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
