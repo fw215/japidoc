@@ -44,6 +44,12 @@ class Scenarios_model extends CI_Model
 								$this->db->where('scenarios.project_id', $value);
 							}
 							break;
+						case 'freetext':
+							if( $this->validation->required($value) ){
+								$this->db->like('scenarios.name', $value);
+								$this->db->or_like('scenarios.description', $value);
+							}
+							break;
 						case 'page':
 							if( $isCount == false && $this->validation->required($value) ){
 								$offset = DEFAULT_PAGE_LIMIT * ($value - 1);

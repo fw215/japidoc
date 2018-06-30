@@ -45,6 +45,12 @@ class Apis_model extends CI_Model
 								$this->db->where('apis.project_id', $value);
 							}
 							break;
+						case 'freetext':
+							if( $this->validation->required($value) ){
+								$this->db->like('apis.name', $value);
+								$this->db->or_like('apis.description', $value);
+							}
+							break;
 						case 'page':
 							if( $isCount == false && $this->validation->required($value) ){
 								$offset = DEFAULT_PAGE_LIMIT * ($value - 1);
