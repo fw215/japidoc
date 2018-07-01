@@ -9,6 +9,7 @@ new Vue({
 		pages: 0,
 		search: {
 			project_id: 0,
+			freetext: '',
 			page: 1,
 		},
 		loading: {
@@ -42,6 +43,7 @@ new Vue({
 				base_url + "api/v1/apis/search", {
 					params: {
 						project_id: self.search.project_id,
+						freetext: self.search.freetext,
 						page: self.search.page,
 					}
 				}

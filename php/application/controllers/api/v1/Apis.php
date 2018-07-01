@@ -22,6 +22,7 @@ class Apis extends MY_Controller
 	{
 		$search = array(
 			'project_id' => $this->input->get('project_id'),
+			'freetext' => $this->input->get('freetext'),
 			'page' => $this->input->get('page'),
 		);
 
