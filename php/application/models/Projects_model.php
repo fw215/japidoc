@@ -40,8 +40,10 @@ class Projects_model extends CI_Model
 				foreach($search as $column => $value){
 					switch ($column) {
 						case 'freetext':
-							$this->db->or_like('projects.name', $value);
-							$this->db->or_like('projects.description', $value);
+							if( $this->validation->required($value) ){
+								$this->db->like('projects.name', $value);
+								$this->db->or_like('projects.description', $value);
+							}
 							break;
 						case 'page':
 							if( $isCount == false && $this->validation->required($value) ){

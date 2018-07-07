@@ -40,147 +40,151 @@
 					</div>
 
 					<div class="box-body" v-show="isNewEnv || isEnv(0)">
-						<div class="row form-group" v-if="loading.getENV">
-							<div class="col-xs-12">
-								<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+						<div v-if="loading.getENV">
+							<div class="row form-group">
+								<div class="col-xs-12">
+									<p class="text-center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></p>
+								</div>
 							</div>
 						</div>
-						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_id'); ?></label>
-							<div class="col-sm-9 form-control-static">
-								<span v-if="env.env_id > 0">{{env.env_id}}</span>
-								<span v-else>#</span>
+						<div v-else>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('envs_id'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									<span v-if="env.env_id > 0">{{env.env_id}}</span>
+									<span v-else>#</span>
+								</div>
 							</div>
-						</div>
-						<div class="row form-group" v-if="env.env_id == 0">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_category'); ?><?= lang('app_required'); ?></label>
-							<div class="col-sm-9" :class="{'has-error': isErrorCategory}">
-								<select class="form-control" v-model="env.category_id">
+							<div class="row form-group" v-if="env.env_id == 0">
+								<label class="col-sm-3 form-control-static"><?= lang('envs_category'); ?><?= lang('app_required'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorCategory}">
+									<select class="form-control" v-model="env.category_id">
 <?php foreach($categories as $category): ?>
-									<option value="<?= $category->category_id; ?>"><?= $category->name; ?></option>
+										<option value="<?= $category->category_id; ?>"><?= $category->name; ?></option>
 <?php endforeach; ?>
-								</select>
-								<span class="help-block">{{errors.category_id}}</span>
-							</div>
-						</div>
-						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_description'); ?></label>
-							<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
-								<textarea class="form-control" rows="5" v-model="env.description"></textarea>
-								<span class="help-block">{{errors.description}}</span>
-							</div>
-						</div>
-						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_method'); ?><?= lang('app_required'); ?></label>
-							<div class="col-sm-9" :class="{'has-error': isErrorMethod}">
-								<select class="form-control" v-model="env.method">
-									<option value="<?= ENV_METHOD_GET; ?>"><?= lang('envs_method_get'); ?></option>
-									<option value="<?= ENV_METHOD_POST; ?>"><?= lang('envs_method_post'); ?></option>
-									<option value="<?= ENV_METHOD_PUT; ?>"><?= lang('envs_method_put'); ?></option>
-									<option value="<?= ENV_METHOD_DELETE; ?>"><?= lang('envs_method_delete'); ?></option>
-								</select>
-								<span class="help-block">{{errors.method}}</span>
-							</div>
-						</div>
-						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_url'); ?><?= lang('app_required'); ?></label>
-							<div class="col-sm-9" :class="{'has-error': isErrorUrl}">
-								<input type="text" class="form-control" v-model="env.url">
-								<span class="help-block">{{errors.url}}</span>
-							</div>
-						</div>
-						<div class="row form-group" v-if="env.env_id > 0">
-							<label class="col-xs-12 col-sm-3 form-control-static"><?= lang('headers_title'); ?></label>
-							<div class="col-xs-12 col-sm-9">
-								<div class="break-word" v-for="(header, index) in env.headers" :class="{'has-error': isErrorHeader(index)}">
-									<div class="input-group form-group">
-										<input type="text" class="form-control" v-model="header.name">
-										<span class="input-group-addon bg-gray">&#58;</span>
-										<input type="text" class="form-control" v-model="header.value">
-										<span class="input-group-addon bg-red pointer" @click="removeHeader(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
-									</div>
-									<span class="help-block">{{isErrorHeaderName(index)}}</span>
-									<span class="help-block">{{isErrorHeaderValue(index)}}</span>
+									</select>
+									<span class="help-block">{{errors.category_id}}</span>
 								</div>
-								<button class="btn btn-sm bg-navy" @click="addHeader">
-									<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('headers_add'); ?>
-								</button>
 							</div>
-						</div>
-						<div class="row form-group" v-if="env.env_id > 0 && env.method != <?= ENV_METHOD_GET; ?> && env.method != <?= ENV_METHOD_DELETE; ?>">
-							<label class="col-xs-12 col-sm-3 form-control-static">
-								<span v-if="env.is_body == <?= ENV_IS_BODY; ?>"><?= lang('envs_body'); ?><br></span>
-								<span v-else><?= lang('forms_title'); ?><br></span>
-								<button class="btn btn-sm bg-navy" @click="changeBody">
-									<i class="fa fa-random" aria-hidden="true"></i></i>
-									<span v-if="env.is_body == <?= ENV_IS_NOT_BODY; ?>"><?= lang('envs_body'); ?></span>
-									<span v-else><?= lang('forms_title'); ?></span>
-								</button>
-							</label>
-							<div class="col-xs-12 col-sm-9">
-								<div v-if="env.is_body == <?= ENV_IS_BODY; ?>" :class="{'has-error': isErrorBody}">
-									<textarea class="form-control" rows="5" v-model="env.body"></textarea>
-									<span class="help-block">{{errors.body}}</span>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('envs_description'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorDescription}">
+									<textarea class="form-control" rows="5" v-model="env.description"></textarea>
+									<span class="help-block">{{errors.description}}</span>
 								</div>
-								<div v-else>
-									<div class="break-word" v-for="(form, index) in env.forms" :class="{'has-error': isErrorForm(index)}">
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('envs_method'); ?><?= lang('app_required'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorMethod}">
+									<select class="form-control" v-model="env.method">
+										<option value="<?= ENV_METHOD_GET; ?>"><?= lang('envs_method_get'); ?></option>
+										<option value="<?= ENV_METHOD_POST; ?>"><?= lang('envs_method_post'); ?></option>
+										<option value="<?= ENV_METHOD_PUT; ?>"><?= lang('envs_method_put'); ?></option>
+										<option value="<?= ENV_METHOD_DELETE; ?>"><?= lang('envs_method_delete'); ?></option>
+									</select>
+									<span class="help-block">{{errors.method}}</span>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"><?= lang('envs_url'); ?><?= lang('app_required'); ?></label>
+								<div class="col-sm-9" :class="{'has-error': isErrorUrl}">
+									<input type="text" class="form-control" v-model="env.url">
+									<span class="help-block">{{errors.url}}</span>
+								</div>
+							</div>
+							<div class="row form-group" v-if="env.env_id > 0">
+								<label class="col-xs-12 col-sm-3 form-control-static"><?= lang('headers_title'); ?></label>
+								<div class="col-xs-12 col-sm-9">
+									<div class="break-word" v-for="(header, index) in env.headers" :class="{'has-error': isErrorHeader(index)}">
 										<div class="input-group form-group">
-											<input type="text" class="form-control" v-model="form.name">
+											<input type="text" class="form-control" v-model="header.name">
 											<span class="input-group-addon bg-gray">&#58;</span>
-											<input type="text" class="form-control" v-model="form.value">
-											<span class="input-group-addon bg-red pointer" @click="removeForm(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+											<input type="text" class="form-control" v-model="header.value">
+											<span class="input-group-addon bg-red pointer" @click="removeHeader(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
 										</div>
-										<span class="help-block">{{isErrorFormName(index)}}</span>
-										<span class="help-block">{{isErrorFormValue(index)}}</span>
+										<span class="help-block">{{isErrorHeaderName(index)}}</span>
+										<span class="help-block">{{isErrorHeaderValue(index)}}</span>
 									</div>
-									<button class="btn btn-sm bg-navy" @click="addForm">
-										<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('forms_add'); ?>
+									<button class="btn btn-sm bg-navy" @click="addHeader">
+										<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('headers_add'); ?>
 									</button>
 								</div>
 							</div>
-						</div>
-						<div class="row form-group" v-if="env.modified_ymd_his">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_modified'); ?></label>
-							<div class="col-sm-9 form-control-static">
-								{{env.modified_ymd_his}}
-							</div>
-						</div>
-						<div class="row form-group" v-if="env.created_ymd_his">
-							<label class="col-sm-3 form-control-static"><?= lang('envs_created'); ?></label>
-							<div class="col-sm-9 form-control-static">
-								{{env.created_ymd_his}}
-							</div>
-						</div>
-						<div class="row form-group" v-if="env.env_id > 0">
-							<label class="col-sm-3 form-control-static"><?= lang('benchmarks_title'); ?></label>
-							<div class="col-sm-9">
-								<div class="btn-toolbar">
-									<button class="btn btn-sm bg-purple mb10px" v-for="benchmark in env.benchmarks" @click="getBenchmark(benchmark.benchmark_id)" data-toggle="modal" data-target="#modal-benchmark">
-										{{benchmark.times}}&ensp;<?= lang('benchmarks_times'); ?>
+							<div class="row form-group" v-if="env.env_id > 0 && env.method != <?= ENV_METHOD_GET; ?> && env.method != <?= ENV_METHOD_DELETE; ?>">
+								<label class="col-xs-12 col-sm-3 form-control-static">
+									<span v-if="env.is_body == <?= ENV_IS_BODY; ?>"><?= lang('envs_body'); ?><br></span>
+									<span v-else><?= lang('forms_title'); ?><br></span>
+									<button class="btn btn-sm bg-navy" @click="changeBody">
+										<i class="fa fa-random" aria-hidden="true"></i></i>
+										<span v-if="env.is_body == <?= ENV_IS_NOT_BODY; ?>"><?= lang('envs_body'); ?></span>
+										<span v-else><?= lang('forms_title'); ?></span>
 									</button>
-									<button class="btn btn-sm bg-navy" data-toggle="modal" data-target="#modal-benchmark" @click="newBenchmark">
-										<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('benchmarks_add'); ?>
-									</button>
+								</label>
+								<div class="col-xs-12 col-sm-9">
+									<div v-if="env.is_body == <?= ENV_IS_BODY; ?>" :class="{'has-error': isErrorBody}">
+										<textarea class="form-control" rows="5" v-model="env.body"></textarea>
+										<span class="help-block">{{errors.body}}</span>
+									</div>
+									<div v-else>
+										<div class="break-word" v-for="(form, index) in env.forms" :class="{'has-error': isErrorForm(index)}">
+											<div class="input-group form-group">
+												<input type="text" class="form-control" v-model="form.name">
+												<span class="input-group-addon bg-gray">&#58;</span>
+												<input type="text" class="form-control" v-model="form.value">
+												<span class="input-group-addon bg-red pointer" @click="removeForm(index)"><i class="fa fa-trash-o" aria-hidden="true"></i></span>
+											</div>
+											<span class="help-block">{{isErrorFormName(index)}}</span>
+											<span class="help-block">{{isErrorFormValue(index)}}</span>
+										</div>
+										<button class="btn btn-sm bg-navy" @click="addForm">
+											<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('forms_add'); ?>
+										</button>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row form-group" v-if="env.env_id > 0">
-							<label class="col-sm-3 form-control-static"></label>
-							<div class="col-sm-9">
-								<button class="btn bg-purple" @click="sendApi" data-toggle="modal" data-target="#modal-result" v-if="!loading.sendAPI">
-									<i class="fa fa-paper-plane" aria-hidden="true"></i> <?= lang('app_send'); ?>
-								</button>
-								<button class="btn bg-purple" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+							<div class="row form-group" v-if="env.modified_ymd_his">
+								<label class="col-sm-3 form-control-static"><?= lang('envs_modified'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									{{env.modified_ymd_his}}
+								</div>
 							</div>
-						</div>
-						<div class="row form-group">
-							<label class="col-sm-3 form-control-static"></label>
-							<div class="col-sm-9">
-								<button class="btn btn-info" @click="registerEnv" v-if="!loading.registerENV">
-									<span v-if="env.env_id > 0"><?= lang('app_edit'); ?></span>
-									<span v-else><?= lang('app_add'); ?></span>
-								</button>
-								<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+							<div class="row form-group" v-if="env.created_ymd_his">
+								<label class="col-sm-3 form-control-static"><?= lang('envs_created'); ?></label>
+								<div class="col-sm-9 form-control-static">
+									{{env.created_ymd_his}}
+								</div>
+							</div>
+							<div class="row form-group" v-if="env.env_id > 0">
+								<label class="col-sm-3 form-control-static"><?= lang('benchmarks_title'); ?></label>
+								<div class="col-sm-9">
+									<div class="btn-toolbar">
+										<button class="btn btn-sm bg-purple mb10px" v-for="benchmark in env.benchmarks" @click="getBenchmark(benchmark.benchmark_id)" data-toggle="modal" data-target="#modal-benchmark">
+											{{benchmark.times}}&ensp;<?= lang('benchmarks_times'); ?>
+										</button>
+										<button class="btn btn-sm bg-navy" data-toggle="modal" data-target="#modal-benchmark" @click="newBenchmark">
+											<i class="fa fa-plus-square" aria-hidden="true"></i>&ensp;<?= lang('benchmarks_add'); ?>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="row form-group" v-if="env.env_id > 0">
+								<label class="col-sm-3 form-control-static"></label>
+								<div class="col-sm-9">
+									<button class="btn bg-purple" @click="sendApi" data-toggle="modal" data-target="#modal-result" v-if="!loading.sendAPI">
+										<i class="fa fa-paper-plane" aria-hidden="true"></i> <?= lang('app_send'); ?>
+									</button>
+									<button class="btn bg-purple" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-3 form-control-static"></label>
+								<div class="col-sm-9">
+									<button class="btn btn-info" @click="registerEnv" v-if="!loading.registerENV">
+										<span v-if="env.env_id > 0"><?= lang('app_edit'); ?></span>
+										<span v-else><?= lang('app_add'); ?></span>
+									</button>
+									<button class="btn btn-info" v-else disabled><i class="fa fa-spinner fa-pulse fa-fw"></i></button>
+								</div>
 							</div>
 						</div>
 					</div>
