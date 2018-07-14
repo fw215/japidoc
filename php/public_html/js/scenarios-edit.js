@@ -10,7 +10,7 @@ new Vue({
 			scenario_id: 0,
 			name: '',
 			description: '',
-			category_id: 0,
+			category_id: 1,
 		},
 		loading: {
 			getSCENARIO: false,
@@ -131,7 +131,7 @@ new Vue({
 						scenario_id: 0,
 						name: '',
 						description: '',
-						category_id: 0,
+						category_id: 1,
 					};
 					self.notifies = '削除しました';
 					self.notification('success');
